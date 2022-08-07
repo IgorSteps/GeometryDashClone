@@ -3,6 +3,7 @@
 #include "Shader.h"
 #include "Sprite.h"
 #include <iostream>
+#include "GameObject.h"
 
 // Coordinate System Data
 glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
@@ -12,6 +13,7 @@ glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
 // Game Data
 Shader myShader;
 Sprite Background;
+GameObject* testObj;
 
 Game::Game( int width,  int height)
     : State(GAME_ACTIVE), Keys(), Width(width), Height(height)
@@ -46,14 +48,18 @@ void Game::Init()
 
 	float red[3] = { 1.0f, 0.0f, 0.0f };
 	// background
-	Background.SetWidth(200.0f);
-	Background.SetHeight(200.0f);
-	Background.Init(myShader, red, "textures/background.png", 1.0f, .0f);
+	Background.SetWidth(400.0f);
+	Background.SetHeight(400.0f);
+	Background.Init(myShader, red, "textures/background.png", 3.0f, 3.0f);
+
+	Transform* trans = new Transform(glm::vec2(0.0f));
+
+	testObj = new GameObject("Some game obj", *trans);
 }
 
 void Game::Update(float dt)
 {
-
+	testObj->update(dt);
 }
 
 void Game::ProcessInput(float dt)
