@@ -52,9 +52,9 @@ void Game::Init()
 	Background.SetHeight(400.0f);
 	Background.Init(myShader, red, "textures/background.png", 3.0f, 3.0f);
 
-	Transform* trans = new Transform(glm::vec2(0.0f));
+	Transform trans = glm::vec2(0.0f);
 
-	testObj = new GameObject("Some game obj", *trans);
+	testObj = new GameObject("Some game obj", trans);
 }
 
 void Game::Update(float dt)
