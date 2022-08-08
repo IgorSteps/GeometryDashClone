@@ -11,15 +11,23 @@ GameObject::~GameObject() {};
 
 void GameObject::update(float dt) {
 	// testing - prints out game object name and position
-	std::cout << this->name << ", x-coord: " << this->transform.position.x << ", y-coord: " << this->transform.position.y << '\n';
+	//std::cout << this->name << ", x-coord: " << this->transform.position.x << ", y-coord: " << this->transform.position.y << '\n';
+	for (Component* c : this->components) {
+		c->update(dt);
+	}
 }
 
-Component* GameObject::getComponent() {
-	for (auto &comp: this->components)
-	{
-		if(dynamic_cast<Component*>(comp)){
-			return comp;
-		}
-	}
-	return NULL;
+
+//Component* GameObject::getComponent() {
+//	for (auto &comp: this->components)
+//	{
+//		if(dynamic_cast<Component*>(comp)){
+//			return dynamic_cast<Component*>(comp);
+//		}
+//	}
+//	return NULL;
+//}
+
+void GameObject::addComponent(Component* c) {
+	this->components.push_back(c);
 }

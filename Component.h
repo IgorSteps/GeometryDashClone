@@ -1,6 +1,7 @@
 #pragma once
 class Component {
-	virtual void update(float dt);
-	virtual void draw();
+public:
+	virtual void update(float dt){};
+	virtual void draw(){};
 	virtual ~Component() {};
 };

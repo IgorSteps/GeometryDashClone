@@ -12,7 +12,17 @@ public:
 	~GameObject();
 	void update(float dt);
 	Transform transform; //make a smart pointer?
-	Component* getComponent();
+	template <typename T>
+	T* getComponent() {
+		for (auto& comp : this->components)
+		{
+			if (dynamic_cast<T*>(comp)) {
+				return dynamic_cast<T*>(comp);
+			}
+		}
+		return NULL;
+	}
+	void addComponent(Component* c);
 private:
 	std::vector<Component*> components;
 	std::string name;
