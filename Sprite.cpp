@@ -1,20 +1,19 @@
 #include "Sprite.h"
 #include "Shader.h"
 
-#include "ImageLoading.h"
 
 #include <string>
 
 #include <iostream>
 
-Sprite::Sprite()
+Sprite::Sprite(std::string filename)
 {
 	m_vaoID = 0;
 	m_vboID[0] = 0;
 	m_vboID[1] = 0;
-	m_Width = 0.0f;
-	m_Height = 0.0f;
 	m_NumberOfVerts = 0;
+
+	this->filename = filename;
 }
 
 Sprite::~Sprite() {
@@ -22,20 +21,15 @@ Sprite::~Sprite() {
 	glDeleteVertexArrays(1, &m_vaoID);
 }
 
-void Sprite::SetWidth(float size)
-{
-	m_Width = size;
+void Sprite::SetHeight(float height) {
+	this->m_Height = std::move(height);
 }
 
-float Sprite::GetWidth() { return m_Width; }
-
-void Sprite::SetHeight(float size)
-{
-	m_Height = size;
+void Sprite::SetWidth(float width) {
+	this->m_Width = std::move(width);
 }
 
-void Sprite::Init(Shader& shader, float colour[3], std::string filename, float repeatInS, float
-	repeatInT)
+void Sprite::Init(Shader& shader, float colour[3], float repeatInS, float repeatInT)
 {
 	//load png image
 	int imageHeight = 0;
@@ -53,7 +47,7 @@ void Sprite::Init(Shader& shader, float colour[3], std::string filename, float r
 
 
 	//image loading error checking
-	bool success = ImageLoading::loadImage(filename);
+	bool success = ImageLoading::loadImage(this->filename);
 	if (!success) {
 		std::cout << "Unable to load image file" << std::endl;
 		glDeleteTextures(1, &m_TexName);
@@ -61,7 +55,7 @@ void Sprite::Init(Shader& shader, float colour[3], std::string filename, float r
 	}
 	else
 	{
-		std::cout << "Image loaded " << std::endl;
+		std::cout << "Image "<< this->filename <<" loaded " << std::endl;
 	}
 
 
@@ -145,7 +139,7 @@ void Sprite::Init(Shader& shader, float colour[3], std::string filename, float r
 	glBindVertexArray(0);
 }
 
-void Sprite::Render(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
+void Sprite::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
 	glUseProgram(shader.handle());  // use the shader
 

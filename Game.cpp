@@ -5,6 +5,7 @@
 #include <iostream>
 #include "GameObject.h"
 #include "BoxBounds.h"
+#include "AssetPool.h"
 
 // Coordinate System Data
 glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
@@ -13,9 +14,9 @@ glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
 
 // Game Data
 Shader myShader;
-Sprite Background;
 GameObject* testObj;
 Transform trans = glm::vec2(0.0f);
+AssetPool assetPool;
 
 
 Game::Game( int width,  int height)
@@ -49,21 +50,23 @@ void Game::Init()
 		std::cout << "failed to load shader" << std::endl;
 	}
 
+	//some initial testing of rendering sprites
 	float red[3] = { 1.0f, 0.0f, 0.0f };
-	// background
-	Background.SetWidth(400.0f);
-	Background.SetHeight(400.0f);
-	Background.Init(myShader, red, "textures/background.png", 3.0f, 3.0f);
+	
 
 	
 
 	testObj = new GameObject("Some game obj", trans);
 	testObj->addComponent(new BoxBounds("BoxBounds"));
+	testObj->addComponent(assetPool.getSprite("textures/background.png"));
+	testObj->getComponent<Sprite>()->SetHeight(200.0f);
+	testObj->getComponent<Sprite>()->SetWidth(200.0f);
+	testObj->getComponent<Sprite>()->Init(myShader, red, 3.0f, 3.0f);
 }
 
 void Game::Update(float dt)
 {
-	std::cout << testObj->getComponent<BoxBounds>()->name << '\n';
+	//std::cout << testObj->getComponent<BoxBounds>()->name << '\n';
 	testObj->update(dt);
 }
 
@@ -74,5 +77,5 @@ void Game::ProcessInput(float dt)
 
 void Game::Render()
 {
-	Background.Render(myShader, ViewMatrix, ProjectionMatrix);
+	testObj->draw(myShader, ViewMatrix, ProjectionMatrix);
 }

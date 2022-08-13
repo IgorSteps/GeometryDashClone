@@ -17,17 +17,13 @@ void GameObject::update(float dt) {
 	}
 }
 
-
-//Component* GameObject::getComponent() {
-//	for (auto &comp: this->components)
-//	{
-//		if(dynamic_cast<Component*>(comp)){
-//			return dynamic_cast<Component*>(comp);
-//		}
-//	}
-//	return NULL;
-//}
-
 void GameObject::addComponent(Component* c) {
 	this->components.push_back(c);
+	c->gameObj = this;
+}
+
+void GameObject::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix) {
+	for (Component* c : this->components) {
+		c->draw(shader, ModelViewMatrix, ProjectionMatrix);
+	}
 }
