@@ -9,15 +9,45 @@
 Sprite::Sprite(std::string filename)
 {
 	m_vaoID = 0;
+
 	m_vboID[0] = 0;
 	m_vboID[1] = 0;
+	m_vboID[2] = 0;
+
 	m_NumberOfVerts = 0;
+
+	EBO[0] = 0;
+	EBO[1] = 0;
+	EBO[2] = 0;
 
 	this->filename = filename;
 }
 
+Sprite::Sprite(int imgX, int imgY, int tileWidth, int tileHeight)
+{
+	m_vaoID = 0;
+
+	m_vboID[0] = 0;
+	m_vboID[1] = 0;
+	m_vboID[2] = 0;
+
+	m_NumberOfVerts = 0;
+
+	EBO[0] = 0;
+	EBO[1] = 0;
+	EBO[2] = 0;
+
+	this->imgX = imgX;
+	this->imgY = imgY;
+	this->tileWidth = tileWidth;
+	this->tileHeight = tileHeight;
+
+}
+
+
 Sprite::~Sprite() {
 	glDeleteBuffers(2, m_vboID);
+	glDeleteBuffers(2, EBO);
 	glDeleteVertexArrays(1, &m_vaoID);
 }
 
@@ -31,10 +61,6 @@ void Sprite::SetWidth(float width) {
 
 void Sprite::Init(Shader& shader, float colour[3], float repeatInS, float repeatInT)
 {
-	//load png image
-	int imageHeight = 0;
-	int imageWidth = 0;
-
 	//create the texture on the GPU
 	glGenTextures(1, &m_TexName);
 
@@ -58,75 +84,78 @@ void Sprite::Init(Shader& shader, float colour[3], float repeatInS, float repeat
 		std::cout << "Image "<< this->filename <<" loaded " << std::endl;
 	}
 
-
+	float halfWidth = m_Width/2  ;
+	float halfHeight = m_Height/2  ;
+	
 	//Create the geometry
-	m_NumberOfVerts = 6;
-	float vert[18];	// create a vertex array
-
-	float halfWidth = m_Width / 2.0f;
-	float halfHeight = m_Height / 2.0f;
-	//x,y,z values for each vertex
-	vert[0] = -halfWidth; vert[1] = halfHeight;  vert[2] = 0.0;
-	vert[3] = -halfWidth; vert[4] = -halfHeight; vert[5] = 0.0;
-	vert[6] = halfWidth; vert[7] = -halfHeight; vert[8] = 0.0;
-
-	vert[9] = -halfWidth; vert[10] = halfHeight;  vert[11] = 0.0;
-	vert[12] = halfWidth; vert[13] = halfHeight;  vert[14] = 0.0;
-	vert[15] = halfWidth; vert[16] = -halfHeight; vert[17] = 0.0;
+	float vert[] = {
+		-halfWidth,		halfHeight,		0.0f,	// top left
+		-halfWidth,		-halfHeight,	0.0f,	// bottom left
+		halfWidth,		-halfHeight,	0.0f,	// bottom right
+		halfWidth,		halfHeight,		0.0f	// top right
+	};
+	
 
 	//texture coordinates
-	float tex[12];
-	tex[0] = 0.0f;	 tex[1] = repeatInT;
-	tex[2] = 0.0f;	 tex[3] = 0.0f;
-	tex[4] = repeatInS;	 tex[5] = 0.0f;
-
-	tex[6] = 0.0f;	 tex[7] = repeatInT;
-	tex[8] = repeatInS;	 tex[9] = repeatInT;
-	tex[10] = repeatInS;	 tex[11] = 0.0f;
+	float tex[]{
+		0.0f, 1.0f,
+		0.0f, 0.0f,
+		1.0f, 0.0f,
+		1.0f, 1.0f
+	};
 
 	// colour array
-	float col[18];
-	col[0] = colour[0]; col[1] = colour[1]; col[2] = colour[2]; //r,g,b values for each vertex
-	col[3] = colour[0]; col[4] = colour[1]; col[5] = colour[2]; //r,g,b values for each vertex
-	col[6] = colour[0]; col[7] = colour[1]; col[8] = colour[2]; //r,g,b values for each vertex
-	col[9] = colour[0]; col[10] = colour[1]; col[11] = colour[2]; //r,g,b values for each vertex
-	col[12] = colour[0]; col[13] = colour[1]; col[14] = colour[2]; //r,g,b values for each vertex
-	col[15] = colour[0]; col[16] = colour[1]; col[17] = colour[2]; //r,g,b values for each vertex
+	float col[]{
+		colour[0], colour[1], colour[2],
+		colour[0], colour[1], colour[2],
+		colour[0], colour[1], colour[2],
+		colour[0], colour[1], colour[2],
+	};
+
+	unsigned int indices[] = {  // note that we start from 0!
+		0, 1, 3,				// first triangle
+		1, 2, 3					// second triangle
+	};
+	
 
 	//VAO allocation
 	glGenVertexArrays(1, &m_vaoID);
-
 	// First VAO setup
 	glBindVertexArray(m_vaoID);
+	// Buffers setup
+	glGenBuffers(3, m_vboID);	// we need three VBOs - vertices, colours, textures
+	glGenBuffers(3, EBO);		// we need three EBOs - vertices, colours, textures
 
-	glGenBuffers(3, m_vboID); // we need three VBOs - one for the vertices and one for the colours
-							//and an extra one for the texture coordinates
 
-	//Lets set up the vertices.
+	/// --------VERTICIES--------
+	// VBO[0]
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[0]);
-
-	//initialises data storage of vertex buffer object
-	glBufferData(GL_ARRAY_BUFFER, m_NumberOfVerts * 3 * sizeof(GLfloat), vert, GL_STATIC_DRAW);
-
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);//initialises data storage of VBO
+	// EBO[0]
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[0]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);//initialises data storage of EBO
 	//set the position - linked to the position shader input
 	GLint vertexLocation = glGetAttribLocation(shader.handle(), "in_Position");
 	glEnableVertexAttribArray(vertexLocation);
 	glVertexAttribPointer(vertexLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-	//Now set up the colours
+	/// --------COLOURS--------
+	// Bind and initilise storage of VBO[1] & EBO[1]
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[1]);
-	glBufferData(GL_ARRAY_BUFFER, m_NumberOfVerts * 3 * sizeof(GLfloat), col, GL_STATIC_DRAW);
-
-	//set the colour - linked to the colour shader input.
+	glBufferData(GL_ARRAY_BUFFER, sizeof(col), col, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[1]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	// set the colour - linked to the colour shader input 
 	GLint colorLocation = glGetAttribLocation(shader.handle(), "in_Color");
 	glEnableVertexAttribArray(colorLocation);
-	//location in shader, number of componentns,  type, normalised, stride, pointer to first attribute
 	glVertexAttribPointer(colorLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-	//Now set up the texture coordinates
+	/// --------TEXTURES--------
+	// Bind and initilise storage of VBO[1] & EBO[1]
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[2]);
-	glBufferData(GL_ARRAY_BUFFER, m_NumberOfVerts * 3 * sizeof(GLfloat), tex, GL_DYNAMIC_DRAW);
-
+	glBufferData(GL_ARRAY_BUFFER,sizeof(tex), tex, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[2]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	//set the texture coords - linked to the texcoord shader input.
 	GLint texLocation = glGetAttribLocation(shader.handle(), "in_TexCoord");
 	glEnableVertexAttribArray(texLocation);
@@ -138,6 +167,8 @@ void Sprite::Init(Shader& shader, float colour[3], float repeatInS, float repeat
 
 	glBindVertexArray(0);
 }
+
+
 
 void Sprite::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
@@ -156,7 +187,7 @@ void Sprite::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Project
 
 	//Draw the object
 	glBindVertexArray(m_vaoID);		// select first VAO
-	glDrawArrays(GL_TRIANGLES, 0, m_NumberOfVerts);	// draw first object
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	glBindVertexArray(0); //unbind the vertex array object
 	glUseProgram(0); //turn off the current shader
