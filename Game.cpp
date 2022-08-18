@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "BoxBounds.h"
 #include "AssetPool.h"
+#include "Spritesheet.h"
 
 // Coordinate System Data
 glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
@@ -57,11 +58,18 @@ void Game::Init()
 	
 
 	testObj = new GameObject("Some game obj", trans);
-	testObj->addComponent(new BoxBounds("BoxBounds"));
-	testObj->addComponent(assetPool.getSprite("textures/background.png"));
-	testObj->getComponent<Sprite>()->SetHeight(200.0f);
-	testObj->getComponent<Sprite>()->SetWidth(200.0f);
-	testObj->getComponent<Sprite>()->Init(myShader, red, 3.0f, 3.0f);
+	//testObj->addComponent(new BoxBounds("BoxBounds"));
+	//testObj->addComponent(assetPool.getSprite("assets/player/layerOne.png"));
+	//testObj->getComponent<Sprite>()->initSprite(myShader, red, 3.0f, 3.0f);
+
+
+
+	Spritesheet* ss = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	testObj->addComponent(ss->sprites[25]);
+	testObj->getComponent<Sprite>()->initSubSprite(myShader, red);
+
+
+
 }
 
 void Game::Update(float dt)
