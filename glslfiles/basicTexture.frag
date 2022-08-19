@@ -11,5 +11,5 @@ uniform sampler2D DiffuseMap;  //sampler 2d for the texture map
 void main(void)
 {
 	//Set the fragment's colour to be the colour in the texture map
-	out_Color =  texture(DiffuseMap, ex_TexCoord);
+	out_Color =  texture(DiffuseMap, ex_TexCoord) * vec4(ex_Color);
 }

@@ -10,14 +10,21 @@ Sprite::Sprite(std::string file)
 	m_vaoID = 0;
 	m_vboID[2] = 0;
 	m_eboID[2] = 0;
+	
+
 }
 
 Sprite::Sprite(std::string file, float imgX, float imgY, float tileWidth, float tileHeight, float pW, float pH)
 {
 	this->spritesheetFile = file;
 	m_vaoID = 0;
+	m_vboID[0] = 0;
+	m_vboID[1] = 0;
 	m_vboID[2] = 0;
+	m_eboID[0] = 0;
+	m_eboID[1] = 0;
 	m_eboID[2] = 0;
+
 
 	this->m_Height = pH;
 	this->m_Width = pW;
@@ -28,6 +35,10 @@ Sprite::Sprite(std::string file, float imgX, float imgY, float tileWidth, float 
 	this->tileHeight = tileHeight;
 }
 
+Sprite::Sprite()
+{
+}
+
 
 Sprite::~Sprite() {
 	glDeleteBuffers(2, m_vboID);
@@ -35,15 +46,22 @@ Sprite::~Sprite() {
 	glDeleteVertexArrays(1, &m_vaoID);
 }
 
+//void Sprite::setColour(float colour[2]) {
+//	this->colour[] = colour;
+//}
+
 void Sprite::SetHeight(float height) {
 	this->m_Height = std::move(height);
 }
+float const& Sprite::getWidth() { return this->m_Width;}
 
 void Sprite::SetWidth(float width) {
 	this->m_Width = std::move(width);
 }
+float const& Sprite::getHeight() { return this->m_Height; }
 
-void Sprite::initSprite(Shader& shader, float colour[3], float repeatInS, float repeatInT)
+
+void Sprite::initSprite(Shader& shader, float repeatInS, float repeatInT)
 {
 	//create the texture on the GPU
 	glGenTextures(1, &m_TexName);
@@ -119,7 +137,7 @@ void Sprite::initSprite(Shader& shader, float colour[3], float repeatInS, float 
 	glEnableVertexAttribArray(vertexLocation);
 	glVertexAttribPointer(vertexLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-	/// --------COLOURS--------
+	/// --------colourS--------
 	// Bind and initilise storage of VBO[1] & m_eboID[1]
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(col), col, GL_STATIC_DRAW);
@@ -148,7 +166,7 @@ void Sprite::initSprite(Shader& shader, float colour[3], float repeatInS, float 
 	glBindVertexArray(0);
 }
 
-void Sprite::initSubSprite(Shader& shader, float colour[3])
+void Sprite::initSubSprite(Shader& shader)
 {
 	//create the texture on the GPU
 	glGenTextures(1, &m_TexName);
@@ -171,8 +189,8 @@ void Sprite::initSubSprite(Shader& shader, float colour[3])
 		std::cout << "Image " << this->spritesheetFile << " loaded " << std::endl;
 	}
 
-	float halfWidth = 42.0f/2;
-	float halfHeight = 42.0f/2;
+	float halfWidth = 62.0f/2;
+	float halfHeight = 62.0f/2;
 
 	//Create the geometry
 	float vert[] = {
@@ -230,7 +248,7 @@ void Sprite::initSubSprite(Shader& shader, float colour[3])
 	glEnableVertexAttribArray(vertexLocation);
 	glVertexAttribPointer(vertexLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-	/// --------COLOURS--------
+	/// --------colourS--------
 	// Bind and initilise storage of VBO[1] & m_eboID[1]
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(col), col, GL_STATIC_DRAW);

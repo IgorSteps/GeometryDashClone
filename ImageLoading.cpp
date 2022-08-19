@@ -1,8 +1,5 @@
 
 #include "ImageLoading.h"
-#include "FreeImage.h"
-
-#include <string>
 #include <iostream>
 #include <glad/glad.h>
 
@@ -70,3 +67,32 @@ bool ImageLoading::loadImage(std::string filename)
 
 	return true;
 }
+
+FIBITMAP* ImageLoading::loadImageTwo(std::string file)
+{
+	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
+	FIBITMAP* dib = nullptr;
+	
+	//check the file signature and deduce its format
+	fif = FreeImage_GetFileType(file.c_str(), 0);
+	//check that the plugin has reading capabilities and load the file
+	if (FreeImage_FIFSupportsReading(fif)) {
+		dib = FreeImage_Load(fif, file.c_str());
+		std::cout << "Player image dib for colour is loaded" << '\n';
+	} else 
+		std::cout << "Player image dib for colour is NOT loaded" << '\n';
+
+	return dib;
+}
+
+
+
+//RGBQUAD ImageLoading::getPixelColour(FIBITMAP* dib, int x, int y, RGBQUAD color)
+//{
+//
+//	FreeImage_GetPixelColor(dib, x, y, &color);
+//
+//	return color;
+//};
+
+

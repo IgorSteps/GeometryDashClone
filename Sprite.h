@@ -14,14 +14,20 @@ class Sprite : public Component
 public:
 	Sprite(std::string filename);	//Sprite constructor 
 	Sprite(std::string filename, float imgX, float imgY, float tileWidth, float tileHeight, float pW, float pH); //Spritesheet constructor
+	Sprite();
 	~Sprite();
 
-	void initSprite(Shader& shader, float colour[3], float repeatInS, float repeatInT);
-	void initSubSprite(Shader& shader, float colour[3]);
+	void setColour(float colour[2]);
+
+	void initSprite(Shader& shader, float repeatInS, float repeatInT);
+	void initSubSprite(Shader& shader);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 
 	void SetWidth(float size);
 	void SetHeight(float size);
+	float const& getWidth();
+	float const& getHeight();
+	float colour[3];
 private:
 	unsigned int m_vaoID;		// id for Vertex Array Object
 	unsigned int m_vboID[3];	// ids for Vertex Buffer Objects
@@ -30,7 +36,7 @@ private:
 	float m_Width;
 	float m_Height;
 	//sub sprite data
-	float imgX, imgY, tileWidth, tileHeight;
+	float imgX, imgY, tileWidth, tileHeight;	
 	// picture file name
 	std::string spriteFile, spritesheetFile;
 	//identifier for the texture
