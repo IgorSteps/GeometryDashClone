@@ -66,10 +66,10 @@
     <ClInclude Include="Component.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Spritesheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Spritesheet.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
   </ItemGroup>

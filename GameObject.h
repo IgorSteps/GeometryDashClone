@@ -1,9 +1,13 @@
 #pragma once
+#include "Transform.h"
+#include "glm\gtc\matrix_transform.hpp"
+class Component;
+
 #include <vector>
 #include <string>
-#include "Component.h"
 #include <memory>
-#include "Transform.h"
+#include "Shader.h"
+
 
 class GameObject
 {

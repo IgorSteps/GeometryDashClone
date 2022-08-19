@@ -1,13 +1,13 @@
 #include "Game.h"
-#include <glm/ext/matrix_float4x4.hpp>
-#include "Shader.h"
-#include "Sprite.h"
-#include <iostream>
 #include "GameObject.h"
 #include "BoxBounds.h"
 #include "AssetPool.h"
 #include "Spritesheet.h"
 #include "Player.h"
+
+#include <glm/ext/matrix_float4x4.hpp>
+
+#include <iostream>
 
 // Coordinate System Data
 glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
@@ -77,8 +77,9 @@ void Game::Init()
 	layerOne->sprites[spNum]->initSubSprite(myShader);
 	layerTwo->sprites[spNum]->initSubSprite(myShader);
 	layerThree->sprites[spNum]->initSubSprite(myShader);
-	//player->getComponent<Sprite>()->initSubSprite(myShader);
 
+	//player->transform.rotateion = 45.0f;
+	//player->transform.scale = glm::vec2(2.0f);
 
 }
 
@@ -86,6 +87,7 @@ void Game::Update(float dt)
 {
 	//std::cout << testObj->getComponent<BoxBounds>()->name << '\n';
 	player->update(dt);
+	player->transform.rotateion += dt * 100.0f;
 }
 
 void Game::ProcessInput(float dt)
