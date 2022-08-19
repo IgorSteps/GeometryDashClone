@@ -7,6 +7,7 @@
 #include "BoxBounds.h"
 #include "AssetPool.h"
 #include "Spritesheet.h"
+#include "Player.h"
 
 // Coordinate System Data
 glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
@@ -15,7 +16,7 @@ glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
 
 // Game Data
 Shader myShader;
-GameObject* testObj;
+GameObject* player;
 Transform trans = glm::vec2(0.0f);
 AssetPool assetPool;
 
@@ -28,7 +29,7 @@ Game::Game( int width,  int height)
 
 Game::~Game()
 {
-	delete testObj;
+	delete player;
 }
 
 void Game::Init()
@@ -52,22 +53,31 @@ void Game::Init()
 	}
 
 	//some initial testing of rendering sprites
-	float red[3] = { 1.0f, 0.0f, 0.0f };
+	float red[] = {255.0f, 0.0f, 0.0f};
+	float blue[] = {0.0f, 255.0f, 0.0f };
 	
 
 	
 
-	testObj = new GameObject("Some game obj", trans);
-	//testObj->addComponent(new BoxBounds("BoxBounds"));
-	//testObj->addComponent(assetPool.getSprite("assets/player/layerOne.png"));
-	//testObj->getComponent<Sprite>()->initSprite(myShader, red, 3.0f, 3.0f);
+	player = new GameObject("Some game obj", trans);
+	
+	Spritesheet* layerOne	= new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	Spritesheet* layerTwo	= new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	Spritesheet* layerThree = new Spritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	
+	int spNum = 52;
+	Player* playerComp = new Player(
+		layerOne->sprites[spNum],
+		layerTwo->sprites[spNum],
+		layerThree->sprites[spNum],
+		red,
+		blue);
 
-
-
-	Spritesheet* ss = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
-	testObj->addComponent(ss->sprites[25]);
-	testObj->getComponent<Sprite>()->initSubSprite(myShader, red);
-
+	player->addComponent(playerComp);
+	layerOne->sprites[spNum]->initSubSprite(myShader);
+	layerTwo->sprites[spNum]->initSubSprite(myShader);
+	layerThree->sprites[spNum]->initSubSprite(myShader);
+	//player->getComponent<Sprite>()->initSubSprite(myShader);
 
 
 }
@@ -75,7 +85,7 @@ void Game::Init()
 void Game::Update(float dt)
 {
 	//std::cout << testObj->getComponent<BoxBounds>()->name << '\n';
-	testObj->update(dt);
+	player->update(dt);
 }
 
 void Game::ProcessInput(float dt)
@@ -85,5 +95,5 @@ void Game::ProcessInput(float dt)
 
 void Game::Render()
 {
-	testObj->draw(myShader, ViewMatrix, ProjectionMatrix);
+	player->draw(myShader, ViewMatrix, ProjectionMatrix);
 }
