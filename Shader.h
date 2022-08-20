@@ -1,8 +1,7 @@
 #pragma once
 
-
-#include "glad/glad.h"
 #include <windows.h>
+#include "glad/glad.h"
 #include <string>
 
 // GLSL wrapper
