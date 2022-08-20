@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "GameObject.h"
 #include <iostream>
 
 Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float colourOne[], float colourTwo[])
@@ -46,6 +47,16 @@ Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float col
 
 
 void Player::draw(Shader& shader, glm::mat4& Model, glm::mat4& Proj) {
+
+	Model = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform.position.x,
+			gameObj->transform.position.y, 0.0f));
+
+	Model = glm::rotate(Model, glm::radians(gameObj->transform.rotateion),
+		glm::vec3(0.0f, 0.0f, 1.0f));
+
+	Model = glm::scale(Model, glm::vec3(gameObj->transform.scale, 1.0f));
+
+
 	layerOne->draw(shader, Model, Proj);
 	layerTwo->draw(shader, Model, Proj);
 	layerThree->draw(shader, Model, Proj);

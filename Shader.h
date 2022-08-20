@@ -1,8 +1,9 @@
 #pragma once
 
-#include <string>
+
 #include "glad/glad.h"
 #include <windows.h>
+#include <string>
 
 // GLSL wrapper
 class Shader

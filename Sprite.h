@@ -1,12 +1,11 @@
 #pragma once
 
+#include "Component.h"
+#include "ImageLoading.h"
 
 #include "glm\glm.hpp"
 #include "glm\gtc\matrix_transform.hpp"
 #include "glad\glad.h"
-#include "Shader.h"
-#include "Component.h"
-#include "ImageLoading.h"
 #include <string>
 
 class Sprite : public Component

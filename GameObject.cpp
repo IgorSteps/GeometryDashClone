@@ -1,5 +1,5 @@
 #include "GameObject.h"
-#include <iostream>
+#include "Component.h"
 
 GameObject::GameObject(std::string name, Transform transform) {
 	this->name = name;
