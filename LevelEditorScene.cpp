@@ -41,8 +41,7 @@ void LevelEditorScene::init()
 		1.0f,
 		-1.0f);
 
-	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+	
 
 	//Load the GLSL program 
 	if (!myShader.load("Shader", "./glslfiles/basicTexture.vert", "./glslfiles/basicTexture.frag"))
@@ -58,6 +57,10 @@ void LevelEditorScene::init()
 
 
 	player = new GameObject("Some game obj", trans);
+
+	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform.position.x,
+		player->transform.position.y, 0.0f));
+	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
 	Spritesheet* layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	Spritesheet* layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
@@ -76,16 +79,19 @@ void LevelEditorScene::init()
 	layerTwo->sprites[spNum]->initSubSprite(myShader);
 	layerThree->sprites[spNum]->initSubSprite(myShader);
 
+	renderer->submit(player); 
 }
 
 void LevelEditorScene::update(float dt)
 {
 	player->update(dt);
 	player->transform.rotateion += dt * 100.0f;
-}
+	camera->position.x += dt * 60.0f;
+ }
 
 void LevelEditorScene::draw()
 {
-	player->draw(myShader, ViewMatrix, ProjectionMatrix);
+	//player->draw(myShader, ViewMatrix, ProjectionMatrix);
+	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
 }
 
