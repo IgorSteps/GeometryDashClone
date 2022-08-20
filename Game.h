@@ -1,6 +1,7 @@
 #pragma once
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Scene.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -22,6 +23,9 @@ public:
     // constructor/destructor
     Game( int width,  int height);
     ~Game();
+    // Scene
+    Scene* currentScene;
+    void changeScene(int scene);
     // initialize game state (load all shaders/textures/levels)
     void Init();
     // game loop
