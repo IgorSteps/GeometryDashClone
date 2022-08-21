@@ -45,9 +45,6 @@
     <ClInclude Include="Transform.h">
       <Filter>Header Files\dataStructure</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AssetPool.h">
       <Filter>Header Files\dataStructure</Filter>
     </ClInclude>
@@ -76,7 +73,16 @@
       <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="LevelEditorScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +97,6 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\dataStructure</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AssetPool.cpp">
       <Filter>Source Files\dataStructure</Filter>
@@ -117,6 +120,12 @@
       <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="LevelEditorScene.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>

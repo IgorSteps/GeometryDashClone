@@ -7,7 +7,7 @@ GameObject::GameObject(std::string name, Transform transform) {
 	this->components = std::vector<Component*>(); 
 }
 
-GameObject::~GameObject() {};
+GameObject::~GameObject() { };
 
 void GameObject::update(float dt) {
 	// testing - prints out game object name and position
