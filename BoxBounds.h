@@ -4,9 +4,9 @@
 class BoxBounds : public Component
 {
 public:
-	std::string name;
+	float width, height;
 
-	BoxBounds(std::string name);
+	BoxBounds(float width, float height);
 	void update(float dt);
 
 };

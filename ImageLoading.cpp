@@ -22,7 +22,7 @@ bool ImageLoading::loadImage(std::string filename)
 	//if still unkown, return failure
 	if (fif == FIF_UNKNOWN)
 		return false;
-
+	
 	//check that the plugin has reading capabilities and load the file
 	if (FreeImage_FIFSupportsReading(fif))
 		dib = FreeImage_Load(fif, filename.c_str());
@@ -30,6 +30,10 @@ bool ImageLoading::loadImage(std::string filename)
 	if (!dib)
 		return false;
 
+	// OpenGL has the origin in the lower left corner,
+	// unlike most windowing systems in use, where the origin is in the upper left corner.
+	// this method flips the image vertically
+	FreeImage_FlipVertical(dib);
 	//retrieve the image data
 	bits = FreeImage_GetBits(dib);
 	//get the image width and height

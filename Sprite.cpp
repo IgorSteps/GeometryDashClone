@@ -8,7 +8,11 @@ Sprite::Sprite(std::string file)
 {
 	this->spriteFile = file;
 	m_vaoID = 0;
+	m_vboID[0] = 0;
+	m_vboID[1] = 0;
 	m_vboID[2] = 0;
+	m_eboID[0] = 0;
+	m_eboID[1] = 0;
 	m_eboID[2] = 0;
 	
 
@@ -61,7 +65,7 @@ void Sprite::SetWidth(float width) {
 float const& Sprite::getHeight() { return this->m_Height; }
 
 
-void Sprite::initSprite(Shader& shader, float repeatInS, float repeatInT)
+void Sprite::initSprite(Shader& shader)
 {
 	//create the texture on the GPU
 	glGenTextures(1, &m_TexName);
@@ -84,24 +88,22 @@ void Sprite::initSprite(Shader& shader, float repeatInS, float repeatInT)
 		std::cout << "Image "<< this->spriteFile <<" loaded " << std::endl;
 	}
 
-	float halfWidth  = m_Width/2;
-	float halfHeight = m_Height/2;
 	
 	//Create the geometry
 	float vert[] = {
-		-halfWidth,		halfHeight,		0.0f,	// top left
-		-halfWidth,		-halfHeight,	0.0f,	// bottom left
-		halfWidth,		-halfHeight,	0.0f,	// bottom right
-		halfWidth,		halfHeight,		0.0f	// top right
+		0.0f,		0.0f,		0.0f,	// top left
+		0.0f,		m_Height,	0.0f,	// bottom left
+		m_Width,	m_Height,	0.0f,	// bottom right
+		m_Width,	0.0f,		0.0f	// top right
 	};
 	
 
 	//texture coordinates
 	float tex[]{
-		0.0f, 1.0f,
 		0.0f, 0.0f,
-		1.0f, 0.0f,
-		1.0f, 1.0f
+		0.0f, 1.0f,
+		1.0f, 1.0f,
+		1.0f, 0.0f
 	};
 
 	// colour array
@@ -189,8 +191,8 @@ void Sprite::initSubSprite(Shader& shader)
 		std::cout << "Image " << this->spritesheetFile << " loaded " << std::endl;
 	}
 
-	float halfWidth = 62.0f/2;
-	float halfHeight = 62.0f/2;
+	float halfWidth = 84.0f/2.0f;
+	float halfHeight = 84.0f/2.0f;
 
 	//Create the geometry
 	float vert[] = {

@@ -12,13 +12,14 @@ class Component;
 class GameObject
 {
 public:
-	GameObject(std::string name, Transform transform);
+	GameObject(std::string name, Transform* transform);
+	GameObject();
 	~GameObject();
 
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	
-	Transform transform; //make a smart pointer?
+	Transform* transform; //make a smart pointer?
 	
 	template <typename T> T* getComponent() {
 		for (auto& comp : this->components)
