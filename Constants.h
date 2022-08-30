@@ -12,6 +12,6 @@ namespace Constants {
 	constexpr int CAMERA_OFFSET_Y = 325;
 	constexpr int CAMERA_OFFSET_GROUND_Y = 150;
 	
-	constexpr int GRAVITY = 200;
-	constexpr int TERMINAL_VELOCITY = 600;
+	constexpr int GRAVITY = 2850;
+	constexpr int TERMINAL_VELOCITY = 1900;
 };

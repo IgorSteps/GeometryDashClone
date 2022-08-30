@@ -3,6 +3,8 @@
 #include "Constants.h"
 #include "BoxBounds.h"
 #include "LevelEditorScene.h"
+#include "Game.h"
+#include "LevelScene.h"
 
 
 Ground::Ground(Sprite* sp, Shader& sh) {
@@ -16,11 +18,21 @@ Ground::~Ground() {
 
 }
 void Ground::update(float dt) {
-	GameObject* player = LevelEditorScene::getScene()->player;
 
-	if (player->transform->position.y + player->getComponent<BoxBounds>()->height > gameObj->transform->position.y) {
-		player->transform->position.y = gameObj->transform->position.y - player->getComponent<BoxBounds>()->height;
+	if (!Game::game->isInEditor) {
+		LevelScene* scene = static_cast<LevelScene*>(Game::game->getCurrentScene());
+		GameObject* player = scene->player;
+
+		if (player->transform->position.y + player->getComponent<BoxBounds>()->height > gameObj->transform->position.y) {
+			player->transform->position.y = gameObj->transform->position.y - player->getComponent<BoxBounds>()->height;
+		}
+
+		gameObj->transform->position.x = scene->camera->position.x - 10.0f;
 	}
+	else {
+		gameObj->transform->position.x = Game::game->getCurrentScene()->camera->position.x - 10.0f;
+	}
+
 } 
 
 void Ground::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)

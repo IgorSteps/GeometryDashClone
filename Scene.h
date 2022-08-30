@@ -21,6 +21,11 @@ public:
 		delete renderer;
 	}
 
+	void addGameObject(GameObject* g) {
+		gameObjects.push_back(g);
+		renderer->submit(g);
+	}
+
 	virtual void init()=0;
 	virtual void update(float dt)=0;
 	virtual void draw()=0;
