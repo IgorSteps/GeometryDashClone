@@ -18,7 +18,7 @@ public:
 
 	void setColour(float colour[2]);
 
-	void initSprite(Shader& shader, float repeatInS, float repeatInT);
+	void initSprite(Shader& shader);
 	void initSubSprite(Shader& shader);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 

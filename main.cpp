@@ -1,18 +1,16 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Game.h"
+#include "Constants.h"
+
 #include <iostream>
 
 // GLFW function declarations
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
-// The Width of the screen
-const  int SCREEN_WIDTH = 800;
-// The height of the screen
-const  int SCREEN_HEIGHT = 600;
 
-Game GeometryDashClone(SCREEN_WIDTH, SCREEN_HEIGHT);
+Game GeometryDashClone(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
 
 int main(int argc, char* argv[])
 {
@@ -25,7 +23,8 @@ int main(int argc, char* argv[])
 #endif
     glfwWindowHint(GLFW_RESIZABLE, false);
 
-    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "GeometryDashClone", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT,
+         "Geometry Dash", nullptr, nullptr);
     glfwMakeContextCurrent(window);
 
     // glad: load all OpenGL function pointers
@@ -41,7 +40,7 @@ int main(int argc, char* argv[])
 
     // OpenGL configuration
     // --------------------
-    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    glViewport(0, 0, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

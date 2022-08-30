@@ -3,7 +3,6 @@
 #include <iostream>
 
 
-
 Game::Game( int width,  int height) : State(GAME_ACTIVE), Keys(), Width(width), Height(height)
 {
 	this->currentScene = nullptr;
@@ -18,7 +17,7 @@ void Game::changeScene(int scene)
 {
 	switch (scene) {
 	case 0:
-		currentScene = new LevelEditorScene("Level editor");
+		currentScene = LevelEditorScene::getScene();
 		break;
 	default:
 		std::cout << "Don't know which scene" << '\n';

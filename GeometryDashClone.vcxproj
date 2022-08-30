@@ -149,12 +149,15 @@
     <ClInclude Include="BoxBounds.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="ImageLoading.h" />
     <ClInclude Include="LevelEditorScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sprite.h" />
@@ -167,6 +170,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="ImageLoading.cpp" />
     <ClCompile Include="LevelEditorScene.cpp" />
     <ClCompile Include="main.cpp" />

@@ -1,8 +1,9 @@
 #include "BoxBounds.h"
 #include <iostream>
 
-BoxBounds::BoxBounds(std::string name) {
-	this->name = name;
+BoxBounds::BoxBounds(float width, float height) {
+	this->width = width;
+	this->height = height;
 }
 
 void BoxBounds::update(float dt) {
