@@ -18,14 +18,17 @@ class Game
 public:
     // game state
     GameState               State;
-    bool                    Keys[1024];
+    bool                    Keys[1024], isInEditor;
      int            Width, Height;
     // constructor/destructor
     Game( int width,  int height);
+    Game(){};
     ~Game();
+    static Game* game;
     // Scene
     Scene* currentScene;
     void changeScene(int scene);
+    Scene* getCurrentScene();
     // initialize game state (load all shaders/textures/levels)
     void Init();
     // game loop

@@ -1,40 +1,40 @@
-#include "Constants.h"
-#include "LevelEditorScene.h"
-#include "GameObject.h"
-#include "BoxBounds.h"
-#include "AssetPool.h"
-#include "Spritesheet.h"
-#include "Player.h"
-#include "Ground.h"
-#include "Rigidbody.h"
-
-#include <glm/ext/matrix_float4x4.hpp>
-#include <iostream>
-
-
-// Coordinate System Data
-glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
-glm::mat4 ModelViewMatrix;  // matrix for the modelling and viewing
-glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
-
-// Game Data
-Shader myShader;
-GameObject* ground;
-Spritesheet* layerOne;
-Spritesheet* layerTwo;
-Spritesheet* layerThree;
-Transform* trans;
-AssetPool assetPool;
+//#include "Constants.h"
+#include "LevelScene.h"
+//#include "GameObject.h"
+//#include "BoxBounds.h"
+//#include "AssetPool.h"
+//#include "Spritesheet.h"
+//#include "Player.h"
+//#include "Ground.h"
+//#include "Rigidbody.h"
+//
+//#include <glm/ext/matrix_float4x4.hpp>
+//#include <iostream>
 
 
-LevelEditorScene::LevelEditorScene(std::string name) {
+//// Coordinate System Data
+//glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
+//glm::mat4 ModelViewMatrix;  // matrix for the modelling and viewing
+//glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
+//
+//// Game Data
+//Shader myShader;
+//GameObject* ground;
+//Spritesheet* layerOne;
+//Spritesheet* layerTwo;
+//Spritesheet* layerThree;
+//Transform* trans;
+//AssetPool assetPool;
+
+
+LevelScene::LevelScene(std::string name) {
 	Scene::SceneInit(name);
 }
 
 
 
 
-LevelEditorScene::~LevelEditorScene() {
+LevelScene::~LevelScene() {
 	delete player;
 	delete ground;
 	delete layerOne;
@@ -42,7 +42,7 @@ LevelEditorScene::~LevelEditorScene() {
 	delete layerThree;
 }
 
-void LevelEditorScene::init()
+void LevelScene::init()
 {
 	int Width = Constants::SCREEN_WIDTH;
 	int Height = Constants::SCREEN_HEIGHT;
@@ -70,7 +70,7 @@ void LevelEditorScene::init()
 	}
 
 	/// PLAYER
-	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f,350.0f)));
+	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f, 350.0f)));
 
 	float red[] = { 255.0f, 0.0f, 0.0f };
 	float blue[] = { 0.0f, 255.0f, 0.0f };
@@ -78,7 +78,7 @@ void LevelEditorScene::init()
 	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x,
 		player->transform->position.y, 0.0f));
 
-	ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f,500.0f,1.0f));
+	ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f, 500.0f, 1.0f));
 
 	layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
@@ -93,7 +93,10 @@ void LevelEditorScene::init()
 		blue);
 
 	player->addComponent(playerComp);
+	player->addComponent(new Rigidbody(glm::vec2(395.0f, 0.0f)));
+	player->addComponent(new BoxBounds(Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT));
 
+	 
 	layerOne->sprites[spNum]->initSubSprite(myShader);
 	layerTwo->sprites[spNum]->initSubSprite(myShader);
 	layerThree->sprites[spNum]->initSubSprite(myShader);
@@ -104,11 +107,12 @@ void LevelEditorScene::init()
 	Ground* groundComp = new Ground(sp, myShader);
 	ground->addComponent(groundComp);
 
+
 	addGameObject(player);
 	addGameObject(ground);
 }
 
-void LevelEditorScene::update(float dt)
+void LevelScene::update(float dt)
 {
 	if (player->transform->position.x - camera->position.x > Constants::CAMERA_OFFSET_X)
 	{
@@ -122,18 +126,19 @@ void LevelEditorScene::update(float dt)
 	{
 		camera->position.y = Constants::CAMERA_OFFSET_GROUND_Y;
 	}
-	
-	
+
+
 	//player->transform->rotateion += 100.0f * dt;
 
 	for (GameObject* g : gameObjects) {
 		g->update(dt);
 	}
-	
- }
 
-void LevelEditorScene::draw()
+}
+
+void LevelScene::draw()
 {
 	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
 }
 
+LevelScene* LevelScene::currentScene;

@@ -93,6 +93,9 @@
     <ClInclude Include="Rigidbody.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="LevelScene.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -139,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelScene.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

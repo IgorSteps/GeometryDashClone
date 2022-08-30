@@ -81,7 +81,6 @@ int main(int argc, char* argv[])
     }
 
     // delete all loaded resources ?
-
     glfwTerminate();
     return 0;
 }
