@@ -3,8 +3,8 @@
 Renderer::Renderer(Camera* camera)
 {
 	this->camera = camera;
-	this->gameObjects = std::vector < GameObject*>();
-	this->oldTransform=nullptr;
+	this->gameObjects = std::vector<GameObject*>();
+	this->oldTransform = nullptr;
 }
 
 Renderer::~Renderer()
@@ -19,7 +19,7 @@ void Renderer::submit(GameObject* gameObj)
 
 void Renderer::render(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
-	for (GameObject* g : gameObjects) {
+	for (auto& g : gameObjects) {
 		oldTransform = new Transform(g->transform->position);
 		oldTransform->rotateion = g->transform->rotateion;
 		oldTransform->scale = g->transform->scale;

@@ -9,27 +9,14 @@
 class Scene
 {
 public:
-	void SceneInit(std::string name) {
-		this->camera = new Camera(glm::vec2(0.0f));
-		this->renderer = new Renderer(this->camera);
-		this->gameObjects = std::vector<GameObject*>();
-		this->name = name;
-	}
+	~Scene();
 
-	~Scene() {
-		delete camera;
-		delete renderer;
-	}
-
-	void addGameObject(GameObject* g) {
-		gameObjects.push_back(g);
-		renderer->submit(g);
-	}
+	void SceneInit(std::string name);
+	void addGameObject(GameObject* g);
 
 	virtual void init()=0;
 	virtual void update(float dt)=0;
 	virtual void draw()=0;
-
 
 	std::string name;
 	Camera* camera;

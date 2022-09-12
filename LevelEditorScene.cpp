@@ -25,6 +25,9 @@ Spritesheet* layerTwo;
 Spritesheet* layerThree;
 Transform* trans;
 AssetPool assetPool;
+Sprite* groundSp;
+Ground* groundComp;
+Player* playerComp;
 
 
 LevelEditorScene::LevelEditorScene(std::string name) {
@@ -40,6 +43,10 @@ LevelEditorScene::~LevelEditorScene() {
 	delete layerOne;
 	delete layerTwo;
 	delete layerThree;
+
+	delete playerComp;
+	delete groundComp;
+	delete groundSp;
 }
 
 void LevelEditorScene::init()
@@ -85,7 +92,7 @@ void LevelEditorScene::init()
 	layerThree = new Spritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 
 	int spNum = 0;
-	Player* playerComp = new Player(
+	playerComp = new Player(
 		layerOne->sprites[spNum],
 		layerTwo->sprites[spNum],
 		layerThree->sprites[spNum],
@@ -100,8 +107,8 @@ void LevelEditorScene::init()
 
 	/// GROUND
 	ground = new GameObject("Ground game object", new Transform(glm::vec2(0.0f, Constants::GROUND_Y)));
-	Sprite* sp = new Sprite("assets/grounds/ground01.png");
-	Ground* groundComp = new Ground(sp, myShader);
+	groundSp = new Sprite("assets/grounds/ground01.png");
+	groundComp = new Ground(groundSp, myShader);
 	ground->addComponent(groundComp);
 
 	addGameObject(player);
