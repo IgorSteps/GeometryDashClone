@@ -1,38 +1,8 @@
-//#include "Constants.h"
 #include "LevelScene.h"
-//#include "GameObject.h"
-//#include "BoxBounds.h"
-//#include "AssetPool.h"
-//#include "Spritesheet.h"
-//#include "Player.h"
-//#include "Ground.h"
-//#include "Rigidbody.h"
-//
-//#include <glm/ext/matrix_float4x4.hpp>
-//#include <iostream>
-
-
-//// Coordinate System Data
-//glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
-//glm::mat4 ModelViewMatrix;  // matrix for the modelling and viewing
-//glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
-//
-//// Game Data
-//Shader myShader;
-//GameObject* ground;
-//Spritesheet* layerOne;
-//Spritesheet* layerTwo;
-//Spritesheet* layerThree;
-//Transform* trans;
-//AssetPool assetPool;
-
 
 LevelScene::LevelScene(std::string name) {
 	Scene::SceneInit(name);
 }
-
-
-
 
 LevelScene::~LevelScene() {
 	delete player;
@@ -46,14 +16,7 @@ void LevelScene::init()
 {
 	int Width = Constants::SCREEN_WIDTH;
 	int Height = Constants::SCREEN_HEIGHT;
-	// this proj mat will place an object in the center
-	//ProjectionMatrix = glm::ortho(
-	//	(static_cast<float>(-Width) / 2.0f),	//left
-	//	(static_cast<float>(Width) / 2.0f),		//right
-	//	static_cast<float>(-Height) / 2.0f,		//bottom
-	//	static_cast<float>(Height) / 2.0f,		//top
-	//	1.0f,
-	//	-1.0f);
+
 	ProjectionMatrix = glm::ortho(
 		0.0f,
 		(static_cast<float>(Constants::SCREEN_WIDTH)),
@@ -130,7 +93,7 @@ void LevelScene::update(float dt)
 
 	//player->transform->rotateion += 100.0f * dt;
 
-	for (GameObject* g : gameObjects) {
+	for (auto& g : gameObjects) {
 		g->update(dt);
 	}
 

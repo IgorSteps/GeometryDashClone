@@ -9,5 +9,6 @@ public:
 	Camera(glm::vec2 position) {
 		this->position = position;
 	};
+	Camera(){};
 };
 
