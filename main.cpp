@@ -1,7 +1,7 @@
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include "Game.h"
 #include "Constants.h"
+#include "ML.h"
 
 #include <iostream>
 
@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     GLFWwindow* window = glfwCreateWindow(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT,
          "Geometry Dash", nullptr, nullptr);
     glfwMakeContextCurrent(window);
-
+   
     // glad: load all OpenGL function pointers
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -37,6 +37,8 @@ int main(int argc, char* argv[])
 
     glfwSetKeyCallback(window, key_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, ML::mousePosCallback);
+    glfwSetMouseButtonCallback(window, ML::mouseButtonCallback);
 
     // OpenGL configuration
     // --------------------
@@ -69,7 +71,7 @@ int main(int argc, char* argv[])
         // update game state
         // -----------------
         GeometryDashClone.Update(deltaTime);
-
+     
         // render
         // ------
         glClearColor(0.0f, 0.0f, 1.0f, 0.0f);

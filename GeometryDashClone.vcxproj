@@ -156,6 +156,7 @@
     <ClInclude Include="ImageLoading.h" />
     <ClInclude Include="LevelEditorScene.h" />
     <ClInclude Include="LevelScene.h" />
+    <ClInclude Include="ML.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Rigidbody.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="LevelEditorScene.cpp" />
     <ClCompile Include="LevelScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ML.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
