@@ -30,14 +30,16 @@ void ML::mousePosCallback(GLFWwindow* window, double xpos, double ypos)
     get()->m_isDragging = get()->m_mouseButtonPressed[0] ||
         get()->m_mouseButtonPressed[1] ||
         get()->m_mouseButtonPressed[2];
+    // test
+    std::cout << "mousePosCallback_TEST   " << "x-coord: " << s_Instance->m_xPos << ", y-coord: " << s_Instance->m_yPos << '\n';
 }
 
 void ML::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     if (action == GLFW_PRESS) {
         if (button < 3) {
-            get()->m_mouseButtonPressed[button] = true;
             //test  
-            //std::cout << "pressed" << '\n';
+            std::cout << "mouseButtonCallback_TEST   " << "x-coord: " << s_Instance->m_xPos << ", y-coord: " << s_Instance->m_yPos << '\n';
+            get()->m_mouseButtonPressed[button] = true;
         }
     }
     else if (action == GLFW_RELEASE) {

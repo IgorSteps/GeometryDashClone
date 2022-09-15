@@ -79,6 +79,7 @@ int main(int argc, char* argv[])
         //std::cout << glGetError() << std::endl;
         GeometryDashClone.Render();
 
+        ML::endFrame();
         glfwSwapBuffers(window);
     }
 
