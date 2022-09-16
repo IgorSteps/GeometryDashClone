@@ -14,4 +14,7 @@ namespace Constants {
 	
 	constexpr int GRAVITY = 2850;
 	constexpr int TERMINAL_VELOCITY = 1900;
+
+	constexpr int TILE_HEIGHT = 42;
+	constexpr int TILE_WIDTH = 42;
 };

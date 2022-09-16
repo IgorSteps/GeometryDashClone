@@ -39,7 +39,7 @@ void Game::changeScene(int scene)
 
 void Game::Init()
 {
-	changeScene(1);
+	changeScene(0);
 	this->currentScene->init();
 }
 

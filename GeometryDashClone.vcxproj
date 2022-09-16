@@ -152,10 +152,12 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="ImageLoading.h" />
     <ClInclude Include="LevelEditorScene.h" />
     <ClInclude Include="LevelScene.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="ML.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
@@ -172,10 +174,12 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="ImageLoading.cpp" />
     <ClCompile Include="LevelEditorScene.cpp" />
     <ClCompile Include="LevelScene.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ML.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -186,6 +190,12 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Spritesheet.cpp" />
     <ClCompile Include="Transform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="glslfiles\lineShader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glslfiles\lineShader.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
