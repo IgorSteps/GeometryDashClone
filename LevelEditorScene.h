@@ -8,6 +8,7 @@
 #include "Ground.h"
 #include "Rigidbody.h"
 #include "Grid.h"
+#include "CameraControls.h"
 
 class LevelEditorScene : public Scene
 {
@@ -36,5 +37,6 @@ public:
 	Ground* groundComp;
 	Player* playerComp;
 	Grid* grid;
+	CameraControls* cameraContrl;
 };
 

@@ -105,6 +105,9 @@
     <ClInclude Include="Grid.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="CameraControls.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -168,6 +171,9 @@
       <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraControls.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
