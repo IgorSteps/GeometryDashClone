@@ -16,19 +16,19 @@ Grid::Grid()
 	// lines color
 	float col[] = { .75f, .75f, .75f };
 
-	// initilise lineVert
+	// initilise vertical lines
 	lineVert = Line();
 	lineVert.setColour(col);
 	lineVert.SetWidth(2.5f);
 	lineVert.SetHeight(Constants::GROUND_Y);
 
-	//initilise line horizontal
+	//initilise horizontal lines
 	lineHoriz = Line();
 	lineHoriz.setColour(col);
 	lineHoriz.SetWidth(Constants::SCREEN_WIDTH);
 	lineHoriz.SetHeight(2.5f);
 	
-	// load lineVert shader
+	// load shader for lines
 	if (!shader.load("lineVert", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
 	{
 		std::cout << "failed to load shader" << std::endl;
@@ -45,7 +45,7 @@ void Grid::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Projectio
 	float startX = floor(camera->position.x / m_gridWidth) * m_gridWidth - camera->position.x;
 	float startY = floor(camera->position.y / m_gridHeight) * m_gridHeight - camera->position.y;
 
-	// vertical lineVerts
+	// vertical lines
 	for (int column = 0; column < numYLines; ++column)
 	{
 		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(startX, 0.0f, 0.0f));
@@ -53,12 +53,9 @@ void Grid::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Projectio
 		startX += m_gridWidth;
 	}
 
-	// horizontal lineVerts
+	// horizontal lines
 	for (int row = 0; row < numXLines; ++row)
 	{
-		//ModelViewMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f),
-			//glm::vec3(0.0f, 0.0f, 1.0f));
-
 		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, startY, 0.0f));
 		lineHoriz.draw(shader, ModelViewMatrix, ProjectionMatrix);
 		startY += m_gridHeight;
