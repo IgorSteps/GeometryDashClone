@@ -1,33 +1,8 @@
-#include "Constants.h"
 #include "LevelEditorScene.h"
-#include "GameObject.h"
-#include "BoxBounds.h"
-#include "AssetPool.h"
-#include "Spritesheet.h"
-#include "Player.h"
-#include "Ground.h"
-#include "Rigidbody.h"
+
 
 #include <glm/ext/matrix_float4x4.hpp>
 #include <iostream>
-
-
-// Coordinate System Data
-glm::mat4 ViewMatrix;		// matrix for the modelling and viewing
-glm::mat4 ModelViewMatrix;  // matrix for the modelling and viewing
-glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
-
-// Game Data
-Shader myShader;
-GameObject* ground;
-Spritesheet* layerOne;
-Spritesheet* layerTwo;
-Spritesheet* layerThree;
-Transform* trans;
-AssetPool assetPool;
-Sprite* groundSp;
-Ground* groundComp;
-Player* playerComp;
 
 
 LevelEditorScene::LevelEditorScene(std::string name) {
@@ -53,14 +28,7 @@ void LevelEditorScene::init()
 {
 	int Width = Constants::SCREEN_WIDTH;
 	int Height = Constants::SCREEN_HEIGHT;
-	// this proj mat will place an object in the center
-	//ProjectionMatrix = glm::ortho(
-	//	(static_cast<float>(-Width) / 2.0f),	//left
-	//	(static_cast<float>(Width) / 2.0f),		//right
-	//	static_cast<float>(-Height) / 2.0f,		//bottom
-	//	static_cast<float>(Height) / 2.0f,		//top
-	//	1.0f,
-	//	-1.0f);
+
 	ProjectionMatrix = glm::ortho(
 		0.0f,
 		(static_cast<float>(Constants::SCREEN_WIDTH)),
@@ -75,17 +43,17 @@ void LevelEditorScene::init()
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
-
+	grid = new Grid();
 	/// PLAYER
 	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f,350.0f)));
 
-	float red[] = { 255.0f, 0.0f, 0.0f };
-	float blue[] = { 0.0f, 255.0f, 0.0f };
+	float red[] = { 1.0f, 0.0f, 0.0f };
+	float blue[] = { 0.0f, 1.0f, 0.0f };
 
 	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x,
 		player->transform->position.y, 0.0f));
 
-	ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f,500.0f,1.0f));
+	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f));
 
 	layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
@@ -137,10 +105,12 @@ void LevelEditorScene::update(float dt)
 		g->update(dt);
 	}
 	
+	grid->update(dt);
  }
 
 void LevelEditorScene::draw()
 {
 	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
+	grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
 }
 
