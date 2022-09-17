@@ -47,13 +47,13 @@ void LevelEditorScene::init()
 	/// PLAYER
 	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f,350.0f)));
 
-	float red[] = { 255.0f, 0.0f, 0.0f };
-	float blue[] = { 0.0f, 255.0f, 0.0f };
+	float red[] = { 1.0f, 0.0f, 0.0f };
+	float blue[] = { 0.0f, 1.0f, 0.0f };
 
 	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x,
 		player->transform->position.y, 0.0f));
 
-	ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f,500.0f,1.0f));
+	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f));
 
 	layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
@@ -111,6 +111,6 @@ void LevelEditorScene::update(float dt)
 void LevelEditorScene::draw()
 {
 	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
-	grid->draw(grid->shader, ViewMatrix, ProjectionMatrix);
+	grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
 }
 

@@ -10,24 +10,33 @@ Grid::Grid()
 	camera = Game::game->getCurrentScene()->camera;
 	m_gridHeight = Constants::TILE_HEIGHT;
 	m_gridWidth = Constants::TILE_WIDTH;
-	numXLines = 10;
-	numYLines = 10;
+	numYLines = 33; // number of vertical lines
+	numXLines = 15; // number of horizontal lines
 
-	// initilise line
-	line = Line();
-	float col[3] = { 1.0f, 0.0f, 0.0f };
-	line.setColour(col);
-	line.SetWidth(50.0f);
-	line.SetHeight(Constants::SCREEN_HEIGHT);
+	// lines color
+	float col[] = { .75f, .75f, .75f };
 
-	// load line shader
-	if (!shader.load("Line", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
+	// initilise lineVert
+	lineVert = Line();
+	lineVert.setColour(col);
+	lineVert.SetWidth(2.5f);
+	lineVert.SetHeight(Constants::GROUND_Y);
+
+	//initilise line horizontal
+	lineHoriz = Line();
+	lineHoriz.setColour(col);
+	lineHoriz.SetWidth(Constants::SCREEN_WIDTH);
+	lineHoriz.SetHeight(2.5f);
+	
+	// load lineVert shader
+	if (!shader.load("lineVert", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
 
 	// initlise opengl stuff
-	line.init(shader);
+	lineVert.init(shader);
+	lineHoriz.init(shader);
 }
 
 void Grid::update(float dt) {};
@@ -36,17 +45,22 @@ void Grid::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Projectio
 	float startX = floor(camera->position.x / m_gridWidth) * m_gridWidth - camera->position.x;
 	float startY = floor(camera->position.y / m_gridHeight) * m_gridHeight - camera->position.y;
 
+	// vertical lineVerts
 	for (int column = 0; column < numYLines; ++column)
 	{
-		// todo: draw verical lines
-		line.draw(shader, ModelViewMatrix, ProjectionMatrix);
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(startX, 0.0f, 0.0f));
+		lineVert.draw(shader, ModelViewMatrix, ProjectionMatrix);
 		startX += m_gridWidth;
 	}
 
+	// horizontal lineVerts
 	for (int row = 0; row < numXLines; ++row)
 	{
-		// todo: draw horizontal lines
-		line.draw(shader, ModelViewMatrix, ProjectionMatrix);
+		//ModelViewMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f),
+			//glm::vec3(0.0f, 0.0f, 1.0f));
+
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, startY, 0.0f));
+		lineHoriz.draw(shader, ModelViewMatrix, ProjectionMatrix);
 		startY += m_gridHeight;
 	}
 }

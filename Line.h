@@ -10,6 +10,7 @@ class Line : public Component
 {
 public:
 	Line(); 
+	~Line();
 
 	void setColour(float colour[3]);
 
@@ -23,8 +24,8 @@ public:
 	float colour[3];
 private:
 	unsigned int m_vaoID;		// id for Vertex Array Object
-	unsigned int m_vboID[3];	// ids for Vertex Buffer Objects
-	unsigned int m_eboID[3];	// ids for Element Buffer Objects
+	unsigned int m_vboID[2];	// ids for Vertex Buffer Objects
+	unsigned int m_eboID[2];	// ids for Element Buffer Objects
 	
 	//Dimensions of the sprite.
 	float m_Width;

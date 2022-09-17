@@ -3,12 +3,24 @@
 Line::Line()
 {
 	m_vaoID = 0;
-	m_vboID[3] = { 0 };
-	m_eboID[3] = { 0 };
+	m_vboID[0] = { 0 };
+	m_vboID[1] = { 0 };
+	m_vboID[2] = { 0 };
+	m_eboID[0] = { 0 };
+	m_eboID[1] = { 0 };
+	m_eboID[2] = { 0 };
 
-	colour[3] = { 0 };
+	colour[0] = { 0 };
+	colour[1] = { 0 };
+	colour[2] = { 0 };
 	m_Height = 0;
 	m_Width = 0;
+}
+
+Line::~Line() {
+	glDeleteBuffers(2, m_vboID);
+	glDeleteBuffers(2, m_eboID);
+	glDeleteVertexArrays(1, &m_vaoID);
 }
 
 void Line::setColour(float col[3]) 
@@ -54,8 +66,8 @@ void Line::init(Shader& shader)
 	//Generate buffers
 	glGenVertexArrays(1, &m_vaoID);
 	glBindVertexArray(m_vaoID);
-	glGenBuffers(3, m_vboID);		// we need three VBOs - vertices, colours, textures
-	glGenBuffers(3, m_eboID);		// we need three m_eboIDs - vertices, colours, textures
+	glGenBuffers(2, m_vboID);		// we need three VBOs - vertices, colours, textures
+	glGenBuffers(2, m_eboID);		// we need three m_eboIDs - vertices, colours, textures
 	
 	/// --------VERTICIES--------
 	// VBO[0]

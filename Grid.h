@@ -15,6 +15,6 @@ public:
 	int numYLines, numXLines;
 
 	Shader shader;
-	Line line;
+	Line lineVert, lineHoriz;
 };
 

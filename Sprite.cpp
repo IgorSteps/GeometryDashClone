@@ -45,8 +45,8 @@ Sprite::Sprite()
 
 
 Sprite::~Sprite() {
-	glDeleteBuffers(2, m_vboID);
-	glDeleteBuffers(2, m_eboID);
+	glDeleteBuffers(3, m_vboID);
+	glDeleteBuffers(3, m_eboID);
 	glDeleteVertexArrays(1, &m_vaoID);
 }
 
@@ -191,8 +191,8 @@ void Sprite::initSubSprite(Shader& shader)
 		std::cout << "Image " << this->spritesheetFile << " loaded " << std::endl;
 	}
 
-	float halfWidth = 84.0f/2.0f;
-	float halfHeight = 84.0f/2.0f;
+	float halfWidth = 42.0f/2.0f;
+	float halfHeight = 42.0f/2.0f;
 
 	//Create the geometry
 	float vert[] = {
