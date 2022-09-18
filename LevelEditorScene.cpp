@@ -15,6 +15,8 @@ LevelEditorScene::~LevelEditorScene() {
 	delete layerOne;
 	delete layerTwo;
 	delete layerThree;
+	delete grid;
+	delete cameraContrl;
 
 	delete playerComp;
 	delete groundComp;
