@@ -9,9 +9,6 @@ LevelEditorScene::LevelEditorScene(std::string name) {
 	Scene::SceneInit(name);
 }
 
-
-
-
 LevelEditorScene::~LevelEditorScene() {
 	delete player;
 	delete ground;
@@ -37,13 +34,18 @@ void LevelEditorScene::init()
 		-1.0f,
 		1.0f);
 
-
 	//Load the GLSL program 
 	if (!myShader.load("Shader", "./glslfiles/basicTexture.vert", "./glslfiles/basicTexture.frag"))
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
+
+	/// GRID
 	grid = new Grid();
+
+	/// CAMERA CONTROLS
+	cameraContrl = new CameraControls();
+
 	/// PLAYER
 	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f,350.0f)));
 
@@ -85,26 +87,16 @@ void LevelEditorScene::init()
 
 void LevelEditorScene::update(float dt)
 {
-	if (player->transform->position.x - camera->position.x > Constants::CAMERA_OFFSET_X)
-	{
-		camera->position.x = player->transform->position.x - Constants::CAMERA_OFFSET_X;
-	}
-	if (player->transform->position.y - camera->position.y > Constants::CAMERA_OFFSET_Y)
-	{
-		camera->position.y = player->transform->position.y - Constants::CAMERA_OFFSET_Y;
-	}
 	if (camera->position.y > Constants::CAMERA_OFFSET_GROUND_Y)
 	{
 		camera->position.y = Constants::CAMERA_OFFSET_GROUND_Y;
 	}
 	
-	
-	//player->transform->rotateion += 100.0f * dt;
-
 	for (GameObject* g : gameObjects) {
-		g->update(dt);
+		g->update(dt); 
 	}
 	
+	cameraContrl->update(dt);
 	grid->update(dt);
  }
 

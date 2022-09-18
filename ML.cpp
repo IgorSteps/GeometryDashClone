@@ -36,7 +36,7 @@ void ML::mousePosCallback(GLFWwindow* window, double xpos, double ypos)
 
 void ML::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     if (action == GLFW_PRESS) {
-        if (button < 3) {
+        if (button < 3) { 
             //test  
             //std::cout << "mouseButtonCallback_TEST   " << "x-coord: " << s_Instance->m_xPos << ", y-coord: " << s_Instance->m_yPos << '\n';
             get()->m_mouseButtonPressed[button] = true;

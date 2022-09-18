@@ -148,6 +148,7 @@
     <ClInclude Include="AssetPool.h" />
     <ClInclude Include="BoxBounds.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraControls.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="AssetPool.cpp" />
     <ClCompile Include="BoxBounds.cpp" />
+    <ClCompile Include="CameraControls.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glad.c" />
