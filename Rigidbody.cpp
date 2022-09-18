@@ -1,4 +1,5 @@
 #include "Rigidbody.h"
+#define signum(x)  ((signbit(x) ?  -1 : 1)
 
 Rigidbody::Rigidbody(glm::vec2 v) {
 	this->Velocity = v;
@@ -11,6 +12,6 @@ void Rigidbody::update(float dt) {
 	Velocity.y += Constants::GRAVITY * dt;
 
 	if (abs(Velocity.y) > Constants::TERMINAL_VELOCITY) {
-		Velocity.y = Velocity.y * Constants::TERMINAL_VELOCITY;
+		Velocity.y = signum(Velocity.y) * Constants::TERMINAL_VELOCITY);
 	}
 }
