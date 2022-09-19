@@ -7,6 +7,17 @@ GameObject::GameObject(std::string name, Transform* transform) {
 	this->components = std::vector<Component*>(); 
 }
 
+GameObject::GameObject(GameObject& g)
+{
+	name = g.name;
+	transform = g.transform;
+
+	for (auto& c : components) 
+	{
+		g.addComponent(c);
+	}
+}
+
 GameObject::~GameObject() { 
 };
 

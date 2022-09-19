@@ -43,6 +43,10 @@ Sprite::Sprite()
 {
 }
 
+Sprite::Sprite(Sprite& sp) 
+{
+	*this = sp;
+}
 
 Sprite::~Sprite() {
 	glDeleteBuffers(3, m_vboID);

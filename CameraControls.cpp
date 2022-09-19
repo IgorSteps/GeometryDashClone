@@ -9,6 +9,12 @@ CameraControls::CameraControls()
 	m_prevMy = 0.0f;
 }
 
+CameraControls::CameraControls(CameraControls& cc)
+{
+	m_prevMx = cc.m_prevMx;
+	m_prevMy = cc.m_prevMy;
+}
+
 void CameraControls::update(float dt) 
 {
 	if (ML::mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT))
