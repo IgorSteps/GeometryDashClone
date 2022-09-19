@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Component.h"
+#include <iostream>
 
 GameObject::GameObject(std::string name, Transform* transform) {
 	this->name = name;
@@ -7,15 +8,20 @@ GameObject::GameObject(std::string name, Transform* transform) {
 	this->components = std::vector<Component*>(); 
 }
 
-GameObject::GameObject(GameObject& g)
+GameObject* GameObject::copy()
 {
-	name = g.name;
-	transform = g.transform;
+	GameObject* newGameObj = new GameObject("Generated", new Transform(this->transform));
 
-	for (auto& c : components) 
+	for (Component* c : components) 
 	{
-		g.addComponent(c);
+		Component* copy = c->copy();
+		if (copy != nullptr)
+		{
+			newGameObj->addComponent(copy);
+		}
 	}
+
+	return newGameObj;
 }
 
 GameObject::~GameObject() { 

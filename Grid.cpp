@@ -73,3 +73,8 @@ void Grid::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Projectio
 		}
 	}
 }
+
+Component* Grid::copy()
+{
+	return nullptr;
+}

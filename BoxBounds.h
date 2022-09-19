@@ -9,6 +9,6 @@ public:
 	BoxBounds(float width, float height);
 	BoxBounds(BoxBounds& boxB);
 	void update(float dt);
-
+	Component* copy();
 };
 

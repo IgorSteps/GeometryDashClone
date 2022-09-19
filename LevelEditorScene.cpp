@@ -3,6 +3,7 @@
 
 #include <glm/ext/matrix_float4x4.hpp>
 #include <iostream>
+#include "SnapToGrid.h"
 
 
 LevelEditorScene::LevelEditorScene(std::string name) {
@@ -17,6 +18,7 @@ LevelEditorScene::~LevelEditorScene() {
 	delete layerThree;
 	delete grid;
 	delete cameraContrl;
+	delete objects;
 
 	delete playerComp;
 	delete groundComp;
@@ -48,15 +50,21 @@ void LevelEditorScene::init()
 	/// CAMERA CONTROLS
 	cameraContrl = new CameraControls();
 
+	/// PLACING BLOCKS
+	objects = new Spritesheet("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
+	Sprite* mouseSprite = objects->sprites[0];
+	mouseCursor = new GameObject("Mouse cursor", new Transform(glm::vec2(0.0f)));
+	mouseCursor->addComponent(new SnapToGrid(Constants::TILE_WIDTH, Constants::TILE_HEIGHT));
+	mouseCursor->addComponent(mouseSprite);
+	mouseSprite->initSubSprite(myShader);
+
 	/// PLAYER
 	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f,350.0f)));
 
 	float red[] = { 1.0f, 0.0f, 0.0f };
 	float blue[] = { 0.0f, 1.0f, 0.0f };
 
-	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x,
-		player->transform->position.y, 0.0f));
-
+	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x, player->transform->position.y, 0.0f));
 	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f));
 
 	layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
@@ -100,11 +108,13 @@ void LevelEditorScene::update(float dt)
 	
 	cameraContrl->update(dt);
 	grid->update(dt);
+	mouseCursor->update(dt);
  }
 
 void LevelEditorScene::draw()
 {
 	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
 	grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
+	mouseCursor->draw(myShader, ModelViewMatrix, ProjectionMatrix);
 }
 

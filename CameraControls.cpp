@@ -29,3 +29,8 @@ void CameraControls::update(float dt)
 	m_prevMx = ML::getX() + ML::getDx();
 	m_prevMy = ML::getY() + ML::getDy();
 }
+
+Component* CameraControls::copy()
+{
+	return nullptr;
+}

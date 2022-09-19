@@ -60,3 +60,9 @@ void Player::draw(Shader& shader, glm::mat4& Model, glm::mat4& Proj) {
 	layerTwo->draw(shader, Model, Proj);
 	layerThree->draw(shader, Model, Proj);
 }
+
+Component* Player::copy()
+{
+	return nullptr;
+}
+

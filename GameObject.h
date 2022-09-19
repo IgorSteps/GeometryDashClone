@@ -14,12 +14,12 @@ class GameObject
 public:
 	GameObject(std::string name, Transform* transform);
 	GameObject();
-	GameObject(GameObject& g);
 	~GameObject();
 
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
-	
+	GameObject* copy();
+
 	Transform* transform; //make a smart pointer?
 	
 	template <typename T> T* getComponent() {

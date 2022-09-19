@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, ML::mousePosCallback);
     glfwSetMouseButtonCallback(window, ML::mouseButtonCallback);
+    glfwSetCursorEnterCallback(window, ML::mouseEnterCallback);
 
     // OpenGL configuration
     // --------------------

@@ -46,3 +46,8 @@ void Ground::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Project
 	// Draw ground
 	this->sp->draw(shader, ModelViewMatrix, ProjectionMatrix);
 }
+
+Component* Ground::copy()
+{
+	return nullptr;
+}

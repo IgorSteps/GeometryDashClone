@@ -54,20 +54,17 @@ Sprite::~Sprite() {
 	glDeleteVertexArrays(1, &m_vaoID);
 }
 
-//void Sprite::setColour(float colour[2]) {
-//	this->colour[] = colour;
-//}
-
 void Sprite::SetHeight(float height) {
 	this->m_Height = std::move(height);
 }
+
 float const& Sprite::getWidth() { return this->m_Width;}
 
 void Sprite::SetWidth(float width) {
 	this->m_Width = std::move(width);
 }
-float const& Sprite::getHeight() { return this->m_Height; }
 
+float const& Sprite::getHeight() { return this->m_Height; }
 
 void Sprite::initSprite(Shader& shader)
 {
@@ -283,7 +280,6 @@ void Sprite::initSubSprite(Shader& shader)
 	glBindVertexArray(0);
 }
 
-
 void Sprite::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
 	glUseProgram(shader.handle());  // use the shader
@@ -305,4 +301,10 @@ void Sprite::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Project
 
 	glBindVertexArray(0); //unbind the vertex array object
 	glUseProgram(0); //turn off the current shader
+}
+
+
+Component* Sprite::copy()
+{
+	return this;
 }

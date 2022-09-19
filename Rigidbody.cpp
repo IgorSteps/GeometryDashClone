@@ -15,3 +15,8 @@ void Rigidbody::update(float dt) {
 		Velocity.y = signum(Velocity.y) * Constants::TERMINAL_VELOCITY);
 	}
 }
+
+Component* Rigidbody::copy()
+{
+	return nullptr;
+}

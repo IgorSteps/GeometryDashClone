@@ -118,3 +118,8 @@ void Line::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Projectio
 	glBindVertexArray(0); //unbind the vertex array object
 	glUseProgram(0); //turn off the current shader
 }
+
+Component* Line::copy() 
+{
+	return nullptr;
+}
