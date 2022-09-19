@@ -14,6 +14,7 @@ class GameObject
 public:
 	GameObject(std::string name, Transform* transform);
 	GameObject();
+	GameObject(GameObject& g);
 	~GameObject();
 
 	void update(float dt);

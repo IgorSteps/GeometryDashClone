@@ -4,6 +4,7 @@ class CameraControls : public Component
 {
 public:
 	CameraControls();
+	CameraControls(CameraControls& cc);
 	void update(float dt);
 
 private:

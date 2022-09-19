@@ -14,6 +14,7 @@ public:
 	Sprite(std::string filename);	//Sprite constructor 
 	Sprite(std::string filename, float imgX, float imgY, float tileWidth, float tileHeight, float pW, float pH); //Spritesheet constructor
 	Sprite();
+	Sprite(Sprite& sp);
 	~Sprite();
 
 	void setColour(float colour[2]);
