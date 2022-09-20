@@ -14,3 +14,14 @@ Transform::Transform(Transform* trans)
 	scale = trans->scale;
 	rotateion = trans->rotateion;
 }
+
+
+Transform* Transform::copy()
+{
+	Transform* tr = new Transform(this->position);
+	
+	tr->scale = this->scale;
+	tr->rotateion = this->rotateion;
+
+	return tr;
+}

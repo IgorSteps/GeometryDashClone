@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "Component.h"
 #include <iostream>
+#include "Sprite.h"
 
 GameObject::GameObject(std::string name, Transform* transform) {
 	this->name = name;
@@ -8,9 +9,9 @@ GameObject::GameObject(std::string name, Transform* transform) {
 	this->components = std::vector<Component*>(); 
 }
 
-GameObject* GameObject::copy()
+GameObject* GameObject::copy(Shader& sh)
 {
-	GameObject* newGameObj = new GameObject("Generated", new Transform(this->transform));
+	GameObject* newGameObj = new GameObject("Generated", transform->copy());
 
 	for (Component* c : components) 
 	{
@@ -18,6 +19,7 @@ GameObject* GameObject::copy()
 		if (copy != nullptr)
 		{
 			newGameObj->addComponent(copy);
+			newGameObj->getComponent<Sprite>()->initSubSprite(sh);
 		}
 	}
 

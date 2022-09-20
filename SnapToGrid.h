@@ -7,7 +7,7 @@ public:
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	Component* copy();
-
+	Shader shader;
 
 private:
 	// when user presses it only registers one click

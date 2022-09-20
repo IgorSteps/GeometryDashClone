@@ -9,6 +9,8 @@ SnapToGrid::SnapToGrid(int gridWidth, int gridHeight)
 	m_gridHeight = gridHeight;
 	m_debounceTime = 0.2f;
 	m_debounceLeft = 0.0f;
+	
+	shader.load("Shader", "./glslfiles/basicTexture.vert", "./glslfiles/basicTexture.frag");
 }
 
 void SnapToGrid::update(float dt)
@@ -29,9 +31,9 @@ void SnapToGrid::update(float dt)
 
 		if (ML::mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT))
 		{
-			GameObject* object = this->gameObj->copy();
-			//Game::game->getCurrentScene()->addGameObject(object);
-			std::cout << "-------------Copy constructor called--------------" << '\n';
+			GameObject* object = this->gameObj->copy(shader);
+			Game::game->getCurrentScene()->addGameObject(object);
+			std::cout << "----------------Copy func called----------------" << '\n';
 		}
 	}
 
