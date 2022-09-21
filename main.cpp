@@ -22,9 +22,9 @@ int main(int argc, char* argv[])
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
     glfwWindowHint(GLFW_RESIZABLE, false);
+    glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
 
-    GLFWwindow* window = glfwCreateWindow(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT,
-         "Geometry Dash", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, "Geometry Dash", nullptr, nullptr);
     glfwMakeContextCurrent(window);
    
     // glad: load all OpenGL function pointers
@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, ML::mousePosCallback);
     glfwSetMouseButtonCallback(window, ML::mouseButtonCallback);
+    glfwSetCursorEnterCallback(window, ML::mouseEnterCallback);
 
     // OpenGL configuration
     // --------------------

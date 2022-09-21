@@ -22,6 +22,8 @@ public:
 	void initSprite(Shader& shader);
 	void initSubSprite(Shader& shader);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
+	Component* copy();
+
 
 	void SetWidth(float size);
 	void SetHeight(float size);

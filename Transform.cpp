@@ -8,9 +8,20 @@ Transform::Transform(glm::vec2 position)
 
 Transform::Transform(){}
 
-Transform::Transform(Transform& trans)
+Transform::Transform(Transform* trans)
 {
-	position = trans.position;
-	scale = trans.scale;
-	rotateion = trans.rotateion;
+	position = trans->position;
+	scale = trans->scale;
+	rotateion = trans->rotateion;
+}
+
+
+Transform* Transform::copy()
+{
+	Transform* tr = new Transform(this->position);
+	
+	tr->scale = this->scale;
+	tr->rotateion = this->rotateion;
+
+	return tr;
 }

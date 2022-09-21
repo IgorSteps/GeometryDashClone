@@ -108,6 +108,9 @@
     <ClInclude Include="CameraControls.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="SnapToGrid.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -174,6 +177,9 @@
       <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="CameraControls.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SnapToGrid.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>

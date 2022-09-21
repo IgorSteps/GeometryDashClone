@@ -6,7 +6,8 @@ namespace Constants {
 
 	constexpr int PLAYER_WIDTH = 42;
 	constexpr int PLAYER_HEIGHT = 42;
-	
+	constexpr int PLAYER_CENTER = 21; // constant to make SnapToGrid object center on mouse
+
 	constexpr int GROUND_Y = 600;
 	constexpr int CAMERA_OFFSET_X = 300;
 	constexpr int CAMERA_OFFSET_Y = 325;

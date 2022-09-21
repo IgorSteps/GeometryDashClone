@@ -9,6 +9,7 @@ public:
 	Grid();
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
+	Component* copy();
 
 	Camera* camera;
 	int m_gridWidth, m_gridHeight;

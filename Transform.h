@@ -5,7 +5,8 @@ class Transform
 public:
 	Transform(glm::vec2 position);
 	Transform();
-	Transform(Transform& trans);
+	Transform(Transform* trans);
+	Transform* copy();
 	glm::vec2 position;
 	float rotateion;
 	glm::vec2 scale; 

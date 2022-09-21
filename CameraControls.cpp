@@ -1,6 +1,7 @@
 #include "CameraControls.h"
 #include "ML.h"
 #include "Game.h"
+#include <iostream>
 
 
 CameraControls::CameraControls() 
@@ -24,8 +25,15 @@ void CameraControls::update(float dt)
 		
 		Game::game->getCurrentScene()->camera->position.x -= dx;
 		Game::game->getCurrentScene()->camera->position.y -= dy;
+		//test
+		//std::cout << "camera controls event fired\n";
 	}
 
 	m_prevMx = ML::getX() + ML::getDx();
 	m_prevMy = ML::getY() + ML::getDy();
+}
+
+Component* CameraControls::copy()
+{
+	return nullptr;
 }

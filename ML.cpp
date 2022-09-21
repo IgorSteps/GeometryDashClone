@@ -6,6 +6,8 @@ ML::ML() {
     m_yPos = 0.0;
     m_lastX = 0.0;
     m_lastY = 0.0;
+   // m_mouseButtonPressed[3]{ 0 };
+    inside = false;
 }
 
 ML::~ML() {
@@ -30,23 +32,47 @@ void ML::mousePosCallback(GLFWwindow* window, double xpos, double ypos)
     get()->m_isDragging = get()->m_mouseButtonPressed[0] ||
         get()->m_mouseButtonPressed[1] ||
         get()->m_mouseButtonPressed[2];
+    if (xpos < 1280 && ypos < 720) {
+        get()->inside = true;
+    }
     // test
     //std::cout << "mousePosCallback_TEST   " << "x-coord: " << s_Instance->m_xPos << ", y-coord: " << s_Instance->m_yPos << '\n';
 }
 
-void ML::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
-    if (action == GLFW_PRESS) {
-        if (button < 3) { 
+void ML::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) 
+{
+    if (action == GLFW_PRESS)
+    {
+        if (button < 3)
+        {
             //test  
             //std::cout << "mouseButtonCallback_TEST   " << "x-coord: " << s_Instance->m_xPos << ", y-coord: " << s_Instance->m_yPos << '\n';
             get()->m_mouseButtonPressed[button] = true;
         }
     }
-    else if (action == GLFW_RELEASE) {
-        if (button < 3) {
+    else if (action == GLFW_RELEASE)
+    {
+        if (button < 3)
+        {
             get()->m_mouseButtonPressed[button] = false;
             get()->m_isDragging = false;
         }
+    }
+}
+
+void ML::mouseEnterCallback(GLFWwindow* window, int entered)
+{
+    if (entered)
+    {
+        //test
+        //std::cout << "inside" << '\n';
+        return;
+    }
+    else
+    {
+        //test
+        //std::cout << "outside" << '\n';
+        return;
     }
 }
 
@@ -70,15 +96,31 @@ float ML::getDx() {
 float ML::getDy() {
     return (float)(get()->m_lastY - get()->m_yPos);
 }
+
+//float ML::getOrthoX() {
+//    float currentX = getX();
+//    currentX = currentX / 1280;
+//    return currentX;
+//}
+//
+//float ML::getOrthoY() {
+//    float currentY = getY();
+//    currentY = currentY / 720;
+//    return currentY;
+//}
+
 bool ML::isDragging() {
     return get()->m_isDragging;
 }
 
-bool ML::mouseButtonDown(int button) {
-    if (button < 3) {
+bool ML::mouseButtonDown(int button) 
+{
+    if (button < 3) 
+    {
         return get()->m_mouseButtonPressed[button];
     }
-    else {
+    else 
+    {
         return false;
     }
 }

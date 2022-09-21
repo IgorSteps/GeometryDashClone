@@ -15,3 +15,8 @@ BoxBounds::BoxBounds(BoxBounds& bb)
 void BoxBounds::update(float dt) {
 	//std::cout << "We are insside box bounds" << '\n';
 }
+
+Component* BoxBounds::copy() 
+{
+	return new BoxBounds(this->width, this->height);
+}

@@ -38,5 +38,7 @@ public:
 	Player* playerComp;
 	Grid* grid;
 	CameraControls* cameraContrl;
+	Spritesheet* objects;
+	GameObject* mouseCursor;
 };
 
