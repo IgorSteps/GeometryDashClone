@@ -25,7 +25,7 @@ private:
 	~ML();
 	static ML* s_Instance;
 	double m_xPos, m_yPos, m_lastX, m_lastY;
-	bool m_mouseButtonPressed[3];
+	bool m_mouseButtonPressed[3] = {0};
 	bool m_isDragging;
 	
 };

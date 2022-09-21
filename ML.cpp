@@ -6,6 +6,7 @@ ML::ML() {
     m_yPos = 0.0;
     m_lastX = 0.0;
     m_lastY = 0.0;
+   // m_mouseButtonPressed[3]{ 0 };
     inside = false;
 }
 

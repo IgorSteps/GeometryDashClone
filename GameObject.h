@@ -18,7 +18,7 @@ public:
 
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
-	GameObject* copy();
+	GameObject* copy(Shader& sh);
 
 	Transform* transform; //make a smart pointer?
 	

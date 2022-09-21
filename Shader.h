@@ -13,7 +13,7 @@ public:
 
 private:
 	Shader(const Shader&);
-	Shader& operator=(const Shader&);
+	//Shader& operator=(const Shader&);
 
 private:
 	std::string m_name;

@@ -306,5 +306,6 @@ void Sprite::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Project
 
 Component* Sprite::copy()
 {
-	return this;
+	// return this;
+	return new Sprite(this->spritesheetFile, this->imgX,this->imgY, this->tileWidth, this->tileHeight, this->m_Width, this->m_Height);
 }
