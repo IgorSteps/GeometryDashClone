@@ -22,7 +22,8 @@ public:
 
 	Transform* transform; //make a smart pointer?
 	
-	template <typename T> T* getComponent() {
+	template <typename T> T* getComponent() 
+	{
 		for (auto& comp : this->components)
 		{
 			if (dynamic_cast<T*>(comp)) {
@@ -31,6 +32,14 @@ public:
 		}
 		return NULL;
 	}
+
+	template <typename T> void removeComponent() 
+	{
+		for (auto it = begin(components); it != end(components);) {
+			it = components.erase(it);
+		}
+	}
+
 	void addComponent(Component* c);
 private:
 	std::vector<Component*> components;
