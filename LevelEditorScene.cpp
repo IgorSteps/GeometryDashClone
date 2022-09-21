@@ -18,6 +18,7 @@ LevelEditorScene::~LevelEditorScene() {
 	delete layerThree;
 	delete grid;
 	delete cameraContrl;
+	delete mouseCursor;
 	delete objects;
 
 	delete playerComp;

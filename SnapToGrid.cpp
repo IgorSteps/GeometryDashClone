@@ -1,6 +1,7 @@
 #include "SnapToGrid.h"
 #include "Game.h"
 #include "ML.h"
+#include "Constants.h"
 #include <iostream>
 
 SnapToGrid::SnapToGrid(int gridWidth, int gridHeight, Shader& sh)
@@ -13,8 +14,15 @@ SnapToGrid::SnapToGrid(int gridWidth, int gridHeight, Shader& sh)
 	shader = sh;
 }
 
+SnapToGrid::~SnapToGrid()
+{
+	delete object;
+}
+
 void SnapToGrid::update(float dt)
 {
+	m_debounceLeft -= dt;
+
 	if (this->gameObj->getComponent<Sprite>() != nullptr)
 	{
 		// calculate x,y coord of the mouse on the grid
@@ -25,18 +33,23 @@ void SnapToGrid::update(float dt)
 		// 'y * m_gridHeight' converts to world space
 		// 'Game::game->getCurrentScene()->camera->position.x' transforms it local to the window
 		// add 21 to center sprite on the mouse cursor
-		this->gameObj->transform->position.x = x * m_gridWidth - Game::game->getCurrentScene()->camera->position.x + 21;
-		this->gameObj->transform->position.y = y * m_gridHeight - Game::game->getCurrentScene()->camera->position.y + 21;
+		this->gameObj->transform->position.x = x * m_gridWidth - Game::game->getCurrentScene()->camera->position.x + Constants::PLAYER_CENTER;
+		this->gameObj->transform->position.y = y * m_gridHeight - Game::game->getCurrentScene()->camera->position.y + Constants::PLAYER_CENTER;
 		
-
-		if (ML::mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT))
+		if (ML::mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) && m_debounceLeft < 0.0f)
 		{
-			GameObject* object = this->gameObj->copy(shader);
+			m_debounceLeft = m_debounceTime;
+
+			object = this->gameObj->copy(shader);
+			// transform back to world space
+			object->transform->position = glm::vec2(x * m_gridWidth + Constants::PLAYER_CENTER, y * m_gridHeight + Constants::PLAYER_CENTER);
+			
 			Game::game->getCurrentScene()->addGameObject(object);
+			
+			//test
 			//std::cout << "----------------Copy func called----------------" << '\n';
 		}
 	}
-
 }
 
 void SnapToGrid::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
