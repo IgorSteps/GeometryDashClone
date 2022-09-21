@@ -43,7 +43,7 @@ void LevelEditorScene::init()
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
-
+	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	/// GRID
 	grid = new Grid();
 
@@ -54,7 +54,7 @@ void LevelEditorScene::init()
 	objects = new Spritesheet("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
 	Sprite* mouseSprite = objects->sprites[0];
 	mouseCursor = new GameObject("Mouse cursor", new Transform(glm::vec2(0.0f)));
-	mouseCursor->addComponent(new SnapToGrid(Constants::TILE_WIDTH, Constants::TILE_HEIGHT));
+	mouseCursor->addComponent(new SnapToGrid(Constants::TILE_WIDTH, Constants::TILE_HEIGHT, myShader));
 	mouseCursor->addComponent(mouseSprite);
 	mouseSprite->initSubSprite(myShader);
 
@@ -65,7 +65,7 @@ void LevelEditorScene::init()
 	float blue[] = { 0.0f, 1.0f, 0.0f };
 
 	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x, player->transform->position.y, 0.0f));
-	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f));
+	//ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f));
 
 	layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);

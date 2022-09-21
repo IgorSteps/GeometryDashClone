@@ -27,6 +27,9 @@ void Renderer::render(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 		g->transform->position = glm::vec2(g->transform->position.x - camera->position.x,
 			g->transform->position.y - camera->position.y);
 
+		// pass game object position to the model view matrix
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(g->transform->position.x, g->transform->position.y, 1.0f));
+
 		g->draw(shader, ModelViewMatrix, ProjectionMatrix);
 		g->transform = oldTransform;
 	}

@@ -3,14 +3,14 @@
 #include "ML.h"
 #include <iostream>
 
-SnapToGrid::SnapToGrid(int gridWidth, int gridHeight)
+SnapToGrid::SnapToGrid(int gridWidth, int gridHeight, Shader& sh)
 {
 	m_gridWidth = gridWidth;
 	m_gridHeight = gridHeight;
 	m_debounceTime = 0.2f;
 	m_debounceLeft = 0.0f;
 	
-	shader.load("Shader", "./glslfiles/basicTexture.vert", "./glslfiles/basicTexture.frag");
+	shader = sh;
 }
 
 void SnapToGrid::update(float dt)
@@ -33,7 +33,7 @@ void SnapToGrid::update(float dt)
 		{
 			GameObject* object = this->gameObj->copy(shader);
 			Game::game->getCurrentScene()->addGameObject(object);
-			std::cout << "----------------Copy func called----------------" << '\n';
+			//std::cout << "----------------Copy func called----------------" << '\n';
 		}
 	}
 
