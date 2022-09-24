@@ -39,76 +39,76 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoxBounds.h">
+    <ClInclude Include="headers\BoxBounds.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="headers\Transform.h">
       <Filter>Header Files\dataStructure</Filter>
     </ClInclude>
-    <ClInclude Include="AssetPool.h">
+    <ClInclude Include="headers\AssetPool.h">
       <Filter>Header Files\dataStructure</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
+    <ClInclude Include="headers\Sprite.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="ImageLoading.h">
+    <ClInclude Include="headers\ImageLoading.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="headers\Game.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="headers\GameObject.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="headers\Component.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="headers\Player.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Spritesheet.h">
+    <ClInclude Include="headers\Spritesheet.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
+    <ClInclude Include="headers\Scene.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="LevelEditorScene.h">
+    <ClInclude Include="headers\LevelEditorScene.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="headers\Shader.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="headers\Camera.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="headers\Renderer.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Ground.h">
+    <ClInclude Include="headers\Ground.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.h">
+    <ClInclude Include="headers\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rigidbody.h">
+    <ClInclude Include="headers\Rigidbody.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="LevelScene.h">
+    <ClInclude Include="headers\LevelScene.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="ML.h">
+    <ClInclude Include="headers\ML.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Line.h">
+    <ClInclude Include="headers\Line.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Grid.h">
+    <ClInclude Include="headers\Grid.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="CameraControls.h">
+    <ClInclude Include="headers\CameraControls.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="SnapToGrid.h">
+    <ClInclude Include="headers\SnapToGrid.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
   </ItemGroup>
@@ -119,67 +119,67 @@
     <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoxBounds.cpp">
+    <ClCompile Include="components\BoxBounds.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="datastructure\Transform.cpp">
       <Filter>Source Files\dataStructure</Filter>
     </ClCompile>
-    <ClCompile Include="AssetPool.cpp">
+    <ClCompile Include="datastructure\AssetPool.cpp">
       <Filter>Source Files\dataStructure</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
+    <ClCompile Include="components\Sprite.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="ImageLoading.cpp">
+    <ClCompile Include="core\ImageLoading.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="core\Game.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="core\GameObject.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="Spritesheet.cpp">
+    <ClCompile Include="components\Spritesheet.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="components\Player.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="LevelEditorScene.cpp">
+    <ClCompile Include="core\LevelEditorScene.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="core\Shader.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
+    <ClCompile Include="core\Renderer.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="Ground.cpp">
+    <ClCompile Include="components\Ground.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="LevelScene.cpp">
+    <ClCompile Include="core\LevelScene.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
+    <ClCompile Include="core\Scene.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
+    <ClCompile Include="components\Rigidbody.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="ML.cpp">
+    <ClCompile Include="core\ML.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="Line.cpp">
+    <ClCompile Include="components\Line.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp">
+    <ClCompile Include="components\Grid.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="CameraControls.cpp">
+    <ClCompile Include="components\CameraControls.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="SnapToGrid.cpp">
+    <ClCompile Include="components\SnapToGrid.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
