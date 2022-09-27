@@ -41,6 +41,7 @@ public:
 	}
 
 	void addComponent(Component* c);
+	std::vector<Component*> getAllComponents();
 private:
 	std::vector<Component*> components;
 	std::string name;

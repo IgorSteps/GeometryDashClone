@@ -9,6 +9,7 @@
 #include "Rigidbody.h"
 #include "Grid.h"
 #include "CameraControls.h"
+#include <MainContainer.h>
 
 class LevelEditorScene : public Scene
 {
@@ -40,5 +41,6 @@ public:
 	CameraControls* cameraContrl;
 	Spritesheet* objects;
 	GameObject* mouseCursor;
+	MainContainer* editingButtons;
 };
 

@@ -169,6 +169,8 @@
     <ClInclude Include="headers\Sprite.h" />
     <ClInclude Include="headers\Spritesheet.h" />
     <ClInclude Include="headers\Transform.h" />
+    <ClInclude Include="headers\MainContainer.h" />
+    <ClInclude Include="headers\MenuItem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="datastructure\AssetPool.cpp" />
@@ -194,12 +196,8 @@
     <ClCompile Include="components\Sprite.cpp" />
     <ClCompile Include="components\Spritesheet.cpp" />
     <ClCompile Include="datastructure\Transform.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="glslfiles\lineShader.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="glslfiles\lineShader.frag" />
+    <ClCompile Include="UI\MainContainer.cpp" />
+    <ClCompile Include="UI\MenuItem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -37,6 +37,12 @@
     <Filter Include="Source Files\core">
       <UniqueIdentifier>{bd992a5f-863e-4b2b-af04-c8034a8fc4c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{74b58593-58af-4c22-bbc5-10b463ccfccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{203900cd-7414-4696-86eb-d5f90d395b92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\BoxBounds.h">
@@ -87,9 +93,6 @@
     <ClInclude Include="headers\Ground.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="headers\Constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="headers\Rigidbody.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
@@ -110,6 +113,15 @@
     </ClInclude>
     <ClInclude Include="headers\SnapToGrid.h">
       <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Constants.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MenuItem.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MainContainer.h">
+      <Filter>Header Files\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,11 +194,11 @@
     <ClCompile Include="components\SnapToGrid.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="glslfiles\lineShader.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="glslfiles\lineShader.frag" />
+    <ClCompile Include="UI\MenuItem.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\MainContainer.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

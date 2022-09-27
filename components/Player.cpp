@@ -10,9 +10,9 @@ Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float col
 	this->dib=ImageLoading::loadImageTwo("assets/player/layerOne.png");
 	RGBQUAD colour;
 
-	for (int y = 0; y < layerOne->getWidth(); y++)
+	for (int y = 0; y < layerOne->getFileWidth(); y++)
 	{
-		for (int x = 0; x < layerOne->getHeight(); x++)
+		for (int x = 0; x < layerOne->getFileHeight(); x++)
 		{
 			FreeImage_GetPixelColor(this->dib, x, y, &colour);
 			if (colour.rgbRed > this->threshold && colour.rgbBlue > this->threshold && colour.rgbGreen > this->threshold)
@@ -27,9 +27,9 @@ Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float col
 
 	
 	this->dib = ImageLoading::loadImageTwo("assets/player/layerTwo.png");
-	for (int y = 0; y < layerTwo->getWidth(); y++)
+	for (int y = 0; y < layerTwo->getFileWidth(); y++)
 	{
-		for (int x = 0; x < layerTwo->getHeight(); x++)
+		for (int x = 0; x < layerTwo->getFileHeight(); x++)
 		{
 			FreeImage_GetPixelColor(this->dib, x, y, &colour);
 			if (colour.rgbRed > this->threshold && colour.rgbBlue > this->threshold && colour.rgbGreen > this->threshold)

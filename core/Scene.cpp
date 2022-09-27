@@ -1,5 +1,5 @@
 #include "Scene.h"
-
+#include <Component.h>
 Scene::~Scene() {
 	delete camera;
 	delete renderer;
@@ -15,4 +15,9 @@ void Scene::SceneInit(std::string name) {
 void Scene::addGameObject(GameObject* g) {
 	gameObjects.push_back(g);
 	renderer->submit(g);
+
+	for (Component* c : g->getAllComponents())
+	{
+		c->start();
+	}
 }
