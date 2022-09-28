@@ -42,6 +42,11 @@ void GameObject::addComponent(Component* c) {
 	c->gameObj = this;
 }
 
+std::vector<Component*> GameObject::getAllComponents()
+{
+	return this->components;
+}
+
 void GameObject::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix) {
 	for (Component* c : this->components) {
 		c->draw(shader, ModelViewMatrix, ProjectionMatrix);

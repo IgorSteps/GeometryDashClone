@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\util\Include;$(IncludePath)</IncludePath>
+    <IncludePath>.\util\Include;.\headers\;$(IncludePath)</IncludePath>
     <LibraryPath>.\util\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,61 +145,59 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AssetPool.h" />
-    <ClInclude Include="BoxBounds.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="CameraControls.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Grid.h" />
-    <ClInclude Include="Ground.h" />
-    <ClInclude Include="ImageLoading.h" />
-    <ClInclude Include="LevelEditorScene.h" />
-    <ClInclude Include="LevelScene.h" />
-    <ClInclude Include="Line.h" />
-    <ClInclude Include="ML.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Rigidbody.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="SnapToGrid.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Spritesheet.h" />
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="headers\AssetPool.h" />
+    <ClInclude Include="headers\BoxBounds.h" />
+    <ClInclude Include="headers\Camera.h" />
+    <ClInclude Include="headers\CameraControls.h" />
+    <ClInclude Include="headers\Component.h" />
+    <ClInclude Include="headers\Constants.h" />
+    <ClInclude Include="headers\Game.h" />
+    <ClInclude Include="headers\GameObject.h" />
+    <ClInclude Include="headers\Grid.h" />
+    <ClInclude Include="headers\Ground.h" />
+    <ClInclude Include="headers\ImageLoading.h" />
+    <ClInclude Include="headers\LevelEditorScene.h" />
+    <ClInclude Include="headers\LevelScene.h" />
+    <ClInclude Include="headers\Line.h" />
+    <ClInclude Include="headers\ML.h" />
+    <ClInclude Include="headers\Player.h" />
+    <ClInclude Include="headers\Renderer.h" />
+    <ClInclude Include="headers\Rigidbody.h" />
+    <ClInclude Include="headers\Scene.h" />
+    <ClInclude Include="headers\Shader.h" />
+    <ClInclude Include="headers\SnapToGrid.h" />
+    <ClInclude Include="headers\Sprite.h" />
+    <ClInclude Include="headers\Spritesheet.h" />
+    <ClInclude Include="headers\Transform.h" />
+    <ClInclude Include="headers\MainContainer.h" />
+    <ClInclude Include="headers\MenuItem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AssetPool.cpp" />
-    <ClCompile Include="BoxBounds.cpp" />
-    <ClCompile Include="CameraControls.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="datastructure\AssetPool.cpp" />
+    <ClCompile Include="components\BoxBounds.cpp" />
+    <ClCompile Include="components\CameraControls.cpp" />
+    <ClCompile Include="core\Game.cpp" />
+    <ClCompile Include="core\GameObject.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="Grid.cpp" />
-    <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="ImageLoading.cpp" />
-    <ClCompile Include="LevelEditorScene.cpp" />
-    <ClCompile Include="LevelScene.cpp" />
-    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="components\Grid.cpp" />
+    <ClCompile Include="components\Ground.cpp" />
+    <ClCompile Include="core\ImageLoading.cpp" />
+    <ClCompile Include="core\LevelEditorScene.cpp" />
+    <ClCompile Include="core\LevelScene.cpp" />
+    <ClCompile Include="components\Line.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ML.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Rigidbody.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="SnapToGrid.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Spritesheet.cpp" />
-    <ClCompile Include="Transform.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="glslfiles\lineShader.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="glslfiles\lineShader.frag" />
+    <ClCompile Include="core\ML.cpp" />
+    <ClCompile Include="components\Player.cpp" />
+    <ClCompile Include="core\Renderer.cpp" />
+    <ClCompile Include="components\Rigidbody.cpp" />
+    <ClCompile Include="core\Scene.cpp" />
+    <ClCompile Include="core\Shader.cpp" />
+    <ClCompile Include="components\SnapToGrid.cpp" />
+    <ClCompile Include="components\Sprite.cpp" />
+    <ClCompile Include="components\Spritesheet.cpp" />
+    <ClCompile Include="datastructure\Transform.cpp" />
+    <ClCompile Include="UI\MainContainer.cpp" />
+    <ClCompile Include="UI\MenuItem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

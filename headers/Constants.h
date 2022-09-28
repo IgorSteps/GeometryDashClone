@@ -18,4 +18,11 @@ namespace Constants {
 
 	constexpr int TILE_HEIGHT = 42;
 	constexpr int TILE_WIDTH = 42;
+
+	constexpr int BUTTON_OFFSET_X = 400;
+	constexpr int BUTTON_OFFSET_Y = 560;
+	constexpr int BUTTON_SPACING_HZ = 10;
+	constexpr int BUTTON_SPACING_VT = 5;
+	constexpr int BUTTON_WIDTH = 60;
+	constexpr int BUTTON_HEIGHT = 60;
 };

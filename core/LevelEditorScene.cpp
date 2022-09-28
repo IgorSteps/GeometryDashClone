@@ -6,6 +6,7 @@
 #include "SnapToGrid.h"
 
 
+
 LevelEditorScene::LevelEditorScene(std::string name) {
 	Scene::SceneInit(name);
 }
@@ -20,6 +21,7 @@ LevelEditorScene::~LevelEditorScene() {
 	delete cameraContrl;
 	delete mouseCursor;
 	delete objects;
+	delete editingButtons;
 
 	delete playerComp;
 	delete groundComp;
@@ -51,13 +53,15 @@ void LevelEditorScene::init()
 	/// CAMERA CONTROLS
 	cameraContrl = new CameraControls();
 
+	/// EDITING BUTTONS
+	editingButtons = new MainContainer(myShader);
+	editingButtons->start();
+
 	/// PLACING BLOCKS
-	objects = new Spritesheet("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
-	Sprite* mouseSprite = objects->sprites[0];
+	
 	mouseCursor = new GameObject("Mouse cursor", new Transform(glm::vec2(0.0f)));
 	mouseCursor->addComponent(new SnapToGrid(Constants::TILE_WIDTH, Constants::TILE_HEIGHT, myShader));
-	mouseCursor->addComponent(mouseSprite);
-	mouseSprite->initSubSprite(myShader);
+
 
 	/// PLAYER
 	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f,350.0f)));
@@ -82,8 +86,17 @@ void LevelEditorScene::init()
 
 	player->addComponent(playerComp);
 
+	layerOne->sprites[spNum]->SetHeight(42.0f);
+	layerOne->sprites[spNum]->SetWidth(42.0f);
+
 	layerOne->sprites[spNum]->initSubSprite(myShader);
+
+	layerTwo->sprites[spNum]->SetHeight(42.0f);
+	layerTwo->sprites[spNum]->SetWidth(42.0f);
 	layerTwo->sprites[spNum]->initSubSprite(myShader);
+
+	layerThree->sprites[spNum]->SetHeight(42.0f);
+	layerThree->sprites[spNum]->SetWidth(42.0f);
 	layerThree->sprites[spNum]->initSubSprite(myShader);
 
 	/// GROUND
@@ -91,6 +104,12 @@ void LevelEditorScene::init()
 	groundSp = new Sprite("assets/grounds/ground01.png");
 	groundComp = new Ground(groundSp, myShader);
 	ground->addComponent(groundComp);
+
+	// button sprite test, they are broken, remove later
+	/*ground = new GameObject("Ground game object", new Transform(glm::vec2(0.0f, 0.0f)));
+	groundSp = new Sprite("assets/player/spaceship.png");
+	groundComp = new Ground(groundSp, myShader);
+	ground->addComponent(groundComp);*/
 
 	addGameObject(player);
 	addGameObject(ground);
@@ -109,6 +128,7 @@ void LevelEditorScene::update(float dt)
 	
 	cameraContrl->update(dt);
 	grid->update(dt);
+	editingButtons->update(dt);
 	mouseCursor->update(dt);
  }
 
@@ -116,6 +136,7 @@ void LevelEditorScene::draw()
 {
 	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
 	grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
+	editingButtons->draw(myShader, ModelViewMatrix, ProjectionMatrix);
 	mouseCursor->draw(myShader, ModelViewMatrix, ProjectionMatrix);
 }
 

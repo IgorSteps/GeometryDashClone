@@ -11,7 +11,7 @@ Spritesheet::Spritesheet(std::string file, float tW, float tH, float sp, int col
 			float imgX = (column * tW) + (column * sp); // top left texture x-coord
 			float imgY = (row * tH) + (row * sp);		// top left texture y-coord
 
-			sprites.push_back(new Sprite(file, imgX, imgY, tW, tH, fileW, fileH));
+			sprites.push_back(new Sprite(file, imgX, imgY, tW, tH, fileW, fileH, row, column, count));
 			count++;
 			if (count > size - 1) {
 				break;

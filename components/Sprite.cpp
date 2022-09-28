@@ -18,7 +18,7 @@ Sprite::Sprite(std::string file)
 
 }
 
-Sprite::Sprite(std::string file, float imgX, float imgY, float tileWidth, float tileHeight, float pW, float pH)
+Sprite::Sprite(std::string file, float imgX, float imgY, float tileWidth, float tileHeight, float pW, float pH, int row, int column, int index)
 {
 	this->spritesheetFile = file;
 	m_vaoID = 0;
@@ -30,13 +30,18 @@ Sprite::Sprite(std::string file, float imgX, float imgY, float tileWidth, float 
 	m_eboID[2] = 0;
 
 
-	this->m_Height = pH;
-	this->m_Width = pW;
+	this->fileH = pH;
+	this->fileW = pW;
 	
 	this->imgX = imgX;
 	this->imgY = imgY;
 	this->tileWidth = tileWidth;
 	this->tileHeight = tileHeight;
+
+	this->isSubSprite = true;
+	this->row = row;
+	this->column = column;
+	this->index = index;
 }
 
 Sprite::Sprite()
@@ -55,16 +60,16 @@ Sprite::~Sprite() {
 }
 
 void Sprite::SetHeight(float height) {
-	this->m_Height = std::move(height);
+	this->m_Height = height;
 }
 
-float const& Sprite::getWidth() { return this->m_Width;}
+float const& Sprite::getFileWidth() { return this->fileW;}
 
 void Sprite::SetWidth(float width) {
-	this->m_Width = std::move(width);
+	this->m_Width = width;
 }
 
-float const& Sprite::getHeight() { return this->m_Height; }
+float const& Sprite::getFileHeight() { return this->fileH; }
 
 void Sprite::initSprite(Shader& shader)
 {
@@ -192,8 +197,8 @@ void Sprite::initSubSprite(Shader& shader)
 		std::cout << "Image " << this->spritesheetFile << " loaded " << std::endl;
 	}
 
-	float halfWidth = 42.0f/2.0f;
-	float halfHeight = 42.0f/2.0f;
+	float halfWidth = tileWidth / 2.0f;
+	float halfHeight = tileHeight / 2.0f;
 
 	//Create the geometry
 	float vert[] = {
@@ -204,10 +209,10 @@ void Sprite::initSubSprite(Shader& shader)
 	};
 
 	// normalise coordinates
-	float tX = this->imgX / m_Width;
-	float tY = this->imgY / m_Height;
-	float tW = this->tileWidth / m_Width;
-	float tH = this->tileHeight / m_Height;
+	float tX = this->imgX / fileW;
+	float tY = this->imgY / fileH;
+	float tW = this->tileWidth / fileW;
+	float tH = this->tileHeight / fileH;
 
 	//texture coordinates
 	float tex[]{
@@ -306,6 +311,12 @@ void Sprite::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Project
 
 Component* Sprite::copy()
 {
-	// return this;
-	return new Sprite(this->spritesheetFile, this->imgX,this->imgY, this->tileWidth, this->tileHeight, this->m_Width, this->m_Height);
+	if (isSubSprite)
+	{
+		return new Sprite(this->spritesheetFile, this->imgX, this->imgY, this->tileWidth, this->tileHeight, this->fileW, this->fileH, this->row, this->column, this->index);
+	}
+	else
+	{
+		return new Sprite(this->spriteFile);
+	}
 }
