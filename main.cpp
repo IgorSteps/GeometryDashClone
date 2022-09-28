@@ -1,7 +1,8 @@
 #include <glad/glad.h>
 #include "Game.h"
 #include "Constants.h"
-#include "ML.h"
+#include "KL.h"
+
 
 #include <iostream>
 
@@ -35,7 +36,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    glfwSetKeyCallback(window, key_callback);
+    glfwSetKeyCallback(window, KL::keyCallback);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, ML::mousePosCallback);
     glfwSetMouseButtonCallback(window, ML::mouseButtonCallback);
@@ -80,6 +81,9 @@ int main(int argc, char* argv[])
         //std::cout << glGetError() << std::endl;
         GeometryDashClone.Render();
 
+        if (KL::isKeyPressed(GLFW_KEY_ESCAPE))
+                glfwSetWindowShouldClose(window, true);
+
         ML::endFrame();
         glfwSwapBuffers(window);
     }
@@ -89,19 +93,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-    // when a user presses the escape key, we set the WindowShouldClose property to true, closing the application
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-    if (key >= 0 && key < 1024)
-    {
-        if (action == GLFW_PRESS)
-            GeometryDashClone.Keys[key] = true;
-        else if (action == GLFW_RELEASE)
-            GeometryDashClone.Keys[key] = false;
-    }
-}
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
