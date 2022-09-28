@@ -2,6 +2,7 @@
 #include <Spritesheet.h>
 #include <Constants.h>
 #include <iostream>
+#include <AssetPool.h>
 
 MainContainer::MainContainer(Shader& sh) : m_MenuItems()
 {
@@ -16,12 +17,12 @@ MainContainer::~MainContainer()
 
 void MainContainer::init(Shader& sh)
 {
-	Spritesheet groundSprites("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
-	Spritesheet buttonSprite("assets/ui/buttonSprites.png", 60.0f, 60.0f, 2.0f, 2, 2, 124.0f, 62.0f);
+	Spritesheet* groundSprites = AssetPool::getSpritesheet("assets/groundSprites.png");
+	Spritesheet* buttonSprite = AssetPool::getSpritesheet("assets/ui/buttonSprites.png");
 
-	for (int i = 0; i < groundSprites.sprites.size(); ++i)
+	for (int i = 0; i < groundSprites->sprites.size(); ++i)
 	{
-		Sprite* currentSprite = groundSprites.sprites[i];
+		Sprite* currentSprite = groundSprites->sprites[i];
 		//currentSprite->initSubSprite(sh);
 
 		// currentSprite->column * Constants::BUTTON_WIDTH		how many buttons are before this
@@ -36,11 +37,11 @@ void MainContainer::init(Shader& sh)
 		obj->getComponent<Sprite>()->initSubSprite(sh);
 
 		menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
-			buttonSprite.sprites[0], buttonSprite.sprites[1], sh);
+			buttonSprite->sprites[0], buttonSprite->sprites[1], sh);
 		obj->addComponent(menuItem);
 
-		buttonSprite.sprites[0]->initSubSprite(sh);
-		buttonSprite.sprites[1]->initSubSprite(sh);
+		buttonSprite->sprites[0]->initSubSprite(sh);
+		buttonSprite->sprites[1]->initSubSprite(sh);
 
 		m_MenuItems.push_back(obj);
 	}

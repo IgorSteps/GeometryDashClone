@@ -31,6 +31,8 @@ void LevelScene::init()
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
+	/// Asset Pool
+	initAssetPool();
 
 	/// PLAYER
 	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f, 350.0f)));
@@ -43,9 +45,9 @@ void LevelScene::init()
 
 	ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f, 500.0f, 1.0f));
 
-	layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
-	layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
-	layerThree = new Spritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	layerOne = AssetPool::getSpritesheet("assets/player/layerOne.png");
+	layerTwo = AssetPool::getSpritesheet("assets/player/layerTwo.png");
+	layerThree = AssetPool::getSpritesheet("assets/player/layerThree.png");
 
 	int spNum = 0;
 	Player* playerComp = new Player(
@@ -73,6 +75,14 @@ void LevelScene::init()
 
 	addGameObject(player);
 	addGameObject(ground);
+}
+
+void LevelScene::initAssetPool()
+{
+	AssetPool::addSpritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	AssetPool::addSpritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	AssetPool::addSpritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	AssetPool::addSpritesheet("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
 }
 
 void LevelScene::update(float dt)
