@@ -47,6 +47,11 @@ void LevelEditorScene::init()
 		std::cout << "failed to load shader" << std::endl;
 	}
 	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	/// AssetPool
+	initAssetPool();
+	editingButtons = new MainContainer(myShader);
+
 	/// GRID
 	grid = new Grid();
 
@@ -54,7 +59,6 @@ void LevelEditorScene::init()
 	cameraContrl = new CameraControls();
 
 	/// EDITING BUTTONS
-	editingButtons = new MainContainer(myShader);
 	editingButtons->start();
 
 	/// PLACING BLOCKS
@@ -72,9 +76,9 @@ void LevelEditorScene::init()
 	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x, player->transform->position.y, 0.0f));
 	//ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f));
 
-	layerOne = new Spritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
-	layerTwo = new Spritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
-	layerThree = new Spritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	layerOne = AssetPool::getSpritesheet("assets/player/layerOne.png");
+	layerTwo = AssetPool::getSpritesheet("assets/player/layerTwo.png");
+	layerThree = AssetPool::getSpritesheet("assets/player/layerThree.png");
 
 	int spNum = 0;
 	playerComp = new Player(
@@ -114,6 +118,16 @@ void LevelEditorScene::init()
 	addGameObject(player);
 	addGameObject(ground);
 }
+
+void LevelEditorScene::initAssetPool()
+{
+	AssetPool::addSpritesheet("assets/player/layerOne.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	AssetPool::addSpritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	AssetPool::addSpritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
+	AssetPool::addSpritesheet("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
+	AssetPool::addSpritesheet("assets/ui/buttonSprites.png", 60.0f, 60.0f, 2.0f, 2, 2, 124.0f, 62.0f);
+}
+
 
 void LevelEditorScene::update(float dt)
 {

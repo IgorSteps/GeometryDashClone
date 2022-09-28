@@ -20,6 +20,7 @@ public:
 	static LevelScene* currentScene;
 	GameObject* player;
 	void init();
+	void initAssetPool();
 	void update(float dt);
 	void draw();
 

@@ -18,6 +18,7 @@ public:
 	~LevelEditorScene();
  	GameObject* player;
 	void init();
+	void initAssetPool();
 	void update(float dt);
 	void draw();
 
