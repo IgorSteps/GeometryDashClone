@@ -171,6 +171,7 @@
     <ClInclude Include="headers\Transform.h" />
     <ClInclude Include="headers\MainContainer.h" />
     <ClInclude Include="headers\MenuItem.h" />
+    <ClInclude Include="headers\KL.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="datastructure\AssetPool.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="core\LevelEditorScene.cpp" />
     <ClCompile Include="core\LevelScene.cpp" />
     <ClCompile Include="components\Line.cpp" />
+    <ClCompile Include="core\KL.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="core\ML.cpp" />
     <ClCompile Include="components\Player.cpp" />

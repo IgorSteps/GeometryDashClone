@@ -123,6 +123,9 @@
     <ClInclude Include="headers\MainContainer.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
+    <ClInclude Include="headers\KL.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="UI\MainContainer.cpp">
       <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="core\KL.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
