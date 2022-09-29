@@ -9,6 +9,8 @@ public:
 	BoxBounds(float width, float height);
 	BoxBounds(BoxBounds& boxB);
 	void update(float dt);
+
+	std::string serialise(int tabSize);
 	Component* copy();
 };
 

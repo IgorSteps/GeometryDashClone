@@ -9,6 +9,8 @@ public:
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	// copy() method to copy components
 	Component* copy();
+	std::string serialise(int tabSize);
+
 	// shader for initlising copied component
 	Shader shader;
 	// copied game object

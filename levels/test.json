@@ -1,0 +1,78 @@
+"GameObject":{
+	"Transform":{
+		"Position":{
+			"x": 500.000000f,
+			"y": 350.000000f
+		},
+		"Scale":{
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Player game obj",
+	"Components":{
+	}
+},
+"GameObject":{
+	"Transform":{
+		"Position":{
+			"x": -10.000000f,
+			"y": 600.000000f
+		},
+		"Scale":{
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Ground game object",
+	"Components":{
+	}
+},
+"GameObject":{
+	"Transform":{
+		"Position":{
+			"x": 777.000000f,
+			"y": 357.000000f
+		},
+		"Scale":{
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components":{
+		"Sprite":{
+			"isSubSprite: 1,
+			"FilePath": "",
+			"row": 0,
+			"column": 3,
+			"index": 3,
+		}
+	}
+},
+"GameObject":{
+	"Transform":{
+		"Position":{
+			"x": 903.000000f,
+			"y": 357.000000f
+		},
+		"Scale":{
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components":{
+		"Sprite":{
+			"isSubSprite: 1,
+			"FilePath": "",
+			"row": 0,
+			"column": 0,
+			"index": 0,
+		}
+	}
+}

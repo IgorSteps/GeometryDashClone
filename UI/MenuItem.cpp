@@ -66,3 +66,8 @@ void MenuItem::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Proje
 		m_HoveredSprite->draw(shader, ModelViewMatrix, ProjectionMatrix);
 	}
 }
+
+std::string MenuItem::serialise(int tabsize)
+{
+	return "";
+}

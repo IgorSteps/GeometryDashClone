@@ -14,6 +14,7 @@ public:
 	Camera* camera;
 	int m_gridWidth, m_gridHeight;
 	int numYLines, numXLines;
+	std::string serialise(int tabSize);
 
 	Shader shader;
 	Line lineVert, lineHoriz;

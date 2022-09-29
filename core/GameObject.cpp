@@ -26,6 +26,59 @@ GameObject* GameObject::copy(Shader& sh)
 	return newGameObj;
 }
 
+std::string GameObject::serialise(int tabSize)
+{
+	std::string stringBuilder;
+
+	// Game Object
+	stringBuilder.append(beginObjectProperty("GameObject", tabSize));
+
+	// Transform
+	stringBuilder.append(transform->serialise(tabSize + 1));
+	stringBuilder.append(addEnding(true, true));
+
+	// Name
+	if (components.size() > 0)
+	{
+		stringBuilder.append(addStringProperty("Name", name, tabSize + 1, true, true));
+		stringBuilder.append(beginObjectProperty("Components", tabSize + 1));
+	}
+	else
+	{
+		stringBuilder.append(addStringProperty("Name", name, tabSize + 1, true, false));
+	}
+
+	// Components
+	int i = 0;
+	for (Component* c : components)
+	{
+		std::string str = c->serialise(tabSize + 2);
+		if (str.compare("") != 0)
+		{
+			stringBuilder.append(str);
+			if (i != components.size() - 1)
+			{ 
+				stringBuilder.append(addEnding(true, true));
+			}
+			else 
+			{
+				stringBuilder.append(addEnding(true, false));
+			}
+		}
+		++i;
+	}
+
+	if (components.size() > 0)
+	{
+		stringBuilder.append(closeObjectProperty(tabSize + 1));
+	}
+
+	stringBuilder.append(addEnding(true, false));
+	stringBuilder.append(closeObjectProperty(tabSize));
+
+	return stringBuilder;
+}
+
 GameObject::~GameObject() { 
 };
 

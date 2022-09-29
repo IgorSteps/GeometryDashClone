@@ -37,3 +37,8 @@ Component* CameraControls::copy()
 {
 	return nullptr;
 }
+
+std::string CameraControls::serialise(int tabSize)
+{
+	return "";
+}
