@@ -2,8 +2,10 @@
 
 
 #include <glm/ext/matrix_float4x4.hpp>
-#include <iostream>
 #include "SnapToGrid.h"
+#include <KL.h>
+#include <fstream>
+#include <iostream>
 
 
 
@@ -115,6 +117,8 @@ void LevelEditorScene::init()
 	groundComp = new Ground(groundSp, myShader);
 	ground->addComponent(groundComp);*/
 
+	ground->setNonserialisable();
+	player->setNonserialisable();
 	addGameObject(player);
 	addGameObject(ground);
 }
@@ -144,7 +148,46 @@ void LevelEditorScene::update(float dt)
 	grid->update(dt);
 	editingButtons->update(dt);
 	mouseCursor->update(dt);
+
+	if (KL::isKeyPressed(GLFW_KEY_SPACE))
+	{
+		savetoFile("test");
+	}
  }
+
+void LevelEditorScene::savetoFile(std::string name)
+{
+	std::ofstream myfile("levels/" + name + ".json");
+	
+	if (myfile.is_open())
+	{
+		//test
+		//myfile << "This is a line.\n";
+		//myfile << "This is another line.\n";
+
+		int i = 0;
+		for (GameObject* g : gameObjects)
+		{
+			std::string str = g->serialise(0);
+
+			if (str.compare("") != 0)
+			{
+				myfile << str;
+				if (i < gameObjects.size() - 1)
+				{
+					myfile << ",\n";
+				}
+			}
+			++i;
+		}
+
+		myfile.close(); // close IO stream
+	}
+	else 
+	{
+		std::cout << "Unable to open " << name << " file\n";
+	}
+}
 
 void LevelEditorScene::draw()
 {

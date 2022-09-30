@@ -78,3 +78,9 @@ Component* Grid::copy()
 {
 	return nullptr;
 }
+
+
+std::string Grid::serialise(int tabSize)
+{
+	return "";
+}

@@ -66,3 +66,7 @@ Component* Player::copy()
 	return nullptr;
 }
 
+std::string Player::serialise(int tabSize)
+{
+	return "";
+}

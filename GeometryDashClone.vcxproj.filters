@@ -43,6 +43,12 @@
     <Filter Include="Header Files\ui">
       <UniqueIdentifier>{203900cd-7414-4696-86eb-d5f90d395b92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\file">
+      <UniqueIdentifier>{198b9f51-91c0-44ac-bdb6-ae6498e8d684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\file">
+      <UniqueIdentifier>{1c2dd1d9-9019-4f5f-ab2d-bd003dbc6893}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\BoxBounds.h">
@@ -126,6 +132,9 @@
     <ClInclude Include="headers\KL.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="headers\Serialise.h">
+      <Filter>Header Files\file</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -205,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="core\KL.cpp">
       <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="file\Serialise.cpp">
+      <Filter>Source Files\file</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

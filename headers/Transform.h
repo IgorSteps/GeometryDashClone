@@ -1,12 +1,16 @@
 #pragma once
 #include <glm/ext/vector_float2.hpp>
-class Transform
+#include <Serialise.h>
+class Transform : public Serialise
 {
 public:
 	Transform(glm::vec2 position);
 	Transform();
 	Transform(Transform* trans);
 	Transform* copy();
+
+	std::string serialise(int tabsize);
+
 	glm::vec2 position;
 	float rotateion;
 	glm::vec2 scale; 

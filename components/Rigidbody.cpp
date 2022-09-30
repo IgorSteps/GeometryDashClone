@@ -20,3 +20,8 @@ Component* Rigidbody::copy()
 {
 	return nullptr;
 }
+
+std::string Rigidbody::serialise(int tabSize)
+{
+	return "";
+}

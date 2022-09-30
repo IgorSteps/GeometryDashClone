@@ -172,6 +172,7 @@
     <ClInclude Include="headers\MainContainer.h" />
     <ClInclude Include="headers\MenuItem.h" />
     <ClInclude Include="headers\KL.h" />
+    <ClInclude Include="headers\Serialise.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="datastructure\AssetPool.cpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="components\Sprite.cpp" />
     <ClCompile Include="components\Spritesheet.cpp" />
     <ClCompile Include="datastructure\Transform.cpp" />
+    <ClCompile Include="file\Serialise.cpp" />
     <ClCompile Include="UI\MainContainer.cpp" />
     <ClCompile Include="UI\MenuItem.cpp" />
   </ItemGroup>

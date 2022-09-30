@@ -43,5 +43,8 @@ public:
 	Spritesheet* objects;
 	GameObject* mouseCursor;
 	MainContainer* editingButtons;
+
+private:
+	void savetoFile(std::string);
 };
 

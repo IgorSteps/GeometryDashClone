@@ -320,3 +320,27 @@ Component* Sprite::copy()
 		return new Sprite(this->spriteFile);
 	}
 }
+
+std::string Sprite::serialise(int tabSize)
+{
+	std::string builder;
+
+	builder.append(beginObjectProperty("Sprite", tabSize));
+	builder.append(addBooleanProperty("isSubSprite", isSubSprite, tabSize + 1, true, true));
+	
+	if (isSubSprite)
+	{
+		builder.append(addStringProperty("FilePath", spritesheetFile, tabSize + 1, true, true));
+		builder.append(addIntProperty("row", row, tabSize + 1, true, true));
+		builder.append(addIntProperty("column", column, tabSize + 1, true, true));
+		builder.append(addIntProperty("index", index, tabSize + 1, true, true));
+		builder.append(closeObjectProperty(tabSize));
+
+		return builder;
+	}
+
+	builder.append(addStringProperty("FilePath", spriteFile, tabSize + 1, true, false));
+	builder.append(closeObjectProperty(tabSize));
+
+	return builder;
+}

@@ -68,3 +68,8 @@ Component* SnapToGrid::copy()
 {
 	return nullptr;
 }
+
+std::string SnapToGrid::serialise(int tabSize)
+{
+	return "";
+}

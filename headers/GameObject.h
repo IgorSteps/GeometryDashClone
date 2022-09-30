@@ -4,12 +4,12 @@
 class Component;
 
 #include <vector>
-#include <string>
 #include <memory>
 #include "Shader.h"
+#include "Serialise.h"
 
 
-class GameObject
+class GameObject : public Serialise
 {
 public:
 	GameObject(std::string name, Transform* transform);
@@ -19,6 +19,8 @@ public:
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	GameObject* copy(Shader& sh);
+	std::string serialise(int tabSize);
+	void setNonserialisable();
 
 	Transform* transform; //make a smart pointer?
 	
@@ -45,5 +47,6 @@ public:
 private:
 	std::vector<Component*> components;
 	std::string name;
+	bool serialisable;
 };
 

@@ -1,7 +1,6 @@
 #include "MainContainer.h"
 #include <Spritesheet.h>
 #include <Constants.h>
-#include <iostream>
 #include <AssetPool.h>
 
 MainContainer::MainContainer(Shader& sh) : m_MenuItems()
@@ -77,4 +76,9 @@ void MainContainer::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& 
 		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(g->transform->position.x, g->transform->position.y, 1.0f));
 		g->draw(shader, ModelViewMatrix, ProjectionMatrixs);
 	}
+}
+
+std::string MainContainer::serialise(int tabsize)
+{
+	return "";
 }

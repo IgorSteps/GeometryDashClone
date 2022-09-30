@@ -123,3 +123,8 @@ Component* Line::copy()
 {
 	return nullptr;
 }
+
+std::string Line::serialise(int tabSize)
+{
+	return "";
+}

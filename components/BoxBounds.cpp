@@ -1,5 +1,4 @@
 #include "BoxBounds.h"
-#include <iostream>
 
 BoxBounds::BoxBounds(float width, float height) {
 	this->width = width;
@@ -19,4 +18,9 @@ void BoxBounds::update(float dt) {
 Component* BoxBounds::copy() 
 {
 	return new BoxBounds(this->width, this->height);
+}
+
+std::string BoxBounds::serialise(int tabSize)
+{
+	return "";
 }

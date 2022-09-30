@@ -51,3 +51,8 @@ Component* Ground::copy()
 {
 	return nullptr;
 }
+
+std::string Ground::serialise(int tabSize)
+{
+	return "";
+}
