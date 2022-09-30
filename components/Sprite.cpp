@@ -330,7 +330,7 @@ std::string Sprite::serialise(int tabSize)
 	
 	if (isSubSprite)
 	{
-		builder.append(addStringProperty("FilePath", spriteFile, tabSize + 1, true, true));
+		builder.append(addStringProperty("FilePath", spritesheetFile, tabSize + 1, true, true));
 		builder.append(addIntProperty("row", row, tabSize + 1, true, true));
 		builder.append(addIntProperty("column", column, tabSize + 1, true, true));
 		builder.append(addIntProperty("index", index, tabSize + 1, true, true));

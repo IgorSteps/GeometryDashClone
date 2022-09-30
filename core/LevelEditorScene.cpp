@@ -117,6 +117,8 @@ void LevelEditorScene::init()
 	groundComp = new Ground(groundSp, myShader);
 	ground->addComponent(groundComp);*/
 
+	ground->setNonserialisable();
+	player->setNonserialisable();
 	addGameObject(player);
 	addGameObject(ground);
 }

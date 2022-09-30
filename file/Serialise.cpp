@@ -8,7 +8,7 @@ std::string Serialise::addTabs(int tabSize)
 
 std::string Serialise::beginObjectProperty(std::string name, int tabSize)
 {
-	return addTabs(tabSize) + '\"' + name + "\":{" + addEnding(true, false);
+	return addTabs(tabSize) + '\"' + name + "\": {" + addEnding(true, false);
 }
 
 std::string Serialise::closeObjectProperty(int tabSize)
@@ -38,7 +38,7 @@ std::string Serialise::addDoublePorperty(std::string name, int value, int tabSiz
 
 std::string Serialise::addBooleanProperty(std::string name, bool value, int tabSize, bool newLine, bool comma)
 {
-	return addTabs(tabSize) + '\"' + name + "\: " + std::to_string(value) + addEnding(newLine, comma);
+	return addTabs(tabSize) + '\"' + name + "\": " + std::to_string(value) + addEnding(newLine, comma);
 }
 
 std::string Serialise::addEnding(bool newLine, bool comma)

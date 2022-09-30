@@ -7,6 +7,7 @@ GameObject::GameObject(std::string name, Transform* transform) {
 	this->name = name;
 	this->transform = transform;
 	this->components = std::vector<Component*>(); 
+	serialisable = true;
 }
 
 GameObject* GameObject::copy(Shader& sh)
@@ -28,6 +29,8 @@ GameObject* GameObject::copy(Shader& sh)
 
 std::string GameObject::serialise(int tabSize)
 {
+	if (!serialisable) return "";
+
 	std::string stringBuilder;
 
 	// Game Object
@@ -77,6 +80,11 @@ std::string GameObject::serialise(int tabSize)
 	stringBuilder.append(closeObjectProperty(tabSize));
 
 	return stringBuilder;
+}
+
+void GameObject::setNonserialisable()
+{
+	serialisable = false;
 }
 
 GameObject::~GameObject() { 
