@@ -344,3 +344,8 @@ std::string Sprite::serialise(int tabSize)
 
 	return builder;
 }
+
+Sprite* Sprite::deserialise()
+{
+
+}

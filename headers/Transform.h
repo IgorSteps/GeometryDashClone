@@ -10,6 +10,7 @@ public:
 	Transform* copy();
 
 	std::string serialise(int tabsize);
+	static Transform* deserialise();
 
 	glm::vec2 position;
 	float rotateion;

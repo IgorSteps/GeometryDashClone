@@ -1,4 +1,5 @@
 #include "Parser.h"
+#include <Sprite.h>
 
 
 
@@ -68,6 +69,16 @@ bool Parser::atEnd()
 bool Parser::isDigit(char c)
 {
     return c >= '0' && c <= '9';
+}
+
+void Parser::checkString(std::string str)
+{
+    std::string title = Parser::parseString();
+    if (title.compare(str) != 0)
+    {
+        std::cout << "Expected '" << str << "' instead got '" << title << "' at line " << line;
+        exit(-1);
+    }
 }
 
 int Parser::parseInt()
@@ -146,6 +157,73 @@ std::string Parser::parseString()
     consume('"');
     return builder;
 }
+
+Component* Parser::parseComponent()
+{
+    std::string componentTitle = Parser::parseString();
+    switch (componentTitle)
+    {
+        case "Sprite":
+            skipWhitespace();
+            Parser::consume(',');
+            skipWhitespace();
+            Parser::consume('{');
+            return Sprite::deserialise();
+        default:
+            std::cout << "Couldn't find component '" << componentTitle << "' at line " <<
+                line;
+            exit(-1);
+    }
+}
+
+void Parser::consumeBeginObjectProperty(std::string name)
+{
+    skipWhitespace();
+    checkString(name);
+    skipWhitespace();
+    consume(':');
+    skipWhitespace();
+    consume('{');
+}
+
+void Parser::consumeEndObjectProperty()
+{
+    skipWhitespace();
+    consume('}');
+}
+
+std::string Parser::consumeStringProperty(std::string name)
+{
+    skipWhitespace();
+    checkString(name);
+    consume(':');
+    return parseString();
+}
+
+int Parser::consumeIntProperty(std::string name)
+{
+    skipWhitespace();
+    checkString(name);
+    consume(':');
+    return parseInt();
+}
+
+float Parser::consumeFloatProperty(std::string name)
+{
+    skipWhitespace();
+    checkString(name);
+    consume(':');
+    return parseFloat();
+}
+
+bool Parser::consumeBoolProperty(std::string name)
+{
+    skipWhitespace();
+    checkString(name);
+    consume(':');
+    return parseBool();
+}
+
 
 int Parser::offset = 0; 
 int Parser::line = 1; 
