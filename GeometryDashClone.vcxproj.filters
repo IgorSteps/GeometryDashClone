@@ -135,6 +135,9 @@
     <ClInclude Include="headers\Serialise.h">
       <Filter>Header Files\file</Filter>
     </ClInclude>
+    <ClInclude Include="headers\Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -216,6 +219,9 @@
       <Filter>Source Files\core</Filter>
     </ClCompile>
     <ClCompile Include="file\Serialise.cpp">
+      <Filter>Source Files\file</Filter>
+    </ClCompile>
+    <ClCompile Include="file\Parser.cpp">
       <Filter>Source Files\file</Filter>
     </ClCompile>
   </ItemGroup>

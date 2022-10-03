@@ -3,9 +3,11 @@
 
 #include <glm/ext/matrix_float4x4.hpp>
 #include "SnapToGrid.h"
+
 #include <KL.h>
 #include <fstream>
 #include <iostream>
+#include <Parser.h>
 
 
 
@@ -121,6 +123,18 @@ void LevelEditorScene::init()
 	player->setNonserialisable();
 	addGameObject(player);
 	addGameObject(ground);
+
+	Parser::openFile("hi");
+	Parser::skipWhitespace();
+	std::cout << '\n' << Parser::parseInt() << std::endl;
+	std::cout << Parser::parseInt() << std::endl;
+	std::cout << Parser::parseFloat() << std::endl;
+	std::cout << Parser::parseFloat() << std::endl;
+	std::cout << Parser::parseBool() << std::endl;
+	std::cout << Parser::parseBool() << std::endl;
+	std::cout << Parser::parseString() << std::endl;
+	std::cout << Parser::parseString() << std::endl;
+
 }
 
 void LevelEditorScene::initAssetPool()

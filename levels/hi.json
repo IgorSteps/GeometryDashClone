@@ -1,32 +1,6 @@
-"GameObject":{
-	"Transform":{
-		"Position":{
-			"x": 500.000000f,
-			"y": 350.000000f
-		},
-		"Scale":{
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Player game obj",
-	"Components":{
-	}
-},
-"GameObject":{
-	"Transform":{
-		"Position":{
-			"x": 0.000000f,
-			"y": 600.000000f
-		},
-		"Scale":{
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Ground game object",
-	"Components":{
-	}
-}
+
+
+12 -14 
+10.23f 4.343f
+true false 
+"string" " another string"

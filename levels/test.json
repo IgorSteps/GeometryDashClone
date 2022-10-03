@@ -1,29 +1,6 @@
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 777.000000f,
-			"y": 357.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": 1,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 4,
-			"index": 4,
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
 			"x": 819.000000f,
 			"y": 357.000000f
 		},
@@ -36,11 +13,34 @@
 	"Name": "Generated",
 	"Components": {
 		"Sprite": {
-			"isSubSprite": 1,
+			"isSubSprite": true,
 			"FilePath": "assets/groundSprites.png",
-			"row": 1,
-			"column": 3,
-			"index": 9,
+			"row": 0,
+			"column": 4,
+			"index": 4,
+		}
+	}
+},
+"GameObject": {
+	"Transform": {
+		"Position": {
+			"x": 903.000000f,
+			"y": 357.000000f
+		},
+		"Scale": {
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components": {
+		"Sprite": {
+			"isSubSprite": true,
+			"FilePath": "assets/groundSprites.png",
+			"row": 0,
+			"column": 4,
+			"index": 4,
 		}
 	}
 }

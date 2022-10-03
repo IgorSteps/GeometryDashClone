@@ -38,7 +38,15 @@ std::string Serialise::addDoublePorperty(std::string name, int value, int tabSiz
 
 std::string Serialise::addBooleanProperty(std::string name, bool value, int tabSize, bool newLine, bool comma)
 {
-	return addTabs(tabSize) + '\"' + name + "\": " + std::to_string(value) + addEnding(newLine, comma);
+	std::string boolean;
+	if (value)
+	{
+		boolean = "true";
+	}
+	else {
+		boolean = "false";
+	}
+	return addTabs(tabSize) + '\"' + name + "\": " + boolean + addEnding(newLine, comma);
 }
 
 std::string Serialise::addEnding(bool newLine, bool comma)
