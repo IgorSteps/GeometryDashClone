@@ -3,9 +3,11 @@
 
 #include <glm/ext/matrix_float4x4.hpp>
 #include "SnapToGrid.h"
+
 #include <KL.h>
 #include <fstream>
 #include <iostream>
+#include <Parser.h>
 
 
 
@@ -64,10 +66,8 @@ void LevelEditorScene::init()
 	editingButtons->start();
 
 	/// PLACING BLOCKS
-	
 	mouseCursor = new GameObject("Mouse cursor", new Transform(glm::vec2(0.0f)));
 	mouseCursor->addComponent(new SnapToGrid(Constants::TILE_WIDTH, Constants::TILE_HEIGHT, myShader));
-
 
 	/// PLAYER
 	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f,350.0f)));
@@ -92,17 +92,8 @@ void LevelEditorScene::init()
 
 	player->addComponent(playerComp);
 
-	layerOne->sprites[spNum]->SetHeight(42.0f);
-	layerOne->sprites[spNum]->SetWidth(42.0f);
-
 	layerOne->sprites[spNum]->initSubSprite(myShader);
-
-	layerTwo->sprites[spNum]->SetHeight(42.0f);
-	layerTwo->sprites[spNum]->SetWidth(42.0f);
 	layerTwo->sprites[spNum]->initSubSprite(myShader);
-
-	layerThree->sprites[spNum]->SetHeight(42.0f);
-	layerThree->sprites[spNum]->SetWidth(42.0f);
 	layerThree->sprites[spNum]->initSubSprite(myShader);
 
 	/// GROUND
@@ -110,12 +101,6 @@ void LevelEditorScene::init()
 	groundSp = new Sprite("assets/grounds/ground01.png");
 	groundComp = new Ground(groundSp, myShader);
 	ground->addComponent(groundComp);
-
-	// button sprite test, they are broken, remove later
-	/*ground = new GameObject("Ground game object", new Transform(glm::vec2(0.0f, 0.0f)));
-	groundSp = new Sprite("assets/player/spaceship.png");
-	groundComp = new Ground(groundSp, myShader);
-	ground->addComponent(groundComp);*/
 
 	ground->setNonserialisable();
 	player->setNonserialisable();
@@ -153,7 +138,27 @@ void LevelEditorScene::update(float dt)
 	{
 		savetoFile("test");
 	}
+	else if (KL::isKeyPressed(GLFW_KEY_A))
+	{
+		importLevel("test");
+	}
  }
+
+void LevelEditorScene::importLevel(std::string filename)
+{
+	Parser::openFile(filename);
+
+	GameObject* go = Parser::parseGameObject();
+
+	while (go != nullptr) {
+		addGameObject(go);
+		go->getComponent<Sprite>()->initSubSprite(myShader);
+		go = Parser::parseGameObject();
+		
+		std::cout << "magic inside\n";
+	}
+	
+}
 
 void LevelEditorScene::savetoFile(std::string name)
 {

@@ -46,5 +46,6 @@ public:
 
 private:
 	void savetoFile(std::string);
+	void importLevel(std::string);
 };
 

@@ -2,6 +2,7 @@
 #include "Component.h"
 #include <iostream>
 #include "Sprite.h"
+#include <Parser.h>
 
 GameObject::GameObject(std::string name, Transform* transform) {
 	this->name = name;
@@ -12,7 +13,7 @@ GameObject::GameObject(std::string name, Transform* transform) {
 
 GameObject* GameObject::copy(Shader& sh)
 {
-	GameObject* newGameObj = new GameObject("Generated", transform->copy());
+	newGameObj = new GameObject("Generated", transform->copy());
 
 	for (Component* c : components) 
 	{
@@ -82,12 +83,44 @@ std::string GameObject::serialise(int tabSize)
 	return stringBuilder;
 }
 
+GameObject* GameObject::deserialise()
+{
+	Parser::consumeBeginObjectProperty("GameObject");
+
+	deserialisedTransform = Transform::deserialise();
+	Parser::consume(',');
+	std::string name = Parser::consumeStringProperty("Name");
+
+	// make game object
+	go = new GameObject(name, deserialisedTransform);
+
+	if (Parser::peek() == ',')
+	{
+		Parser::consume(',');
+		Parser::consumeBeginObjectProperty("Components");
+		go->addComponent(Parser::parseComponent());
+
+
+		while (Parser::peek() == ',')
+		{
+			Parser::consume(',');
+			go->addComponent(Parser::parseComponent());
+		}
+		Parser::consumeEndObjectProperty();
+	}
+	Parser::consumeEndObjectProperty();
+	return go;
+}
+
 void GameObject::setNonserialisable()
 {
 	serialisable = false;
 }
 
 GameObject::~GameObject() { 
+	delete newGameObj;
+	delete deserialisedTransform;
+	
 };
 
 void GameObject::update(float dt) {
@@ -113,3 +146,6 @@ void GameObject::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 		c->draw(shader, ModelViewMatrix, ProjectionMatrix);
 	}
 }
+
+GameObject* GameObject::go = nullptr;
+Transform* GameObject::deserialisedTransform = NULL;

@@ -20,10 +20,15 @@ public:
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	GameObject* copy(Shader& sh);
 	std::string serialise(int tabSize);
+	static GameObject* deserialise();
 	void setNonserialisable();
 
 	Transform* transform; //make a smart pointer?
-	
+	GameObject* newGameObj; // copy
+	static GameObject* go; // deserialised
+	static Transform* deserialisedTransform;
+
+
 	template <typename T> T* getComponent() 
 	{
 		for (auto& comp : this->components)

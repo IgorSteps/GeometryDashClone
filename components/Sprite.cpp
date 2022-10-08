@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <Parser.h>
+#include <AssetPool.h>
 
 Sprite::Sprite(std::string file)
 {
@@ -333,7 +335,7 @@ std::string Sprite::serialise(int tabSize)
 		builder.append(addStringProperty("FilePath", spritesheetFile, tabSize + 1, true, true));
 		builder.append(addIntProperty("row", row, tabSize + 1, true, true));
 		builder.append(addIntProperty("column", column, tabSize + 1, true, true));
-		builder.append(addIntProperty("index", index, tabSize + 1, true, true));
+		builder.append(addIntProperty("index", index, tabSize + 1, true, false));
 		builder.append(closeObjectProperty(tabSize));
 
 		return builder;
@@ -343,4 +345,38 @@ std::string Sprite::serialise(int tabSize)
 	builder.append(closeObjectProperty(tabSize));
 
 	return builder;
+}
+
+Sprite* Sprite::deserialise()
+{
+	bool isSubSprite = Parser::consumeBoolProperty("isSubSprite");
+	Parser::consume(',');
+	std::string filepath = Parser::consumeStringProperty("FilePath");
+
+	if (isSubSprite)
+	{
+		Parser::consume(',');
+		Parser::consumeIntProperty("row");
+		Parser::consume(',');
+		Parser::consumeIntProperty("column");
+		Parser::consume(',');
+		int index = Parser::consumeIntProperty("index");
+		if (!AssetPool::hasSpriteSheet(filepath))
+		{
+			std::cout << "Spritesheet " << filepath << " has not been loaded yet\n";
+			exit(-1);
+		}
+
+		Parser::consumeEndObjectProperty();
+		return (Sprite*) AssetPool::getSpritesheet(filepath)->sprites.at(index)->copy();
+	}
+
+	if (!AssetPool::hasSprite(filepath))
+	{
+		std::cout << "Sprite " << filepath << " has not been loaded yet\n";
+		exit(-1);
+	}
+
+	Parser::consumeEndObjectProperty();
+	return (Sprite*) AssetPool::getSprite(filepath)->copy();
 }

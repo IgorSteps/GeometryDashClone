@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include <Parser.h>
 Transform::Transform(glm::vec2 position)
 {
 	this->position = position;
@@ -54,4 +55,40 @@ std::string Transform::serialise(int tabsize)
 	builder.append(closeObjectProperty(tabsize));
 
 	return builder;
+}
+
+Transform* Transform::deserialise()
+{
+	Parser::consumeBeginObjectProperty("Transform");
+
+	// Position
+	Parser::consumeBeginObjectProperty("Position");
+	float x = Parser::consumeFloatProperty("x");
+	Parser::consume(','); // don't forget the comma between them
+	float y = Parser::consumeFloatProperty("y");
+
+	glm::vec2 pos = glm::vec2(x, y);
+	Parser::consumeEndObjectProperty(); 
+	Parser::consume(',');
+
+	// Scale
+	Parser::consumeBeginObjectProperty("Scale");
+	 x = Parser::consumeFloatProperty("x");
+	Parser::consume(','); // don't forget the comma between them
+	 y = Parser::consumeFloatProperty("y");
+
+	glm::vec2 sca = glm::vec2(x, y);
+	Parser::consumeEndObjectProperty();
+	Parser::consume(',');
+
+	// Rotation
+	float rotation = Parser::consumeFloatProperty("rotation");
+	Parser::consumeEndObjectProperty();
+
+	// Create Transform
+	Transform* t = new Transform(pos);
+	t->scale = sca;
+	t->rotateion = rotation;
+
+	return t;
 }
