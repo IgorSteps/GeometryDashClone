@@ -6,6 +6,7 @@
 class Parser
 {
 public:
+	~Parser();
 	static void openFile(std::string name);
 	static bool atEnd();
 	static char peek();
@@ -35,7 +36,7 @@ private:
 	static int line;
 
 	//static std::string contents;
-	static char characters[];
+	static char* characters;
 	static int length;
 
 };

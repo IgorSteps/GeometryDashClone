@@ -3,6 +3,11 @@
 #include <GameObject.h>
 
 
+Parser::~Parser()
+{
+    delete[] Parser::characters;
+    Parser::characters = nullptr;
+}
 
 void Parser::openFile(std::string name)
 {
@@ -11,10 +16,9 @@ void Parser::openFile(std::string name)
     {
         std::string contents((std::istreambuf_iterator<char>(myfile)), std::istreambuf_iterator<char>());
         
-        // length of contents
-        Parser::length = contents.length() + 1;
-        Parser::characters[contents.length() + 1];
-
+        // length of characters[]
+        Parser::length = contents.size();
+        Parser::characters = new char[contents.size() + 1];
         // copy contetns into characters array 
         strcpy_s(Parser::characters, contents.size() + 1, contents.c_str());
         myfile.close();
@@ -59,7 +63,7 @@ void Parser::consume(char c)
 
 bool Parser::atEnd()
 {
-    return offset == 1048;
+    return offset == Parser::length;
 }
 
 bool Parser::isDigit(char c)
@@ -245,6 +249,6 @@ int Parser::offset = 0;
 int Parser::line = 1; 
 int Parser::length = 0;
 //std::string Parser::contents = "";
-char Parser::characters[] = {0};
+char* Parser::characters = nullptr;
 
 
