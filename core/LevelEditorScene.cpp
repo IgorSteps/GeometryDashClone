@@ -152,10 +152,12 @@ void LevelEditorScene::importLevel(std::string filename)
 
 	while (go != nullptr) {
 		addGameObject(go);
+		go->getComponent<Sprite>()->initSubSprite(myShader);
 		go = Parser::parseGameObject();
+		
 		std::cout << "magic inside\n";
 	}
-
+	
 }
 
 void LevelEditorScene::savetoFile(std::string name)
