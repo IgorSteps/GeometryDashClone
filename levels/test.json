@@ -17,15 +17,15 @@
 			"FilePath": "assets/groundSprites.png",
 			"row": 0,
 			"column": 4,
-			"index": 4,
+			"index": 4
 		}
 	}
 },
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 903.000000f,
-			"y": 357.000000f
+			"x": 777.000000f,
+			"y": 315.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,
@@ -40,7 +40,30 @@
 			"FilePath": "assets/groundSprites.png",
 			"row": 0,
 			"column": 4,
-			"index": 4,
+			"index": 4
+		}
+	}
+},
+"GameObject": {
+	"Transform": {
+		"Position": {
+			"x": 735.000000f,
+			"y": 273.000000f
+		},
+		"Scale": {
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components": {
+		"Sprite": {
+			"isSubSprite": true,
+			"FilePath": "assets/groundSprites.png",
+			"row": 0,
+			"column": 4,
+			"index": 4
 		}
 	}
 }

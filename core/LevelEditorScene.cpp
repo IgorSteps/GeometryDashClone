@@ -138,7 +138,21 @@ void LevelEditorScene::update(float dt)
 	{
 		savetoFile("test");
 	}
+	else if (KL::isKeyPressed(GLFW_KEY_A))
+	{
+		importLevel("test");
+	}
  }
+
+void LevelEditorScene::importLevel(std::string filename)
+{
+	Parser::openFile(filename);
+
+	GameObject* go = Parser::parseGameObject();
+
+	addGameObject(go);
+
+}
 
 void LevelEditorScene::savetoFile(std::string name)
 {

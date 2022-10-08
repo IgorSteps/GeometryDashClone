@@ -25,6 +25,7 @@ public:
 	static float parseFloat();
 	static std::string parseString();
 	static Component* parseComponent();
+	static GameObject* parseGameObject();
 
 private:
 	static bool isDigit(char c);
@@ -33,7 +34,7 @@ private:
 	static int offset;
 	static int line;
 
-	static std::string contents;
+	//static std::string contents;
 	static char characters[];
 	static int length;
 

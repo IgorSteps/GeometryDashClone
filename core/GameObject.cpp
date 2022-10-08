@@ -146,3 +146,6 @@ void GameObject::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 		c->draw(shader, ModelViewMatrix, ProjectionMatrix);
 	}
 }
+
+GameObject* GameObject::go = nullptr;
+Transform* GameObject::deserialisedTransform = NULL;

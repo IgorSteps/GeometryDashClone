@@ -1,25 +1,22 @@
 #include "Parser.h"
 #include <Sprite.h>
+#include <GameObject.h>
 
 
 
 void Parser::openFile(std::string name)
 {
 	std::ifstream myfile("levels/" + name + ".json");
-    
-
     if (myfile.is_open())
     {
-        contents = std::string((std::istreambuf_iterator<char>(myfile)),
-            std::istreambuf_iterator<char>());
+        std::string contents((std::istreambuf_iterator<char>(myfile)), std::istreambuf_iterator<char>());
         
         // length of contents
-        length = int(contents.length() + 1);
-        characters[length];
+        //contents.length() + 1;
+        //Parser::characters[contents.length() + 1];
 
         // copy contetns into characters array 
-        strcpy_s(characters, contents.size() + 1,contents.c_str());
-
+        strcpy_s(Parser::characters, contents.size() + 1, contents.c_str());
         myfile.close();
     }
     else return;
@@ -54,8 +51,7 @@ void Parser::consume(char c)
     char actual = peek();
     if (actual != c)
     {
-        std::cout << "Error: Expected '" << c << "' but instead got: '" <<
-            actual << "' at line: " << line << '\n';
+        std::cout << "Error: Expected '" << c << "' but instead got: '" << actual << "' at line: " << Parser::line << std::endl;
         exit(-1);
     }
     ++offset;
@@ -76,7 +72,7 @@ void Parser::checkString(std::string str)
     std::string title = Parser::parseString();
     if (title.compare(str) != 0)
     {
-        std::cout << "Expected '" << str << "' instead got '" << title << "' at line " << line;
+        std::cout << "Expected '" << str << "' instead got '" << title << "' at line " << Parser::line << std::endl;
         exit(-1);
     }
 }
@@ -120,7 +116,7 @@ bool Parser::parseBool()
     }
     else 
     {
-        std::cout << "Expecting t or f, but got: " << peek() << " at line " << line;
+        std::cout << "Expecting t or f, but got: " << peek() << " at line " << Parser::line << std::endl;
         exit(-1);
     }
     return builder.compare("true") == 0;
@@ -161,19 +157,39 @@ std::string Parser::parseString()
 Component* Parser::parseComponent()
 {
     std::string componentTitle = Parser::parseString();
-    switch (componentTitle)
+    if (componentTitle == "Sprite")
     {
-        case "Sprite":
-            skipWhitespace();
-            Parser::consume(',');
-            skipWhitespace();
-            Parser::consume('{');
-            return Sprite::deserialise();
-        default:
-            std::cout << "Couldn't find component '" << componentTitle << "' at line " <<
-                line;
-            exit(-1);
+        skipWhitespace();
+        Parser::consume(':');
+        skipWhitespace();
+        Parser::consume('{');
+        return Sprite::deserialise();
     }
+    else 
+    {
+        std::cout << "Couldn't find component '" << componentTitle << "' at line " << Parser::line << std::endl;
+        exit(-1);
+    }
+    return nullptr;
+}
+
+GameObject* Parser::parseGameObject()
+{
+    if (length == 0 || atEnd())
+    {
+        return nullptr;
+    }
+
+    if (peek() == ',')  Parser::consume(',');
+
+    skipWhitespace();
+
+    if (atEnd()) 
+    {
+        return nullptr;
+    }
+
+    return GameObject::deserialise();
 }
 
 void Parser::consumeBeginObjectProperty(std::string name)
@@ -228,7 +244,7 @@ bool Parser::consumeBoolProperty(std::string name)
 int Parser::offset = 0; 
 int Parser::line = 1; 
 int Parser::length = 0;
-std::string Parser::contents = "";
+//std::string Parser::contents = "";
 char Parser::characters[] = {0};
 
 
