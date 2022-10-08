@@ -1,8 +1,8 @@
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 819.000000f,
-			"y": 357.000000f
+			"x": 693.000000f,
+			"y": 315.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,
@@ -16,8 +16,8 @@
 			"isSubSprite": true,
 			"FilePath": "assets/groundSprites.png",
 			"row": 0,
-			"column": 4,
-			"index": 4
+			"column": 3,
+			"index": 3
 		}
 	}
 },
@@ -39,8 +39,8 @@
 			"isSubSprite": true,
 			"FilePath": "assets/groundSprites.png",
 			"row": 0,
-			"column": 4,
-			"index": 4
+			"column": 3,
+			"index": 3
 		}
 	}
 },
@@ -62,8 +62,8 @@
 			"isSubSprite": true,
 			"FilePath": "assets/groundSprites.png",
 			"row": 0,
-			"column": 4,
-			"index": 4
+			"column": 3,
+			"index": 3
 		}
 	}
 }

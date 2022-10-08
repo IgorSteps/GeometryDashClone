@@ -12,8 +12,8 @@ void Parser::openFile(std::string name)
         std::string contents((std::istreambuf_iterator<char>(myfile)), std::istreambuf_iterator<char>());
         
         // length of contents
-        //contents.length() + 1;
-        //Parser::characters[contents.length() + 1];
+        Parser::length = contents.length() + 1;
+        Parser::characters[contents.length() + 1];
 
         // copy contetns into characters array 
         strcpy_s(Parser::characters, contents.size() + 1, contents.c_str());
@@ -59,7 +59,7 @@ void Parser::consume(char c)
 
 bool Parser::atEnd()
 {
-    return offset == length;
+    return offset == 1048;
 }
 
 bool Parser::isDigit(char c)

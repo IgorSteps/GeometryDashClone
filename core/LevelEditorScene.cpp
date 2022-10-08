@@ -150,7 +150,11 @@ void LevelEditorScene::importLevel(std::string filename)
 
 	GameObject* go = Parser::parseGameObject();
 
-	addGameObject(go);
+	while (go != nullptr) {
+		addGameObject(go);
+		go = Parser::parseGameObject();
+		std::cout << "magic inside\n";
+	}
 
 }
 
