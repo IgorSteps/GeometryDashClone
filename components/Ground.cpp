@@ -23,8 +23,9 @@ void Ground::update(float dt) {
 		LevelScene* scene = static_cast<LevelScene*>(Game::game->getCurrentScene());
 		GameObject* player = scene->player;
 
-		if (player->transform->position.y + player->getComponent<BoxBounds>()->height > gameObj->transform->position.y) {
-			player->transform->position.y = gameObj->transform->position.y - player->getComponent<BoxBounds>()->height;
+		if (player->transform->position.y + player->getComponent<BoxBounds>()->m_Height > gameObj->transform->position.y) 
+		{
+			player->transform->position.y = gameObj->transform->position.y - player->getComponent<BoxBounds>()->m_Height + 21;
 		}
 
 		gameObj->transform->position.x = scene->camera->position.x - 10.0f;

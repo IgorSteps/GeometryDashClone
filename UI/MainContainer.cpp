@@ -2,6 +2,7 @@
 #include <Spritesheet.h>
 #include <Constants.h>
 #include <AssetPool.h>
+#include <BoxBounds.h>
 
 MainContainer::MainContainer(Shader& sh) : m_MenuItems()
 {
@@ -38,7 +39,7 @@ void MainContainer::init(Shader& sh)
 		menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
 			buttonSprite->sprites[0], buttonSprite->sprites[1], sh);
 		obj->addComponent(menuItem);
-
+		obj->addComponent(new BoxBounds(Constants::TILE_WIDTH, Constants::TILE_HEIGHT));
 		buttonSprite->sprites[0]->initSubSprite(sh);
 		buttonSprite->sprites[1]->initSubSprite(sh);
 

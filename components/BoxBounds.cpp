@@ -1,15 +1,20 @@
 #include "BoxBounds.h"
+#include <Parser.h>
+#include <GameObject.h>
 
 BoxBounds::BoxBounds(float width, float height) {
-	this->width = width;
-	this->height = height;
+	m_Width = width;
+	m_Height = height;
+	m_HalfWidth = m_Width / 2;
+	m_HalfHeight = m_Height / 2;
+	type = Box;
 }
 
-BoxBounds::BoxBounds(BoxBounds& bb) 
+BoxBounds::~BoxBounds()
 {
-	width = bb.width;
-	height = bb.height;
+	delete deserialsiedBB;
 }
+
 
 void BoxBounds::update(float dt) {
 	//std::cout << "We are insside box bounds" << '\n';
@@ -17,10 +22,55 @@ void BoxBounds::update(float dt) {
 
 Component* BoxBounds::copy() 
 {
-	return new BoxBounds(this->width, this->height);
+	return new BoxBounds(m_Width, m_Height);
+}
+
+bool BoxBounds::checkCollision(BoxBounds& b1, BoxBounds& b2)
+{
+	float dx = b1.gameObj->transform->position.x - b2.gameObj->transform->position.x;
+	float dy = b1.gameObj->transform->position.y - b2.gameObj->transform->position.y;
+
+	float combinedHalfWidth = b1.m_HalfWidth + b2.m_HalfWidth;
+	float combinedHalfHeight = b1.m_HalfHeight + b2.m_HalfHeight;
+
+	if (abs(dx) <= combinedHalfWidth)
+	{
+		return abs(dy) <= combinedHalfHeight;
+	}
+
+	return false;
+}
+
+float BoxBounds::getWidth()
+{
+	return m_Width;
+}
+
+float BoxBounds::getHeight()
+{
+	return m_Height;
 }
 
 std::string BoxBounds::serialise(int tabSize)
 {
-	return "";
+	std::string builder;
+	builder.append(beginObjectProperty("BoxBounds", tabSize));
+	builder.append(addFloatProperty("Width", m_Width, tabSize + 1, true, true));
+	builder.append(addFloatProperty("Height", m_Height, tabSize + 1, true, false));
+	builder.append(closeObjectProperty(tabSize));
+
+	return builder;
 }
+
+BoxBounds* BoxBounds::deserialise()
+{
+	float width = Parser::consumeFloatProperty("Width");
+	Parser::consume(',');
+	float height = Parser::consumeFloatProperty("Height");
+	Parser::consumeEndObjectProperty();
+	deserialsiedBB = new BoxBounds(width, height);
+	return deserialsiedBB;
+}
+
+
+BoxBounds* BoxBounds::deserialsiedBB = nullptr;

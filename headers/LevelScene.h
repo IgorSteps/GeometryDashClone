@@ -19,10 +19,12 @@ public:
 	~LevelScene();
 	static LevelScene* currentScene;
 	GameObject* player;
+	BoxBounds* playerBounds;
 	void init();
 	void initAssetPool();
 	void update(float dt);
 	void draw();
+	void importLevel(std::string filename);
 
 	// Coordinate System Data
 	glm::mat4 ViewMatrix;		// matrix for the modelling and viewing

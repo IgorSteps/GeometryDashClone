@@ -25,10 +25,12 @@ void Game::changeScene(int scene)
 	case 0:
 		isInEditor = true;
 		currentScene = new LevelEditorScene("Level Editor");
+		currentScene->init();
 		break;
 	case 1:
 		isInEditor = false;
 		currentScene = new LevelScene("Level");
+		currentScene->init();
 		break;
 	default:
 		std::cout << "Don't know which scene" << '\n';
