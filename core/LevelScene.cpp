@@ -78,7 +78,7 @@ void LevelScene::init()
 	ground->addComponent(groundComp);
 
 
-	addGameObject(player);
+	renderer->submit(player);
 	addGameObject(ground);
 
 	importLevel("test");
@@ -109,12 +109,14 @@ void LevelScene::update(float dt)
 	}
 
 	//player->transform->rotateion += 100.0f * dt;
-
-	for (auto& g : gameObjects) {
+	player->update(dt);
+	player->getComponent<Player>()->onGround = false;
+	for (auto& g : gameObjects) 
+	{
 		g->update(dt);
 
 		Bounds* b = g->getComponent<Bounds>();
-		if (g != player && b != nullptr)
+		if (b != nullptr)
 		{
 			if (Bounds::checkCollison(*playerBounds, *b))
 			{
