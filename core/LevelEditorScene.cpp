@@ -135,15 +135,15 @@ void LevelEditorScene::update(float dt)
 	editingButtons->update(dt);
 	mouseCursor->update(dt);
 
-	if (KL::isKeyPressed(GLFW_KEY_SPACE))
+	if (KL::isKeyPressed(GLFW_KEY_1))
 	{
 		savetoFile("test");
 	}
-	else if (KL::isKeyPressed(GLFW_KEY_A))
+	else if (KL::isKeyPressed(GLFW_KEY_2))
 	{
 		importLevel("test");
 	}
-	else if (KL::isKeyPressed(GLFW_KEY_B))
+	else if (KL::isKeyPressed(GLFW_KEY_3))
 	{
 		Game::game->changeScene(1);
 	}

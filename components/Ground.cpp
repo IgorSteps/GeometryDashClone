@@ -19,18 +19,21 @@ Ground::~Ground() {
 }
 void Ground::update(float dt) {
 
-	if (!Game::game->isInEditor) {
+	if (!Game::game->isInEditor) 
+	{
 		LevelScene* scene = static_cast<LevelScene*>(Game::game->getCurrentScene());
 		GameObject* player = scene->player;
-
-		if (player->transform->position.y + player->getComponent<BoxBounds>()->m_Height > gameObj->transform->position.y) 
+		
+		if (player->transform->position.y + player->getComponent<BoxBounds>()->m_Height - Constants::PLAYER_CENTER > gameObj->transform->position.y) 
 		{
-			player->transform->position.y = gameObj->transform->position.y - player->getComponent<BoxBounds>()->m_Height + 21;
-		}
+			player->transform->position.y = gameObj->transform->position.y - player->getComponent<BoxBounds>()->m_Height + Constants::PLAYER_CENTER;
+			player->getComponent<Player>()->onGround = true;
+		} 
 
 		gameObj->transform->position.x = scene->camera->position.x - 10.0f;
 	}
-	else {
+	else 
+	{
 		gameObj->transform->position.x = Game::game->getCurrentScene()->camera->position.x - 10.0f;
 	}
 
@@ -41,7 +44,7 @@ void Ground::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Project
 	// Translate
 	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x,
 		gameObj->transform->position.y, 0.0f));
-	// Rotate
+	// Scale
 	ModelViewMatrix = glm::scale(ModelViewMatrix, glm::vec3(gameObj->transform->scale, 1.0f));
 
 	// Draw ground

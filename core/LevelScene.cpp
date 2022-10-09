@@ -1,5 +1,7 @@
 #include "LevelScene.h"
 #include <Parser.h>
+#include "Rigidbody.h"
+
 
 LevelScene::LevelScene(std::string name) {
 	Scene::SceneInit(name);
@@ -45,7 +47,7 @@ void LevelScene::init()
 	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x,
 		player->transform->position.y, 0.0f));
 
-	ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f, 500.0f, 1.0f));
+	//ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f, 500.0f, 1.0f));
 
 	layerOne = AssetPool::getSpritesheet("assets/player/layerOne.png");
 	layerTwo = AssetPool::getSpritesheet("assets/player/layerTwo.png");
@@ -106,7 +108,6 @@ void LevelScene::update(float dt)
 		camera->position.y = Constants::CAMERA_OFFSET_GROUND_Y;
 	}
 
-
 	//player->transform->rotateion += 100.0f * dt;
 
 	for (auto& g : gameObjects) {
@@ -117,7 +118,7 @@ void LevelScene::update(float dt)
 		{
 			if (Bounds::checkCollison(*playerBounds, *b))
 			{
-				std::cout << "Colliding!!!!!!!!!!!\n";
+				//std::cout << "Colliding!!!!!!!!!!!\n";
 			}
 		}
 	}
