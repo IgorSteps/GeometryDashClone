@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include <Parser.h>
+#include <Game.h>
 
 
 
@@ -141,6 +142,10 @@ void LevelEditorScene::update(float dt)
 	else if (KL::isKeyPressed(GLFW_KEY_A))
 	{
 		importLevel("test");
+	}
+	else if (KL::isKeyPressed(GLFW_KEY_B))
+	{
+		Game::game->changeScene(1);
 	}
  }
 

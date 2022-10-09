@@ -136,7 +136,10 @@
       <Filter>Header Files\file</Filter>
     </ClInclude>
     <ClInclude Include="headers\Parser.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\file</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Bounds.h">
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="file\Parser.cpp">
       <Filter>Source Files\file</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Bounds.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

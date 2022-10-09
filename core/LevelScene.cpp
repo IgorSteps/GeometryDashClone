@@ -1,4 +1,5 @@
 #include "LevelScene.h"
+#include <Parser.h>
 
 LevelScene::LevelScene(std::string name) {
 	Scene::SceneInit(name);
@@ -10,6 +11,7 @@ LevelScene::~LevelScene() {
 	delete layerOne;
 	delete layerTwo;
 	delete layerThree;
+	delete playerBounds;
 }
 
 void LevelScene::init()
@@ -60,8 +62,9 @@ void LevelScene::init()
 	player->addComponent(playerComp);
 	player->addComponent(new Rigidbody(glm::vec2(395.0f, 0.0f)));
 	player->addComponent(new BoxBounds(Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT));
-
-	 
+	playerBounds = new BoxBounds(Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT);
+	player->addComponent(playerBounds);
+	// init player sprites
 	layerOne->sprites[spNum]->initSubSprite(myShader);
 	layerTwo->sprites[spNum]->initSubSprite(myShader);
 	layerThree->sprites[spNum]->initSubSprite(myShader);
@@ -75,6 +78,8 @@ void LevelScene::init()
 
 	addGameObject(player);
 	addGameObject(ground);
+
+	importLevel("test");
 }
 
 void LevelScene::initAssetPool()
@@ -84,6 +89,7 @@ void LevelScene::initAssetPool()
 	AssetPool::addSpritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	AssetPool::addSpritesheet("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
 }
+
 
 void LevelScene::update(float dt)
 {
@@ -105,6 +111,29 @@ void LevelScene::update(float dt)
 
 	for (auto& g : gameObjects) {
 		g->update(dt);
+
+		Bounds* b = g->getComponent<Bounds>();
+		if (g != player && b != nullptr)
+		{
+			if (Bounds::checkCollison(*playerBounds, *b))
+			{
+				std::cout << "Colliding!!!!!!!!!!!\n";
+			}
+		}
+	}
+
+}
+
+void LevelScene::importLevel(std::string filename)
+{
+	Parser::openFile(filename);
+
+	GameObject* go = Parser::parseGameObject();
+
+	while (go != nullptr) {
+		addGameObject(go);
+		go->getComponent<Sprite>()->initSubSprite(myShader);
+		go = Parser::parseGameObject();
 	}
 
 }

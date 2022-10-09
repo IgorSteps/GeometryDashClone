@@ -1,6 +1,7 @@
 #include "Parser.h"
 #include <Sprite.h>
 #include <GameObject.h>
+#include <BoxBounds.h>
 
 
 Parser::~Parser()
@@ -161,13 +162,17 @@ std::string Parser::parseString()
 Component* Parser::parseComponent()
 {
     std::string componentTitle = Parser::parseString();
+    skipWhitespace();
+    Parser::consume(':');
+    skipWhitespace();
+    Parser::consume('{');
     if (componentTitle == "Sprite")
     {
-        skipWhitespace();
-        Parser::consume(':');
-        skipWhitespace();
-        Parser::consume('{');
-        return Sprite::deserialise();
+        return Sprite::deserialise(); 
+    }
+    else if (componentTitle == "BoxBounds")
+    {
+        return BoxBounds::deserialise();
     }
     else 
     {

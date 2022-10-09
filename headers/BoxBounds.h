@@ -1,16 +1,26 @@
 #pragma once
-#include "Component.h"
+#include "Bounds.h"
 #include <string>
-class BoxBounds : public Component
+class BoxBounds : public Bounds
 {
 public:
-	float width, height;
-
 	BoxBounds(float width, float height);
-	BoxBounds(BoxBounds& boxB);
+	~BoxBounds();
+	
 	void update(float dt);
 
 	std::string serialise(int tabSize);
+	static BoxBounds* deserialise();
 	Component* copy();
+	static BoxBounds* deserialsiedBB;
+
+	// Inherited via Bounds
+	static bool checkCollision(BoxBounds& b1, BoxBounds& b2);
+	virtual float getWidth() override;
+	virtual float getHeight() override;
+
+
+	float m_Width, m_Height;
+	float m_HalfWidth, m_HalfHeight;
 };
 
