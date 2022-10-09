@@ -15,6 +15,7 @@ public:
 	BoundsType type;
 
 	static bool checkCollison(Bounds& b1, Bounds& b2);
+	static void resolveCollison(Bounds* b1, GameObject& plr);
 
 	// Inherited via Component
 	virtual std::string serialise(int tabSize) override;

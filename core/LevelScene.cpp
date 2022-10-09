@@ -118,7 +118,7 @@ void LevelScene::update(float dt)
 		{
 			if (Bounds::checkCollison(*playerBounds, *b))
 			{
-				//std::cout << "Colliding!!!!!!!!!!!\n";
+				Bounds::resolveCollison(b, *player);
 			}
 		}
 	}

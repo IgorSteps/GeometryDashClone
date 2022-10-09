@@ -56,7 +56,7 @@ void Player::update(float dt)
 		onGround = false;
 	}
 	// debugging info of player's y coord
-	std::cout << "Player y: " << this->gameObj->transform->position.y << '\n';
+	//std::cout << "Player y: " << this->gameObj->transform->position.y << '\n';
 
 	if (!onGround)
 	{
@@ -83,7 +83,6 @@ void Player::update(float dt)
 void Player::addJumpForce()
 {
 	gameObj->getComponent<Rigidbody>()->Velocity.y = -650.0f;
-	std::cout << "Jumped\n";
 }
 
 void Player::die()
