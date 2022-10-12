@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "GameObject.h"
 #include <iostream>
+#include <KL.h>
+#include <Rigidbody.h>
+#include <Game.h>
 
 Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float colourOne[], float colourTwo[])
 {
@@ -45,10 +48,54 @@ Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float col
 }
 
 
+void Player::update(float dt)
+{
+	if (onGround && KL::isKeyPressed(GLFW_KEY_SPACE))
+	{
+		addJumpForce(); 
+		onGround = false;
+	}
+	// debugging info of player's y coord
+	//std::cout << "Player y: " << this->gameObj->transform->position.y << '\n';
+
+	if (!onGround)
+	{
+		gameObj->transform->rotateion += 200.0f * dt;
+	}
+	else 
+	{
+		// snap rotation and set rotation between 0 to 360 degrees
+		gameObj->transform->rotateion = (int)gameObj->transform->rotateion % 360;
+
+		if (gameObj->transform->rotateion > 180 && gameObj->transform->rotateion < 360)
+		{
+			gameObj->transform->rotateion = 0;
+		}
+		else if (gameObj->transform->rotateion > 0 && gameObj->transform->rotateion < 180)
+		{
+			gameObj->transform->rotateion = 0;
+		}
+	}
+
+	
+}
+
+void Player::addJumpForce()
+{
+	gameObj->getComponent<Rigidbody>()->Velocity.y = -650.0f;
+}
+
+void Player::die()
+{
+	gameObj->transform->position.x = 0;
+	gameObj->transform->position.x = 30;
+	Game::game->getCurrentScene()->camera->position.x = 0;
+}
+
 void Player::draw(Shader& shader, glm::mat4& Model, glm::mat4& Proj) {
 	// translate
 	Model = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x,
-			gameObj->transform->position.y, 0.0f));
+			gameObj->transform->position.y, 1.0f));
 	// rotate
 	Model = glm::rotate(Model, glm::radians(gameObj->transform->rotateion),
 		glm::vec3(0.0f, 0.0f, 1.0f));

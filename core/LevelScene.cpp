@@ -1,5 +1,7 @@
 #include "LevelScene.h"
 #include <Parser.h>
+#include "Rigidbody.h"
+
 
 LevelScene::LevelScene(std::string name) {
 	Scene::SceneInit(name);
@@ -45,7 +47,7 @@ void LevelScene::init()
 	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x,
 		player->transform->position.y, 0.0f));
 
-	ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f, 500.0f, 1.0f));
+	//ModelViewMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(500.0f, 500.0f, 1.0f));
 
 	layerOne = AssetPool::getSpritesheet("assets/player/layerOne.png");
 	layerTwo = AssetPool::getSpritesheet("assets/player/layerTwo.png");
@@ -76,7 +78,7 @@ void LevelScene::init()
 	ground->addComponent(groundComp);
 
 
-	addGameObject(player);
+	renderer->submit(player);
 	addGameObject(ground);
 
 	importLevel("test");
@@ -106,18 +108,19 @@ void LevelScene::update(float dt)
 		camera->position.y = Constants::CAMERA_OFFSET_GROUND_Y;
 	}
 
-
 	//player->transform->rotateion += 100.0f * dt;
-
-	for (auto& g : gameObjects) {
+	player->update(dt);
+	player->getComponent<Player>()->onGround = false;
+	for (auto& g : gameObjects) 
+	{
 		g->update(dt);
 
 		Bounds* b = g->getComponent<Bounds>();
-		if (g != player && b != nullptr)
+		if (b != nullptr)
 		{
 			if (Bounds::checkCollison(*playerBounds, *b))
 			{
-				std::cout << "Colliding!!!!!!!!!!!\n";
+				Bounds::resolveCollison(b, *player);
 			}
 		}
 	}

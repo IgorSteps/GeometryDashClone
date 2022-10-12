@@ -1,6 +1,8 @@
 #include "BoxBounds.h"
 #include <Parser.h>
 #include <GameObject.h>
+#include <Rigidbody.h>
+#include <LevelScene.h>
 
 BoxBounds::BoxBounds(float width, float height) {
 	m_Width = width;
@@ -23,6 +25,48 @@ void BoxBounds::update(float dt) {
 Component* BoxBounds::copy() 
 {
 	return new BoxBounds(m_Width, m_Height);
+}
+
+void BoxBounds::resolveCollision(GameObject& player)
+{
+	BoxBounds* playerBounds = player.getComponent<BoxBounds>();
+	float dx = this->gameObj->transform->position.x - playerBounds->gameObj->transform->position.x;
+	float dy = this->gameObj->transform->position.y - playerBounds->gameObj->transform->position.y;
+
+	float combinedHalfWidth = playerBounds->m_HalfWidth + this->m_HalfWidth;
+	float combinedHalfHeight = playerBounds->m_HalfHeight + this->m_HalfHeight;
+
+	float overlapX = combinedHalfWidth - abs(dx);
+	float overlapY = combinedHalfHeight - abs(dy);
+	if (overlapX >= overlapY)
+	{
+		if (dy > 0)
+		{
+			// Collision on the top of the player
+			player.transform->position.y = gameObj->transform->position.y - playerBounds->getHeight();
+			player.getComponent<Rigidbody>()->Velocity.y = 0.0f;
+			player.getComponent<Player>()->onGround = true;
+		}
+		else
+		{
+			// Collision on the bottom of the player
+			player.getComponent<Player>()->die();
+		}
+	}
+	else
+	{
+		// Collision on the ledt or right
+		if (dx < 0 && dy <= 0.3f)
+		{
+			player.transform->position.y = gameObj->transform->position.y - playerBounds->getHeight();
+			player.getComponent<Rigidbody>()->Velocity.y = 0.0f;
+			player.getComponent<Player>()->onGround = true;
+		}
+		else
+		{
+			player.getComponent<Player>()->die();
+		}
+	}
 }
 
 bool BoxBounds::checkCollision(BoxBounds& b1, BoxBounds& b2)

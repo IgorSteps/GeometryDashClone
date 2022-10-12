@@ -6,7 +6,6 @@
 #include "Spritesheet.h"
 #include "Player.h"
 #include "Ground.h"
-#include "Rigidbody.h"
 #include "Constants.h"
 
 #include <glm/ext/matrix_float4x4.hpp>

@@ -8,18 +8,20 @@ public:
 	~BoxBounds();
 	
 	void update(float dt);
-
 	std::string serialise(int tabSize);
 	static BoxBounds* deserialise();
 	Component* copy();
-	static BoxBounds* deserialsiedBB;
+	void resolveCollision(GameObject& player);
+
+
+	
 
 	// Inherited via Bounds
 	static bool checkCollision(BoxBounds& b1, BoxBounds& b2);
 	virtual float getWidth() override;
 	virtual float getHeight() override;
 
-
+	static BoxBounds* deserialsiedBB;
 	float m_Width, m_Height;
 	float m_HalfWidth, m_HalfHeight;
 };

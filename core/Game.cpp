@@ -25,7 +25,7 @@ void Game::changeScene(int scene)
 	case 0:
 		isInEditor = true;
 		currentScene = new LevelEditorScene("Level Editor");
-		currentScene->init();
+		//currentScene->init();
 		break;
 	case 1:
 		isInEditor = false;
