@@ -22,7 +22,7 @@ public:
 	std::string serialise(int tabSize);
 	static GameObject* deserialise();
 	void setNonserialisable();
-
+	void setUi(bool var);
 	Transform* transform; //make a smart pointer?
 	GameObject* newGameObj; // copy
 	static GameObject* go; // deserialised
@@ -49,6 +49,8 @@ public:
 
 	void addComponent(Component* c);
 	std::vector<Component*> getAllComponents();
+
+	bool isUi = false;
 private:
 	std::vector<Component*> components;
 	std::string name;

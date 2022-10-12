@@ -6,6 +6,10 @@
 #include "Game.h"
 #include "LevelScene.h"
 
+Ground::Ground()
+{
+
+}
 
 Ground::Ground(Sprite* sp, Shader& sh) {
 	this->sp = sp;
@@ -48,7 +52,7 @@ void Ground::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Project
 	ModelViewMatrix = glm::scale(ModelViewMatrix, glm::vec3(gameObj->transform->scale, 1.0f));
 
 	// Draw ground
-	this->sp->draw(shader, ModelViewMatrix, ProjectionMatrix);
+	//this->sp->draw(shader, ModelViewMatrix, ProjectionMatrix);
 }
 
 Component* Ground::copy()

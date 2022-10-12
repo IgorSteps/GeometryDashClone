@@ -23,6 +23,7 @@ public:
 	void initAssetPool();
 	void update(float dt);
 	void draw();
+	void initBackgrounds(); 
 	void importLevel(std::string filename);
 
 	// Coordinate System Data
