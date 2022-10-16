@@ -51,9 +51,10 @@ public:
 	std::vector<Component*> getAllComponents();
 
 	bool isUi = false;
+	std::string name;
 private:
 	std::vector<Component*> components;
-	std::string name;
+	
 	bool serialisable;
 };
 

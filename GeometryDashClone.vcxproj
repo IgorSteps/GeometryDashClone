@@ -145,7 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Background.h" />
+    <ClInclude Include="headers\Background.h" />
     <ClInclude Include="headers\Bounds.h" />
     <ClInclude Include="headers\AssetPool.h" />
     <ClInclude Include="headers\BoxBounds.h" />
@@ -178,7 +178,7 @@
     <ClInclude Include="headers\Parser.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="components\Background.cpp" />
     <ClCompile Include="core\Bounds.cpp" />
     <ClCompile Include="datastructure\AssetPool.cpp" />
     <ClCompile Include="components\BoxBounds.cpp" />

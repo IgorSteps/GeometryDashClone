@@ -6,14 +6,14 @@
 class Background : public Component
 {
 public:
-	Background(std::string file, std::vector<GameObject*>& backgrounds,
+	Background(std::string file, std::vector<GameObject*>* backgrounds,
 		Ground* gr, bool followingGround, float width, float height, const float color[3]);
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
-	int m_Height, m_Width;
+	float m_Height, m_Width;
 	int m_Timestamp=0;
 	Sprite *sp;
-	std::vector<GameObject*> m_Backgrounds;
+	std::vector<GameObject*>* m_Backgrounds;
 
 	// Inherited via Component
 	virtual std::string serialise(int tabSize) override;

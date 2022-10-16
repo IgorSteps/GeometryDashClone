@@ -141,7 +141,7 @@
     <ClInclude Include="headers\Bounds.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Background.h">
+    <ClInclude Include="headers\Background.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -233,7 +233,7 @@
     <ClCompile Include="core\Bounds.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Background.cpp">
+    <ClCompile Include="components\Background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

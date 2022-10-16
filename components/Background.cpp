@@ -2,8 +2,8 @@
 #include <Game.h>
 #include <Constants.h>
 #include <AssetPool.h>
-Background::Background(std::string file, std::vector<GameObject*>& backgrounds, 
-	Ground* gr, bool followingGround, float width, float height, const float color[3])
+#include <iostream>
+Background::Background(std::string file, std::vector<GameObject*>* backgrounds, Ground* gr, bool followingGround, float width, float height, const float color[3])
 {
 	sp = AssetPool::getSprite(file);
 	sp->setColour(color);
@@ -31,13 +31,14 @@ void Background::update(float dt)
 
 	this->gameObj->transform->position.x -= dt * m_Speed;
 	this->gameObj->transform->position.x = (float) floor(this->gameObj->transform->position.x);
+
 	if (this->gameObj->transform->position.x < -m_Width)
 	{
 		float maxX = 0;
 		int timestamp = 0;
-		for (GameObject* go : m_Backgrounds)
+		for (int i=0; i < 7; ++i)
 		{
-			//if (go == nullptr) return;
+			GameObject* go = m_Backgrounds->at(i);
 			if (go->transform->position.x > maxX)
 			{
 				maxX = go->transform->position.x;
@@ -49,7 +50,7 @@ void Background::update(float dt)
 		{
 			this->gameObj->transform->position.x = m_Width + maxX;
 		}
-		else 
+		else
 		{
 			this->gameObj->transform->position.x = (float)floor((maxX + m_Width) - (dt * m_Speed));
 		}
@@ -67,15 +68,15 @@ void Background::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 	{
 		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(this->gameObj->transform->position.x,
 			this->gameObj->transform->position.y - Game::game->getCurrentScene()->camera->position.y, 1.0f));
+
 		sp->draw(shader, ModelViewMatrix, ProjectionMatrix);
 	}
 	else
 	{
-		int height = std::min((int)m_Ground->gameObj->transform->position.y -
-			(int)Game::game->getCurrentScene()->camera->position.y,
-			Constants::SCREEN_HEIGHT);
-		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(this->gameObj->transform->position.x,
-			this->gameObj->transform->position.y, 1.0f));
+		int height = std::min((int)m_Ground->gameObj->transform->position.y - (int)Game::game->getCurrentScene()->camera->position.y, Constants::SCREEN_HEIGHT);
+
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(this->gameObj->transform->position.x, this->gameObj->transform->position.y, 1.0f));
+
 		sp->draw(shader, ModelViewMatrix, ProjectionMatrix);
 	}
 }
