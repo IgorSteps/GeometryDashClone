@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Ground.h"
 #include "Constants.h"
+#include "Background.h"
 
 #include <glm/ext/matrix_float4x4.hpp>
 #include <iostream>
@@ -39,5 +40,9 @@ public:
 	Spritesheet* layerThree;
 	Transform* trans;
 	AssetPool assetPool;
+	Background* bg;
+	Background* groundBg;
+	GameObject* groundGo;
+	GameObject* go;
 };
 

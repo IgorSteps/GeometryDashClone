@@ -8,6 +8,7 @@ class Background : public Component
 public:
 	Background(std::string file, std::vector<GameObject*>* backgrounds,
 		Ground* gr, bool followingGround, float width, float height, const float color[3]);
+	~Background();
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	float m_Height, m_Width;

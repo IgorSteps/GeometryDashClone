@@ -22,7 +22,11 @@ Background::Background(std::string file, std::vector<GameObject*>* backgrounds, 
 	}
 
 	m_FollowGround = followingGround;
+}
 
+Background::~Background()
+{
+	delete sp;
 }
 
 void Background::update(float dt)
@@ -44,7 +48,7 @@ void Background::update(float dt)
 				maxX = go->transform->position.x;
 				timestamp = go->getComponent<Background>()->m_Timestamp;
 			}
-		}
+		} 
 
 		if (m_Timestamp == timestamp)
 		{
@@ -73,9 +77,12 @@ void Background::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 	}
 	else
 	{
-		int height = std::min((int)m_Ground->gameObj->transform->position.y - (int)Game::game->getCurrentScene()->camera->position.y, Constants::SCREEN_HEIGHT);
+		// height of the background dependent on ground y and camera y
+		float height = std::min((int)m_Ground->gameObj->transform->position.y - (int)Game::game->getCurrentScene()->camera->position.y, Constants::SCREEN_HEIGHT);
+		float scaleY = height/ m_Height;
 
 		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(this->gameObj->transform->position.x, this->gameObj->transform->position.y, 1.0f));
+		ModelViewMatrix = glm::scale(ModelViewMatrix, glm::vec3(1.0f, scaleY, 1.0f));
 
 		sp->draw(shader, ModelViewMatrix, ProjectionMatrix);
 	}

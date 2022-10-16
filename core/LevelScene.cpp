@@ -1,7 +1,6 @@
 #include "LevelScene.h"
 #include <Parser.h>
 #include "Rigidbody.h"
-#include <Background.h>
 
 
 LevelScene::LevelScene(std::string name) {
@@ -15,6 +14,10 @@ LevelScene::~LevelScene() {
 	delete layerTwo;
 	delete layerThree;
 	delete playerBounds;
+	delete bg;
+	delete groundBg;
+	delete go;
+	delete groundGo;
 }
 
 void LevelScene::init()
@@ -98,31 +101,31 @@ void LevelScene::initBackgrounds()
 	addGameObject(ground);
 
 	int numOfBackgrounds = 7;
-	/*GameObject* backgrounds = new GameObject[numOfBackgrounds];
-	GameObject* groundBgs = new GameObject[numOfBackgrounds];*/
+
+	// todo: delete em?
 	std::vector<GameObject*>* backgrounds = new std::vector<GameObject*>;
 	std::vector<GameObject*>* groundBgs = new std::vector<GameObject*>;
 	
 	for (int i = 0; i < numOfBackgrounds; ++i)
 	{
 		// Backgrounds
-		Background* bg= new Background("assets/backgrounds/bg01.png", backgrounds, ground->getComponent<Ground>(), false, 512.0f, 512.0f, Constants::BG_COLOUR); 
+		bg= new Background("assets/backgrounds/bg01.png", backgrounds, ground->getComponent<Ground>(), false, 512.0f, 512.0f, Constants::BG_COLOUR); 
 		bg->sp->initSprite(myShader);
 		float x = i * bg->sp->getWidth();
 		float y = 0;
 
-		GameObject* go = new GameObject("Background " + std::to_string(i), new Transform(glm::vec2(x, y)));
+		go = new GameObject("Background " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		go->setUi(true);
 		go->addComponent(bg);
 		backgrounds->push_back(go);
 
 		// Ground
-		Background* groundBg = new Background("assets/grounds/ground01.png", groundBgs, ground->getComponent<Ground>(), true, 256.0f, 256.0f, Constants::GROUND_COLOUR);
+		groundBg = new Background("assets/grounds/ground01.png", groundBgs, ground->getComponent<Ground>(), true, 256.0f, 256.0f, Constants::GROUND_COLOUR);
 		groundBg->sp->initSprite(myShader);
 		x = i * groundBg->sp->getWidth();
 		y = bg->sp->getHeight();
 
-		GameObject* groundGo = new GameObject("GroundBackground " + std::to_string(i), new Transform(glm::vec2(x, y)));
+		groundGo = new GameObject("GroundBackground " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		groundGo->setUi(true);
 		groundGo->addComponent(groundBg);
 		groundBgs->push_back(groundGo);
