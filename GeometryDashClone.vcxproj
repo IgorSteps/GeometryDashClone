@@ -210,8 +210,8 @@
     <ClCompile Include="UI\MenuItem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="glslfiles\colorfrag.frag" />
-    <None Include="glslfiles\colorvert.vert" />
+    <None Include="glslfiles\noColorFrag.frag" />
+    <None Include="glslfiles\noColorVert.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
