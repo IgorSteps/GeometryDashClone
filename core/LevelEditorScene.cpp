@@ -47,15 +47,17 @@ void LevelEditorScene::init()
 		1.0f);
 
 	//Load the GLSL program 
-	if (!myShader.load("Shader", "./glslfiles/basicTexture.vert", "./glslfiles/basicTexture.frag"))
+	if (!myShader.load("Color Shader", "./glslfiles/basicTexture.vert", "./glslfiles/basicTexture.frag"))
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
+
+	
 	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
 	/// AssetPool
 	initAssetPool();
-	editingButtons = new MainContainer(myShader);
+	editingButtons = new MainContainer();
 
 	/// GRID
 	grid = new Grid();
@@ -76,7 +78,7 @@ void LevelEditorScene::init()
 	float red[] = { 1.0f, 0.0f, 0.0f };
 	float blue[] = { 0.0f, 1.0f, 0.0f };
 
-	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x, player->transform->position.y, 0.0f));
+	ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(player->transform->position.x, player->transform->position.y, 1.0f));
 	//ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,1.0f));
 
 	layerOne = AssetPool::getSpritesheet("assets/player/layerOne.png");

@@ -147,5 +147,10 @@ void GameObject::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 	}
 }
 
+void GameObject::setUi(bool var)
+{
+	isUi = var;
+}
+
 GameObject* GameObject::go = nullptr;
 Transform* GameObject::deserialisedTransform = NULL;

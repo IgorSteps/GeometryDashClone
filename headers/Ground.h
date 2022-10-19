@@ -4,6 +4,7 @@
 class Ground : public Component
 {
 public:
+	Ground();
 	Ground(Sprite *sp, Shader& sh);
 	~Ground();
 	void update(float dt);

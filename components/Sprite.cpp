@@ -14,7 +14,7 @@ Sprite::Sprite(std::string file)
 	m_vboID[1] = 0;
 	m_vboID[2] = 0;
 	m_eboID[0] = 0;
-	m_eboID[1] = 0;
+	m_eboID[1] = 0; 
 	m_eboID[2] = 0;
 	
 
@@ -61,17 +61,45 @@ Sprite::~Sprite() {
 	glDeleteVertexArrays(1, &m_vaoID);
 }
 
-void Sprite::SetHeight(float height) {
+void Sprite::setColour(const float colour[2])
+{
+	this->colour[0] = colour[0];
+	this->colour[1] = colour[1];
+	this->colour[2] = colour[2];
+}
+
+void Sprite::SetHeight(float height) 
+{
 	this->m_Height = height;
 }
 
-float const& Sprite::getFileWidth() { return this->fileW;}
+float Sprite::getWidth()
+{
+	return this->m_Width;
+}
 
-void Sprite::SetWidth(float width) {
+float Sprite::getHeight()
+{
+	return this->m_Height;
+}
+
+float const& Sprite::getFileWidth() 
+{
+	return this->fileW;
+}
+
+void Sprite::SetWidth(float width) 
+{
 	this->m_Width = width;
 }
 
-float const& Sprite::getFileHeight() { return this->fileH; }
+float const& Sprite::getFileHeight() 
+{
+	return this->fileH; 
+}
+
+
+
 
 void Sprite::initSprite(Shader& shader)
 {

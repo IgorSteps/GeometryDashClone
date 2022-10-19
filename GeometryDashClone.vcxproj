@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="headers\Background.h" />
     <ClInclude Include="headers\Bounds.h" />
     <ClInclude Include="headers\AssetPool.h" />
     <ClInclude Include="headers\BoxBounds.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="headers\Parser.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="components\Background.cpp" />
     <ClCompile Include="core\Bounds.cpp" />
     <ClCompile Include="datastructure\AssetPool.cpp" />
     <ClCompile Include="components\BoxBounds.cpp" />
@@ -206,6 +208,10 @@
     <ClCompile Include="file\Parser.cpp" />
     <ClCompile Include="UI\MainContainer.cpp" />
     <ClCompile Include="UI\MenuItem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glslfiles\noColorFrag.frag" />
+    <None Include="glslfiles\noColorVert.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

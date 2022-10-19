@@ -29,6 +29,7 @@ public:
 
 	// Game Data
 	Shader myShader;
+	Shader noColorShader;
 	GameObject* ground;
 	Spritesheet* layerOne;
 	Spritesheet* layerTwo;

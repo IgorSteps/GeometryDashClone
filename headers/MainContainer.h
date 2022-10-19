@@ -6,10 +6,10 @@
 class MainContainer : public Component
 {
 public:
-	MainContainer(Shader& sh);
+	MainContainer();
 	~MainContainer();
 
-	void init(Shader& sh);
+	void init();
 	void start();
 	Component* copy();
 	std::string serialise(int tabsize);
@@ -19,5 +19,6 @@ public:
 	std::vector<GameObject*> m_MenuItems;
 	GameObject* obj;
 	MenuItem* menuItem;
+	Shader shader;
 };
 

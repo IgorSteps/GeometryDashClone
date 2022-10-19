@@ -3,10 +3,11 @@
 #include <Constants.h>
 #include <AssetPool.h>
 #include <BoxBounds.h>
+#include <iostream>
 
-MainContainer::MainContainer(Shader& sh) : m_MenuItems()
+MainContainer::MainContainer() : m_MenuItems()
 {
-	init(sh);
+	init();
 }
 
 MainContainer::~MainContainer()
@@ -15,8 +16,12 @@ MainContainer::~MainContainer()
 	delete menuItem;
 }
 
-void MainContainer::init(Shader& sh)
+void MainContainer::init()
 {
+	if (!shader.load("No Color Shader", "./glslfiles/noColorVert.vert", "./glslfiles/noColorFrag.frag"))
+	{
+		std::cout << "failed to load shader" << std::endl;
+	}
 	Spritesheet* groundSprites = AssetPool::getSpritesheet("assets/groundSprites.png");
 	Spritesheet* buttonSprite = AssetPool::getSpritesheet("assets/ui/buttonSprites.png");
 
@@ -34,14 +39,14 @@ void MainContainer::init(Shader& sh)
 
 		obj = new GameObject("Genereted", new Transform(glm::vec2(x, y)));
 		obj->addComponent(currentSprite->copy());
-		obj->getComponent<Sprite>()->initSubSprite(sh);
+		obj->getComponent<Sprite>()->initSubSprite(shader);
 
 		menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
-			buttonSprite->sprites[0], buttonSprite->sprites[1], sh);
+			buttonSprite->sprites[0], buttonSprite->sprites[1], shader);
 		obj->addComponent(menuItem);
 		obj->addComponent(new BoxBounds(Constants::TILE_WIDTH, Constants::TILE_HEIGHT));
-		buttonSprite->sprites[0]->initSubSprite(sh);
-		buttonSprite->sprites[1]->initSubSprite(sh);
+		buttonSprite->sprites[0]->initSubSprite(shader);
+		buttonSprite->sprites[1]->initSubSprite(shader);
 
 		m_MenuItems.push_back(obj);
 	}
@@ -70,7 +75,7 @@ void MainContainer::update(float dt)
 	}
 }
 
-void MainContainer::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrixs)
+void MainContainer::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrixs)
 {
 	for (GameObject* g : m_MenuItems)
 	{

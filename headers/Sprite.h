@@ -17,7 +17,7 @@ public:
 	Sprite(Sprite& sp);
 	~Sprite();
 
-	void setColour(float colour[2]);
+	void setColour(const float colour[2]);
 
 	void initSprite(Shader& shader);
 	void initSubSprite(Shader& shader);
@@ -30,6 +30,8 @@ public:
 
 	void SetWidth(float size);
 	void SetHeight(float size);
+	float getWidth();
+	float getHeight();
 	float const& getFileWidth();
 	float const& getFileHeight();
 	float colour[3];

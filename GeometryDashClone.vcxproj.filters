@@ -141,6 +141,9 @@
     <ClInclude Include="headers\Bounds.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="headers\Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -230,5 +233,12 @@
     <ClCompile Include="core\Bounds.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
+    <ClCompile Include="components\Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glslfiles\noColorVert.vert" />
+    <None Include="glslfiles\noColorFrag.frag" />
   </ItemGroup>
 </Project>
