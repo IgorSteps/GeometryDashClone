@@ -34,7 +34,7 @@ void Background::update(float dt)
 	++m_Timestamp;
 
 	this->gameObj->transform->position.x -= dt * m_Speed;
-	this->gameObj->transform->position.x = (float) floor(this->gameObj->transform->position.x);
+	//this->gameObj->transform->position.x = (float) floor(this->gameObj->transform->position.x);
 
 	if (this->gameObj->transform->position.x < -m_Width)
 	{
