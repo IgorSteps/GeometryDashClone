@@ -29,7 +29,9 @@ void MenuItem::start()
 
 MenuItem* MenuItem::copy()
 {
-	return new MenuItem(m_X, m_Y, m_Width, m_Height, (Sprite*)m_ButtonSprite->copy(), (Sprite*)m_HoveredSprite->copy(), shader);
+	MenuItem* mt  = new MenuItem(m_X, m_Y, m_Width, m_Height, (Sprite*)m_ButtonSprite->copy(), (Sprite*)m_HoveredSprite->copy(), shader);
+	mt->m_MyImage = gameObj->getComponent<Sprite>();
+	return mt;
 }
 
 void MenuItem::update(float dt)  

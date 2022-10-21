@@ -50,7 +50,7 @@ void MainContainer::init()
 
 		Game::game->getCurrentScene()->addGameObject(obj);
 	}
-	m_CurrentTab = m_Tabs.at(1);
+	m_CurrentTab = m_Tabs.at(0);
 
 	addTabObjects();
 }
