@@ -43,13 +43,14 @@ void MainContainer::init()
 		obj->setUi(true);
 		obj->addComponent(currentTab);
 
-		std::vector<GameObject*> v;
+		
 		m_Tabs.push_back(obj);
-		m_TabMaps.insert({ obj, v });
+		//m_TabMaps.insert({ obj, std::vector<GameObject*>()});
+		m_TabMaps.insert(std::pair(obj, std::vector<GameObject*>()));
 
 		Game::game->getCurrentScene()->addGameObject(obj);
 	}
-	m_CurrentTab = m_Tabs.at(0);
+	m_CurrentTab = m_Tabs.at(1);
 
 	addTabObjects();
 }
@@ -97,6 +98,8 @@ void MainContainer::addTabObjects()
 			obj->setUi(true);
 			obj->setNonserialisable();
 			menuItem = menuItem->copy();
+			menuItem->m_ButtonSprite->initSubSprite(shader);
+			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(smallBlocks->sprites.at(i));
 			smallBlocks->sprites.at(i)->initSubSprite(shader);
 			obj->addComponent(menuItem);
@@ -115,6 +118,8 @@ void MainContainer::addTabObjects()
 			obj->setUi(true);
 			obj->setNonserialisable();
 			menuItem = menuItem->copy();
+			menuItem->m_ButtonSprite->initSubSprite(shader);
+			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(spikeSprites->sprites.at(i));
 			spikeSprites->sprites.at(i)->initSubSprite(shader);
 			obj->addComponent(menuItem);
@@ -130,6 +135,8 @@ void MainContainer::addTabObjects()
 			obj->setUi(true);
 			obj->setNonserialisable();
 			menuItem = menuItem->copy();
+			menuItem->m_ButtonSprite->initSubSprite(shader);
+			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(menuItem);
 			obj->addComponent(bigSprites->sprites.at(i));
 			bigSprites->sprites.at(i)->initSubSprite(shader);
@@ -145,6 +152,8 @@ void MainContainer::addTabObjects()
 			obj->setUi(true);
 			obj->setNonserialisable();
 			menuItem = menuItem->copy();
+			menuItem->m_ButtonSprite->initSubSprite(shader);
+			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(menuItem);
 			obj->addComponent(portalSprites->sprites.at(i));
 			portalSprites->sprites.at(i)->initSubSprite(shader);
