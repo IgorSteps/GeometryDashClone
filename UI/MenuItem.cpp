@@ -27,12 +27,12 @@ void MenuItem::start()
 	m_MyImage = gameObj->getComponent<Sprite>();
 }
 
-Component* MenuItem::copy()
+MenuItem* MenuItem::copy()
 {
-	return nullptr;
+	return new MenuItem(m_X, m_Y, m_Width, m_Height, (Sprite*)m_ButtonSprite->copy(), (Sprite*)m_HoveredSprite->copy(), shader);
 }
 
-void MenuItem::update(float dt) 
+void MenuItem::update(float dt)  
 {
 	// check mouse is within the bounds of the little rectangle
 	if (!isSelected && ML::getX() > m_X && ML::getX() <= m_X + m_Width && ML::getY() > m_Y && ML::getY() <= m_Y + m_Height)

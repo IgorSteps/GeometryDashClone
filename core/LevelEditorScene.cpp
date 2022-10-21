@@ -118,14 +118,19 @@ void LevelEditorScene::initAssetPool()
 	AssetPool::addSpritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	AssetPool::addSpritesheet("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
 	AssetPool::addSpritesheet("assets/ui/buttonSprites.png", 60.0f, 60.0f, 2.0f, 2, 2, 124.0f, 62.0f);
+	AssetPool::addSpritesheet("assets/ui/tabs.png", Constants::TAB_WIDTH, Constants::TAB_HEIGHT, 2.0f, 6, 6, 462.0f, 40.0f);
+	AssetPool::addSpritesheet("assets/spikes.png", 42.0f, 42.0f, 2.0f, 6, 4, 174.0f, 44.0f);
+	AssetPool::addSpritesheet("assets/bigSprites.png", 84.0f, 84.0f, 2.0f, 2, 2, 172.0f, 86.0f);
+	AssetPool::addSpritesheet("assets/smallBlocks.png", 42.0f, 42.0f, 2.0f, 6, 4, 264.0f, 44.0f);
+	AssetPool::addSpritesheet("assets/portal.png", 44.0f, 85.0f, 2.0f, 2, 2 , 92.0f, 87.0f);
 }
 
 
 void LevelEditorScene::update(float dt)
 {
-	if (camera->position.y > Constants::CAMERA_OFFSET_GROUND_Y)
+	if (camera->position.y > Constants::CAMERA_OFFSET_GROUND_Y + 70)
 	{
-		camera->position.y = Constants::CAMERA_OFFSET_GROUND_Y;
+		camera->position.y = Constants::CAMERA_OFFSET_GROUND_Y + 70;
 	}
 	
 	for (GameObject* g : gameObjects) {

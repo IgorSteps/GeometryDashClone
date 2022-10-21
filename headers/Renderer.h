@@ -12,5 +12,6 @@ public:
 	std::vector<GameObject*> gameObjects;
 	Camera* camera;
 	Transform* oldTransform;
+	Shader sh;
 };
 

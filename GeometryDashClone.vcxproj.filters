@@ -142,7 +142,7 @@
       <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="headers\Background.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -234,7 +234,7 @@
       <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="components\Background.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
