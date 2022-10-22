@@ -39,18 +39,17 @@ void MainContainer::init()
 			+ (currentTab->column * Constants::TAB_HORIZONTAL_SPACING);
 		int y = Constants::TAB_OFFSET_Y;
 
-		GameObject* obj = new GameObject("Tab", new Transform(glm::vec2(x, y)));
+		GameObject* obj = new GameObject("Tab " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		obj->setUi(true);
 		obj->addComponent(currentTab);
 
 		
 		m_Tabs.push_back(obj);
-		//m_TabMaps.insert({ obj, std::vector<GameObject*>()});
 		m_TabMaps.insert(std::pair(obj, std::vector<GameObject*>()));
 
 		Game::game->getCurrentScene()->addGameObject(obj);
 	}
-	m_CurrentTab = m_Tabs.at(0);
+	m_CurrentTab = m_Tabs.at(3);
 
 	addTabObjects();
 }
@@ -91,13 +90,14 @@ void MainContainer::addTabObjects()
 
 		m_TabMaps.at(m_Tabs.at(0)).push_back(obj);
 
-		// Add second tab container objs
+		//// Add second tab container objs
 		if (i < smallBlocks->sprites.size())
 		{
 			obj = new GameObject("Second tab", new Transform(glm::vec2(x, y)));
 			obj->setUi(true);
 			obj->setNonserialisable();
-			menuItem = menuItem->copy();
+			menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
+				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader);
 			menuItem->m_ButtonSprite->initSubSprite(shader);
 			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(smallBlocks->sprites.at(i));
@@ -117,7 +117,8 @@ void MainContainer::addTabObjects()
 			obj = new GameObject("Forth tab", new Transform(glm::vec2(x, y)));
 			obj->setUi(true);
 			obj->setNonserialisable();
-			menuItem = menuItem->copy();
+			menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
+				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader);
 			menuItem->m_ButtonSprite->initSubSprite(shader);
 			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(spikeSprites->sprites.at(i));
@@ -134,7 +135,8 @@ void MainContainer::addTabObjects()
 			obj = new GameObject("Fifth tab", new Transform(glm::vec2(x, y)));
 			obj->setUi(true);
 			obj->setNonserialisable();
-			menuItem = menuItem->copy();
+			menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
+				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader);
 			menuItem->m_ButtonSprite->initSubSprite(shader);
 			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(menuItem);
@@ -151,7 +153,8 @@ void MainContainer::addTabObjects()
 			obj = new GameObject("Fifth tab", new Transform(glm::vec2(x, y)));
 			obj->setUi(true);
 			obj->setNonserialisable();
-			menuItem = menuItem->copy();
+			menuItem =new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
+				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader);
 			menuItem->m_ButtonSprite->initSubSprite(shader);
 			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(menuItem);
