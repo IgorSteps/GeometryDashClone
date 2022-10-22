@@ -1,5 +1,4 @@
 #include "MainContainer.h"
-#include <Spritesheet.h>
 #include <Constants.h>
 #include <AssetPool.h>
 #include <BoxBounds.h>
@@ -18,6 +17,16 @@ MainContainer::~MainContainer()
 {
 	delete obj;
 	delete menuItem;
+	delete tabObj;
+
+	delete m_ContainerBg;
+	delete tabsprites;
+	delete groundSprites;
+	delete buttonSprite;
+	delete spikeSprites;
+	delete bigSprites;
+	delete smallBlocks;
+	delete portalSprites;
 }
 
 void MainContainer::init()
@@ -27,7 +36,7 @@ void MainContainer::init()
 		std::cout << "failed to load shader" << std::endl;
 	}
 	
-	Spritesheet* tabsprites = AssetPool::getSpritesheet("assets/ui/tabs.png");
+	tabsprites = AssetPool::getSpritesheet("assets/ui/tabs.png");
 	m_ContainerBg->initSprite(shader);
 
 	for (int i = 0; i < tabsprites->sprites.size(); ++i)
@@ -39,15 +48,15 @@ void MainContainer::init()
 			+ (currentTab->column * Constants::TAB_HORIZONTAL_SPACING);
 		int y = Constants::TAB_OFFSET_Y;
 
-		GameObject* obj = new GameObject("Tab " + std::to_string(i), new Transform(glm::vec2(x, y)));
-		obj->setUi(true);
-		obj->addComponent(currentTab);
+		tabObj = new GameObject("Tab " + std::to_string(i), new Transform(glm::vec2(x, y)));
+		tabObj->setUi(true);
+		tabObj->addComponent(currentTab);
 
 		
-		m_Tabs.push_back(obj);
-		m_TabMaps.insert(std::pair(obj, std::vector<GameObject*>()));
+		m_Tabs.push_back(tabObj);
+		m_TabMaps.insert(std::pair(tabObj, std::vector<GameObject*>()));
 
-		Game::game->getCurrentScene()->addGameObject(obj);
+		Game::game->getCurrentScene()->addGameObject(tabObj);
 	}
 	m_CurrentTab = m_Tabs.at(3);
 
@@ -56,12 +65,12 @@ void MainContainer::init()
 
 void MainContainer::addTabObjects()
 {
-	Spritesheet* groundSprites = AssetPool::getSpritesheet("assets/groundSprites.png");
-	Spritesheet* buttonSprite = AssetPool::getSpritesheet("assets/ui/buttonSprites.png");
-	Spritesheet* spikeSprites = AssetPool::getSpritesheet("assets/spikes.png");
-	Spritesheet* bigSprites = AssetPool::getSpritesheet("assets/bigSprites.png");
-	Spritesheet* smallBlocks = AssetPool::getSpritesheet("assets/smallBlocks.png");
-	Spritesheet* portalSprites = AssetPool::getSpritesheet("assets/portal.png");
+	groundSprites = AssetPool::getSpritesheet("assets/groundSprites.png");
+	buttonSprite = AssetPool::getSpritesheet("assets/ui/buttonSprites.png");
+	spikeSprites = AssetPool::getSpritesheet("assets/spikes.png");
+	bigSprites = AssetPool::getSpritesheet("assets/bigSprites.png");
+	smallBlocks = AssetPool::getSpritesheet("assets/smallBlocks.png");
+	portalSprites = AssetPool::getSpritesheet("assets/portal.png");
 
 	for (int i = 0; i < groundSprites->sprites.size(); ++i)
 	{

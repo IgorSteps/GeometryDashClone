@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "MenuItem.h"
+#include <Spritesheet.h>
 #include <vector>
 #include <map>
 
@@ -24,10 +25,19 @@ public:
 	Sprite* m_ContainerBg;
 	GameObject* m_CurrentTab;
 	GameObject* obj;
+	GameObject* tabObj;
 	MenuItem* menuItem;
 	Shader shader;
 
 private:
 	void addTabObjects();
+	Spritesheet* tabsprites;
+	Spritesheet* groundSprites;
+	Spritesheet* buttonSprite;
+	Spritesheet* spikeSprites;
+	Spritesheet* bigSprites;
+	Spritesheet* smallBlocks;
+	Spritesheet* portalSprites;
+
 };
 
