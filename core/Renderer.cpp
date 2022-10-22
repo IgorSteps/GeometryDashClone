@@ -1,10 +1,16 @@
 #include "Renderer.h"
+#include <iostream>
 
 Renderer::Renderer(Camera* camera)
 {
 	this->camera = camera;
 	this->gameObjects = std::vector<GameObject*>();
 	this->oldTransform = nullptr;
+
+	if (!sh.load("No Color Shader", "./glslfiles/noColorVert.vert", "./glslfiles/noColorFrag.frag"))
+	{
+		std::cout << "failed to load shader" << std::endl;
+	}
 }
 
 Renderer::~Renderer()
@@ -22,7 +28,10 @@ void Renderer::render(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 	for (auto& g : gameObjects) {
 		if (g->isUi)
 		{
-			g->draw(shader, ModelViewMatrix, ProjectionMatrix);
+			ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(g->transform->position.x,
+				g->transform->position.y, 1.0f));
+
+			g->draw(sh, ModelViewMatrix, ProjectionMatrix);
 		}
 		else
 		{

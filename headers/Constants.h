@@ -21,8 +21,8 @@ namespace Constants {
 	constexpr int TILE_HEIGHT = 42;
 	constexpr int TILE_WIDTH = 42;
 
-	constexpr int BUTTON_OFFSET_X = 400;
-	constexpr int BUTTON_OFFSET_Y = 560;
+	constexpr int BUTTON_OFFSET_X = 460;
+	constexpr int BUTTON_OFFSET_Y = 600;
 	constexpr int BUTTON_SPACING_HZ = 10;
 	constexpr int BUTTON_SPACING_VT = 5;
 	constexpr int BUTTON_WIDTH = 60;
@@ -30,4 +30,12 @@ namespace Constants {
 
 	constexpr float BG_COLOUR[3] = { 15.0f / 255.0f, 98.0f / 255.0f, 212.0f / 255.0f };
 	constexpr float GROUND_COLOUR[3] = {28.0f / 255.0f, 70.0f / 255.0f, 148.0f/255.0f};
+
+	constexpr int CONTAINER_OFFSET_Y = 545;
+	constexpr int TAB_WIDTH = 75;
+	constexpr int TAB_HEIGHT = 38;
+	constexpr int TAB_OFFSET_X = 410;
+	constexpr int TAB_OFFSET_Y = 526;
+	constexpr int TAB_HORIZONTAL_SPACING = 10;
+
 };

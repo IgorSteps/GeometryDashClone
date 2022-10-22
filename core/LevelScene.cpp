@@ -77,11 +77,11 @@ void LevelScene::init()
 
 	/// GROUND
 
-
+	initBackgrounds();
 	renderer->submit(player);
 	
 
-	initBackgrounds();
+	
 
 	importLevel("test");
 }

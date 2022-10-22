@@ -10,7 +10,7 @@ public:
 	MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sprite* hoveredSprite, Shader& sh);
 	~MenuItem();
 	void start();
-	Component* copy();
+	MenuItem* copy();
 	std::string serialise(int tabsize);
 
 	void update(float dt);
