@@ -4,6 +4,7 @@
 #include <BoxBounds.h>
 #include <iostream>
 #include <Game.h>
+#include <TabItem.h>
 
 MainContainer::MainContainer() : m_MenuItems()
 {
@@ -50,7 +51,8 @@ void MainContainer::init()
 
 		tabObj = new GameObject("Tab " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		tabObj->setUi(true);
-		tabObj->addComponent(currentTab);
+		TabItem* tabIt = new TabItem(x, y, Constants::TAB_WIDTH, Constants::TAB_HEIGHT, currentTab, shader, this);
+		tabObj->addComponent(tabIt);
 
 		
 		m_Tabs.push_back(tabObj);
@@ -58,7 +60,8 @@ void MainContainer::init()
 
 		Game::game->getCurrentScene()->addGameObject(tabObj);
 	}
-	m_CurrentTab = m_Tabs.at(0);
+	m_HotTab = m_Tabs.at(0);
+	m_HotTab->getComponent<TabItem>()->isSelected = true;
 
 	addTabObjects();
 }
@@ -199,7 +202,7 @@ Component* MainContainer::copy()
 
 void MainContainer::update(float dt)
 {
-	for (GameObject* g : m_TabMaps.at(m_CurrentTab))
+	for (GameObject* g : m_TabMaps.at(m_HotTab))
 	{
 		g->update(dt);
 
@@ -209,13 +212,22 @@ void MainContainer::update(float dt)
 			mItem->isSelected = false;
 		}
 	}
+
+	for (GameObject* g : m_Tabs)
+	{
+		TabItem* tItem = g->getComponent<TabItem>();
+		if (g != m_HotTab && tItem->isSelected)
+		{
+			tItem->isSelected = false;
+		}
+	}
 }
 
 void MainContainer::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrixs)
 {
 	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, Constants::CONTAINER_OFFSET_Y, 1.0f));
 	m_ContainerBg->draw(shader, ModelViewMatrix, ProjectionMatrixs);
-	for (GameObject* g : m_TabMaps.at(m_CurrentTab))
+	for (GameObject* g : m_TabMaps.at(m_HotTab))
 	{
 		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(g->transform->position.x, g->transform->position.y, 1.0f));
 		g->draw(shader, ModelViewMatrix, ProjectionMatrixs);
@@ -230,4 +242,9 @@ std::string MainContainer::serialise(int tabsize)
 void MainContainer::setHotButton(GameObject* go)
 {
 	m_HotButton = go;
+}
+
+void MainContainer::setHotTab(GameObject* go)
+{
+	m_HotTab = go;
 }
