@@ -42,9 +42,8 @@ public:
 
 	template <typename T> void removeComponent() 
 	{
-		for (auto it = begin(components); it != end(components);) {
-			it = components.erase(it);
-		}
+		components.erase(std::remove_if(components.begin(), components.end(),
+			[&](Component* c) { return dynamic_cast<T*>(c); }), components.end());
 	}
 
 	void addComponent(Component* c);

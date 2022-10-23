@@ -3,11 +3,12 @@
 #include <Sprite.h>
 #include <ML.h>
 #include <GameObject.h>
+class MainContainer;
 
 class MenuItem : public Component
 {
 public:
-	MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sprite* hoveredSprite, Shader& sh);
+	MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sprite* hoveredSprite, Shader& sh, MainContainer* mContianer);
 	~MenuItem();
 	void start();
 	MenuItem* copy();
@@ -22,5 +23,8 @@ public:
 	Sprite* m_HoveredSprite;
 	Sprite* m_MyImage;
 	Shader shader;
+
+private:
+	MainContainer* m_MainContainer;
 };
 

@@ -58,7 +58,7 @@ void MainContainer::init()
 
 		Game::game->getCurrentScene()->addGameObject(tabObj);
 	}
-	m_CurrentTab = m_Tabs.at(3);
+	m_CurrentTab = m_Tabs.at(0);
 
 	addTabObjects();
 }
@@ -91,7 +91,7 @@ void MainContainer::addTabObjects()
 		obj->getComponent<Sprite>()->initSubSprite(shader);
 
 		menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
-			buttonSprite->sprites[0], buttonSprite->sprites[1], shader);
+			buttonSprite->sprites[0], buttonSprite->sprites[1], shader, this);
 		obj->addComponent(menuItem);
 		obj->addComponent(new BoxBounds(Constants::TILE_WIDTH, Constants::TILE_HEIGHT));
 		buttonSprite->sprites[0]->initSubSprite(shader);
@@ -106,7 +106,7 @@ void MainContainer::addTabObjects()
 			obj->setUi(true);
 			obj->setNonserialisable();
 			menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
-				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader);
+				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader, this);
 			menuItem->m_ButtonSprite->initSubSprite(shader);
 			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(smallBlocks->sprites.at(i));
@@ -127,7 +127,7 @@ void MainContainer::addTabObjects()
 			obj->setUi(true);
 			obj->setNonserialisable();
 			menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
-				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader);
+				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader, this);
 			menuItem->m_ButtonSprite->initSubSprite(shader);
 			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(spikeSprites->sprites.at(i));
@@ -145,7 +145,7 @@ void MainContainer::addTabObjects()
 			obj->setUi(true);
 			obj->setNonserialisable();
 			menuItem = new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
-				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader);
+				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader, this);
 			menuItem->m_ButtonSprite->initSubSprite(shader);
 			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(menuItem);
@@ -163,7 +163,7 @@ void MainContainer::addTabObjects()
 			obj->setUi(true);
 			obj->setNonserialisable();
 			menuItem =new MenuItem(x, y, Constants::BUTTON_WIDTH, Constants::BUTTON_HEIGHT,
-				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader);
+				(Sprite*)buttonSprite->sprites[0]->copy(), (Sprite*)buttonSprite->sprites[1]->copy(), shader, this);
 			menuItem->m_ButtonSprite->initSubSprite(shader);
 			menuItem->m_HoveredSprite->initSubSprite(shader);
 			obj->addComponent(menuItem);
@@ -202,6 +202,12 @@ void MainContainer::update(float dt)
 	for (GameObject* g : m_TabMaps.at(m_CurrentTab))
 	{
 		g->update(dt);
+
+		MenuItem* mItem = g->getComponent<MenuItem>();
+		if (g != m_HotButton && mItem->isSelected)
+		{
+			mItem->isSelected = false;
+		}
 	}
 }
 
@@ -219,4 +225,9 @@ void MainContainer::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& Proj
 std::string MainContainer::serialise(int tabsize)
 {
 	return "";
+}
+
+void MainContainer::setHotButton(GameObject* go)
+{
+	m_HotButton = go;
 }

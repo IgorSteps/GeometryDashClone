@@ -18,6 +18,7 @@ public:
 	std::string serialise(int tabsize);
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrixs);
+	void setHotButton(GameObject* go);
 
 	std::vector<GameObject*> m_MenuItems;
 	std::vector<GameObject*> m_Tabs;
@@ -39,5 +40,8 @@ private:
 	Spritesheet* smallBlocks;
 	Spritesheet* portalSprites;
 
+	GameObject* m_HotButton = nullptr;
+	GameObject* m_HotTub = nullptr;
+	
 };
 
