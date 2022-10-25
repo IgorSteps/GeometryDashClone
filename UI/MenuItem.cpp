@@ -5,7 +5,7 @@
 #include <LevelEditorScene.h>
 #include <SnapToGrid.h>
 
-MenuItem::MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sprite* hoveredSprite, Shader &sh)
+MenuItem::MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sprite* hoveredSprite, Shader &sh, MainContainer* maincont)
 {
 	m_X = x;
 	m_Y = y;
@@ -13,7 +13,7 @@ MenuItem::MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sp
 	m_Height = height;
 	m_ButtonSprite = buttonSprite;
 	m_HoveredSprite = hoveredSprite; 
-
+	m_MainContainer = maincont;
 	isSelected = false;
 	shader = sh;
 }
@@ -40,14 +40,14 @@ MenuItem* MenuItem::copy()
 
 void MenuItem::update(float dt)  
 {
-	// check mouse is within the bounds of the little rectangle
-	if (!isSelected && ML::getX() > m_X && ML::getX() <= m_X + m_Width && ML::getY() > m_Y && ML::getY() <= m_Y + m_Height)
+	if (ML::mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) 
 	{
-		if (ML::mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT))
+		// check mouse is within the bounds of the little rectangle
+		if (!isSelected && ML::getX() > m_X && ML::getX() <= m_X + m_Width && ML::getY() > m_Y && ML::getY() <= m_Y + m_Height)
 		{
 			GameObject* obj = gameObj->copy(shader);
-			//obj->removeComponent<MenuItem>(); // menuItem is not copied as it return nullptr
-			
+			obj->removeComponent<MenuItem>(); 
+
 			LevelEditorScene* scene = static_cast<LevelEditorScene*>(Game::game->getCurrentScene());
 			SnapToGrid* snapToGrid = scene->mouseCursor->getComponent<SnapToGrid>();
 
@@ -55,7 +55,7 @@ void MenuItem::update(float dt)
 			scene->mouseCursor = obj;
 
 			isSelected = true;
-			std::cout << "Clicked menu item\n";
+			m_MainContainer->setHotButton(this->gameObj);
 		}
 	}
 }

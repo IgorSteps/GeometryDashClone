@@ -30,8 +30,14 @@ void Renderer::render(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 		{
 			ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(g->transform->position.x,
 				g->transform->position.y, 1.0f));
-
-			g->draw(sh, ModelViewMatrix, ProjectionMatrix);
+			if (g->isColor)
+			{
+				g->draw(shader, ModelViewMatrix, ProjectionMatrix);
+			}
+			else
+			{
+				g->draw(sh, ModelViewMatrix, ProjectionMatrix);
+			}
 		}
 		else
 		{

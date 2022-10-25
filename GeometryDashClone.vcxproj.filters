@@ -144,6 +144,9 @@
     <ClInclude Include="headers\Background.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="headers\TabItem.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -235,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="components\Background.cpp">
       <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\TabItem.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

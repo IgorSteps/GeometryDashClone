@@ -36,7 +36,7 @@ void SnapToGrid::update(float dt)
 		this->gameObj->transform->position.x = x * m_gridWidth - Game::game->getCurrentScene()->camera->position.x + Constants::PLAYER_CENTER;
 		this->gameObj->transform->position.y = y * m_gridHeight - Game::game->getCurrentScene()->camera->position.y + Constants::PLAYER_CENTER;
 		
-		if (ML::getY() < Constants::BUTTON_OFFSET_Y &&
+		if (ML::getY() < Constants::TAB_OFFSET_Y &&
 			ML::mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) && m_debounceLeft < 0.0f)
 		{
 			m_debounceLeft = m_debounceTime;
