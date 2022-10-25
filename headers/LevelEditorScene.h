@@ -10,6 +10,7 @@
 #include "Grid.h"
 #include "CameraControls.h"
 #include <MainContainer.h>
+#include <Background.h>
 
 class LevelEditorScene : public Scene
 {
@@ -19,6 +20,7 @@ public:
  	GameObject* player;
 	void init();
 	void initAssetPool();
+	void initBackgrounds();
 	void update(float dt);
 	void draw();
 
@@ -48,5 +50,9 @@ public:
 private:
 	void savetoFile(std::string);
 	void importLevel(std::string);
+	Background* bg;
+	Background* groundBg;
+	GameObject* groundGo;
+	GameObject* go;
 };
 

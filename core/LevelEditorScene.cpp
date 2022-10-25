@@ -31,6 +31,11 @@ LevelEditorScene::~LevelEditorScene() {
 	delete playerComp;
 	delete groundComp;
 	delete groundSp;
+
+	delete bg;
+	delete groundBg;
+	delete go;
+	delete groundGo;
 }
 
 void LevelEditorScene::init()
@@ -57,6 +62,7 @@ void LevelEditorScene::init()
 
 	/// AssetPool
 	initAssetPool();
+	initBackgrounds();
 	editingButtons = new MainContainer();
 
 	/// GRID
@@ -100,15 +106,12 @@ void LevelEditorScene::init()
 	layerThree->sprites[spNum]->initSubSprite(myShader);
 
 	/// GROUND
-	ground = new GameObject("Ground game object", new Transform(glm::vec2(0.0f, Constants::GROUND_Y)));
-	groundSp = new Sprite("assets/grounds/ground01.png");
-	groundComp = new Ground(groundSp, myShader);
-	ground->addComponent(groundComp);
+	
 
-	ground->setNonserialisable();
+	
 	player->setNonserialisable();
 	addGameObject(player);
-	addGameObject(ground);
+	
 }
 
 void LevelEditorScene::initAssetPool()
@@ -125,6 +128,49 @@ void LevelEditorScene::initAssetPool()
 	AssetPool::addSpritesheet("assets/portal.png", 44.0f, 85.0f, 2.0f, 2, 2 , 92.0f, 87.0f);
 }
 
+void LevelEditorScene::initBackgrounds()
+{
+	ground = new GameObject("Ground game object", new Transform(glm::vec2(0.0f, Constants::GROUND_Y)));
+	ground->addComponent(new Ground());
+	addGameObject(ground);
+
+	int numOfBackgrounds = 7;
+
+	// todo: delete em?
+	std::vector<GameObject*>* backgrounds = new std::vector<GameObject*>;
+	std::vector<GameObject*>* groundBgs = new std::vector<GameObject*>;
+
+	for (int i = 0; i < numOfBackgrounds; ++i)
+	{
+		// Backgroundss
+		bg = new Background("assets/backgrounds/bg01.png", nullptr, ground->getComponent<Ground>(), false, 512.0f, 512.0f, Constants::BG_COLOUR);
+		bg->sp->initSprite(myShader);
+		float x = i * bg->sp->getWidth();
+		float y = 0;
+
+		go = new GameObject("Background " + std::to_string(i), new Transform(glm::vec2(x, y)));
+		go->setUi(true);
+		go->setColor(true);
+		go->addComponent(bg);
+		backgrounds->push_back(go);
+
+		// Ground
+		groundBg = new Background("assets/grounds/ground01.png", nullptr, ground->getComponent<Ground>(), true, 256.0f, 256.0f, Constants::GROUND_COLOUR);
+		groundBg->sp->initSprite(myShader);
+		x = i * groundBg->sp->getWidth();
+		y = ground->transform->position.y;
+
+		groundGo = new GameObject("GroundBackground " + std::to_string(i), new Transform(glm::vec2(x, y)));
+		groundGo->setUi(true);
+		groundGo->setColor(true);
+		groundGo->addComponent(groundBg);
+		groundBgs->push_back(groundGo);
+
+		// Add to renderer
+		addGameObject(go);
+		addGameObject(groundGo);
+	}
+}
 
 void LevelEditorScene::update(float dt)
 {

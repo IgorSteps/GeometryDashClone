@@ -31,6 +31,7 @@ Background::~Background()
 
 void Background::update(float dt)
 {
+	if (m_Backgrounds == nullptr) return;
 	++m_Timestamp;
 
 	this->gameObj->transform->position.x -= dt * m_Speed;
