@@ -1,8 +1,8 @@
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 861.000000f,
-			"y": 693.000000f
+			"x": 777.000000f,
+			"y": 651.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,
@@ -18,14 +18,18 @@
 			"row": 0,
 			"column": 0,
 			"index": 0
+		},
+		"TriangleBounds": {
+			"Base": 42.000000f,
+			"Height": 42.000000f
 		}
 	}
 },
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 903.000000f,
-			"y": 693.000000f
+			"x": 819.000000f,
+			"y": 651.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,
@@ -41,14 +45,18 @@
 			"row": 0,
 			"column": 0,
 			"index": 0
+		},
+		"TriangleBounds": {
+			"Base": 42.000000f,
+			"Height": 42.000000f
 		}
 	}
 },
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 945.000000f,
-			"y": 693.000000f
+			"x": 1071.000000f,
+			"y": 651.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,
@@ -64,14 +72,18 @@
 			"row": 0,
 			"column": 0,
 			"index": 0
+		},
+		"TriangleBounds": {
+			"Base": 42.000000f,
+			"Height": 42.000000f
 		}
 	}
 },
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 987.000000f,
-			"y": 693.000000f
+			"x": 1239.000000f,
+			"y": 651.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,
@@ -87,6 +99,10 @@
 			"row": 0,
 			"column": 0,
 			"index": 0
+		},
+		"TriangleBounds": {
+			"Base": 42.000000f,
+			"Height": 42.000000f
 		}
 	}
 }

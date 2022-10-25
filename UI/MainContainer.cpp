@@ -2,6 +2,7 @@
 #include <Constants.h>
 #include <AssetPool.h>
 #include <BoxBounds.h>
+#include <TriangleBounds.h>
 #include <iostream>
 #include <Game.h>
 #include <TabItem.h>
@@ -137,8 +138,8 @@ void MainContainer::addTabObjects()
 			obj->addComponent(spikeSprites->sprites.at(i));
 			spikeSprites->sprites.at(i)->initSubSprite(shader);
 			obj->addComponent(menuItem);
+			obj->addComponent(new TriangleBounds(42.0f, 42.0f));
 
-			// todo: add triangle bounds component later
 			m_TabMaps.at(m_Tabs.at(3)).push_back(obj);
 		} 
 

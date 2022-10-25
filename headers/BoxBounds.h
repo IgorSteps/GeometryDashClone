@@ -20,6 +20,7 @@ public:
 	static bool checkCollision(BoxBounds& b1, BoxBounds& b2);
 	virtual float getWidth() override;
 	virtual float getHeight() override;
+	float m_EnclosingRadius;
 
 	static BoxBounds* deserialsiedBB;
 	float m_Width, m_Height;

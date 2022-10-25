@@ -10,6 +10,7 @@ BoxBounds::BoxBounds(float width, float height) {
 	m_HalfWidth = m_Width / 2;
 	m_HalfHeight = m_Height / 2;
 	type = Box;
+	m_EnclosingRadius = std::sqrtf(pow(m_HalfHeight, 2) + pow(m_HalfWidth,2));
 }
 
 BoxBounds::~BoxBounds()
