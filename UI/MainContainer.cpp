@@ -51,6 +51,7 @@ void MainContainer::init()
 
 		tabObj = new GameObject("Tab " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		tabObj->setUi(true);
+		tabObj->setNonserialisable();
 		TabItem* tabIt = new TabItem(x, y, Constants::TAB_WIDTH, Constants::TAB_HEIGHT, currentTab, shader, this);
 		tabObj->addComponent(tabIt);
 
