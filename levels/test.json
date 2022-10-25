@@ -1,0 +1,92 @@
+"GameObject": {
+	"Transform": {
+		"Position": {
+			"x": 861.000000f,
+			"y": 693.000000f
+		},
+		"Scale": {
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components": {
+		"Sprite": {
+			"isSubSprite": true,
+			"FilePath": "assets/spikes.png",
+			"row": 0,
+			"column": 0,
+			"index": 0
+		}
+	}
+},
+"GameObject": {
+	"Transform": {
+		"Position": {
+			"x": 903.000000f,
+			"y": 693.000000f
+		},
+		"Scale": {
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components": {
+		"Sprite": {
+			"isSubSprite": true,
+			"FilePath": "assets/spikes.png",
+			"row": 0,
+			"column": 0,
+			"index": 0
+		}
+	}
+},
+"GameObject": {
+	"Transform": {
+		"Position": {
+			"x": 945.000000f,
+			"y": 693.000000f
+		},
+		"Scale": {
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components": {
+		"Sprite": {
+			"isSubSprite": true,
+			"FilePath": "assets/spikes.png",
+			"row": 0,
+			"column": 0,
+			"index": 0
+		}
+	}
+},
+"GameObject": {
+	"Transform": {
+		"Position": {
+			"x": 987.000000f,
+			"y": 693.000000f
+		},
+		"Scale": {
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components": {
+		"Sprite": {
+			"isSubSprite": true,
+			"FilePath": "assets/spikes.png",
+			"row": 0,
+			"column": 0,
+			"index": 0
+		}
+	}
+}

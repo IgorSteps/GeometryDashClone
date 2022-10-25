@@ -2,6 +2,7 @@
 #include <Sprite.h>
 #include <GameObject.h>
 #include <BoxBounds.h>
+#include <TriangleBounds.h>
 
 
 Parser::~Parser()
@@ -173,6 +174,10 @@ Component* Parser::parseComponent()
     else if (componentTitle == "BoxBounds")
     {
         return BoxBounds::deserialise();
+    }
+    else if (componentTitle == "TriangleBounds")
+    {
+        return TriangleBounds::deseriaise();
     }
     else 
     {
