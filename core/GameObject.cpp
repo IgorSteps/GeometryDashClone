@@ -152,5 +152,10 @@ void GameObject::setUi(bool var)
 	isUi = var;
 }
 
+void GameObject::setColor(bool var)
+{
+	isColor = var;
+}
+
 GameObject* GameObject::go = nullptr;
 Transform* GameObject::deserialisedTransform = NULL;

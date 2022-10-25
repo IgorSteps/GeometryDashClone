@@ -23,6 +23,7 @@ public:
 	static GameObject* deserialise();
 	void setNonserialisable();
 	void setUi(bool var);
+	void setColor(bool var);
 	Transform* transform; //make a smart pointer?
 	GameObject* newGameObj; // copy
 	static GameObject* go; // deserialised
@@ -50,6 +51,7 @@ public:
 	std::vector<Component*> getAllComponents();
 
 	bool isUi = false;
+	bool isColor = false;
 	std::string name;
 private:
 	std::vector<Component*> components;

@@ -116,6 +116,7 @@ void LevelScene::initBackgrounds()
 
 		go = new GameObject("Background " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		go->setUi(true);
+		go->setColor(true);
 		go->addComponent(bg);
 		backgrounds->push_back(go);
 
@@ -127,6 +128,7 @@ void LevelScene::initBackgrounds()
 
 		groundGo = new GameObject("GroundBackground " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		groundGo->setUi(true);
+		groundGo->setColor(true);
 		groundGo->addComponent(groundBg);
 		groundBgs->push_back(groundGo);
 
