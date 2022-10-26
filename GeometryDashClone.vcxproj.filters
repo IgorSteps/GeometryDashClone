@@ -147,6 +147,9 @@
     <ClInclude Include="headers\TabItem.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
+    <ClInclude Include="headers\TriangleBounds.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -241,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="UI\TabItem.cpp">
       <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="components\TriangleBounds.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

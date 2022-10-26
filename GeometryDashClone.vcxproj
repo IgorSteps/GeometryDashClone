@@ -177,6 +177,7 @@
     <ClInclude Include="headers\Serialise.h" />
     <ClInclude Include="headers\Parser.h" />
     <ClInclude Include="headers\TabItem.h" />
+    <ClInclude Include="headers\TriangleBounds.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="components\Background.cpp" />
@@ -207,6 +208,7 @@
     <ClCompile Include="datastructure\Transform.cpp" />
     <ClCompile Include="file\Serialise.cpp" />
     <ClCompile Include="file\Parser.cpp" />
+    <ClCompile Include="components\TriangleBounds.cpp" />
     <ClCompile Include="UI\TabItem.cpp" />
     <ClCompile Include="UI\MainContainer.cpp" />
     <ClCompile Include="UI\MenuItem.cpp" />

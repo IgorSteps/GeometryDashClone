@@ -2,6 +2,7 @@
 #include <Constants.h>
 #include <AssetPool.h>
 #include <BoxBounds.h>
+#include <TriangleBounds.h>
 #include <iostream>
 #include <Game.h>
 #include <TabItem.h>
@@ -51,6 +52,7 @@ void MainContainer::init()
 
 		tabObj = new GameObject("Tab " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		tabObj->setUi(true);
+		tabObj->setNonserialisable();
 		TabItem* tabIt = new TabItem(x, y, Constants::TAB_WIDTH, Constants::TAB_HEIGHT, currentTab, shader, this);
 		tabObj->addComponent(tabIt);
 
@@ -136,8 +138,8 @@ void MainContainer::addTabObjects()
 			obj->addComponent(spikeSprites->sprites.at(i));
 			spikeSprites->sprites.at(i)->initSubSprite(shader);
 			obj->addComponent(menuItem);
+			obj->addComponent(new TriangleBounds(42.0f, 42.0f));
 
-			// todo: add triangle bounds component later
 			m_TabMaps.at(m_Tabs.at(3)).push_back(obj);
 		} 
 

@@ -132,6 +132,7 @@ void LevelEditorScene::initBackgrounds()
 {
 	ground = new GameObject("Ground game object", new Transform(glm::vec2(0.0f, Constants::GROUND_Y)));
 	ground->addComponent(new Ground());
+	ground->setNonserialisable();
 	addGameObject(ground);
 
 	int numOfBackgrounds = 7;
@@ -151,6 +152,7 @@ void LevelEditorScene::initBackgrounds()
 		go = new GameObject("Background " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		go->setUi(true);
 		go->setColor(true);
+		go->setNonserialisable();
 		go->addComponent(bg);
 		backgrounds->push_back(go);
 
@@ -163,6 +165,7 @@ void LevelEditorScene::initBackgrounds()
 		groundGo = new GameObject("GroundBackground " + std::to_string(i), new Transform(glm::vec2(x, y)));
 		groundGo->setUi(true);
 		groundGo->setColor(true);
+		groundGo->setNonserialisable();
 		groundGo->addComponent(groundBg);
 		groundBgs->push_back(groundGo);
 
