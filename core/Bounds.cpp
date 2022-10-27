@@ -1,6 +1,8 @@
 #include "Bounds.h"
 #include <BoxBounds.h>
 #include <TriangleBounds.h>
+#include <GameObject.h>
+#include <Player.h>
 
 bool Bounds::checkCollison(Bounds& b1, Bounds& b2)
 {
@@ -11,13 +13,13 @@ bool Bounds::checkCollison(Bounds& b1, Bounds& b2)
     }
     else if (b1.type == Box && b2.type == Triangle)
     {
-        TriangleBounds::checkCollision((BoxBounds&)b1, (TriangleBounds&)b2);
+        return TriangleBounds::checkCollision((BoxBounds&)b1, (TriangleBounds&)b2);
     }
     else if (b1.type == Triangle && b2.type == Box)
     {
-        TriangleBounds::checkCollision((BoxBounds&)b2, (TriangleBounds&)b1);
+        return TriangleBounds::checkCollision((BoxBounds&)b2, (TriangleBounds&)b1);
     }
-    return false;
+    return false; 
 }
 
 void Bounds::resolveCollison(Bounds* b1, GameObject& plr)
@@ -26,6 +28,10 @@ void Bounds::resolveCollison(Bounds* b1, GameObject& plr)
     {
         BoxBounds* box = (BoxBounds*)b1;
         box->resolveCollision(plr);
+    }
+    else if (b1->type == Triangle)
+    {
+        plr.getComponent<Player>()->die();
     }
 }
 
