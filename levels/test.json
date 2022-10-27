@@ -1,7 +1,7 @@
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 1155.000000f,
+			"x": 1071.000000f,
 			"y": 693.000000f
 		},
 		"Scale": {
@@ -28,8 +28,35 @@
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 1533.000000f,
-			"y": 651.000000f
+			"x": 1113.000000f,
+			"y": 693.000000f
+		},
+		"Scale": {
+			"x": 1.000000f,
+			"y": 1.000000f
+		},
+		"rotation": 0.000000f
+	},
+	"Name": "Generated",
+	"Components": {
+		"Sprite": {
+			"isSubSprite": true,
+			"FilePath": "assets/spikes.png",
+			"row": 0,
+			"column": 0,
+			"index": 0
+		},
+		"TriangleBounds": {
+			"Base": 42.000000f,
+			"Height": 42.000000f
+		}
+	}
+},
+"GameObject": {
+	"Transform": {
+		"Position": {
+			"x": 1155.000000f,
+			"y": 693.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,

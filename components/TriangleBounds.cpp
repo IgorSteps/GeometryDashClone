@@ -43,6 +43,8 @@ void TriangleBounds::start()
 void TriangleBounds::calculateTransform()
 {
     float rAngle = glm::radians(gameObj->transform->rotateion);
+    // spike's origin is at the center
+    // find corresponding edges:
     glm::vec2 p1(gameObj->transform->position.x - m_HalfWidth, gameObj->transform->position.y + m_HalfHeight);  // bottom left
     glm::vec2 p2(gameObj->transform->position.x, gameObj->transform->position.y - m_HalfHeight);                // top
     glm::vec2 p3(gameObj->transform->position.x + m_HalfWidth, gameObj->transform->position.y + m_HalfHeight);  // bottom right

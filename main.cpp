@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
      
         // render
         // ------
-        glClearColor(255.0f, 255.0f, 255.0f, 0.0f);
+        glClearColor(15.0f / 255.0f, 98.0f / 255.0f, 212.0f / 255.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         //std::cout << glGetError() << std::endl;
         GeometryDashClone.Render();
