@@ -13,12 +13,12 @@ I used Agile methodolgy with 2 week long sprints. Trello Progress board - https:
 
 ## Controls
 Game starts in level editor so most of the controls in there. 
-1. `left mouse button` click and hold - move around level editor
-2. `left mouse button` click - select objects
-3. `right mouse button` click - place objects into a scene
-4. `1` - save level
-5. `2` - load level
-6. `3` - swith to playing the level
+- `left mouse button` click and hold - move around level editor
+- `left mouse button` click - select objects
+- `right mouse button` click - place objects into a scene
+- `1` - save level
+- `2` - load level
+- `3` - swith to playing the level
 
 ## Most interseting features
 - Multifunctional Level Editor
@@ -26,3 +26,4 @@ Game starts in level editor so most of the controls in there.
 - Traingale collisions are implemented through broad/narrow phase collision detections. Narrowphase is using Cohen Sutherland pollygon clipping algorithm.
 - Infinite backgrounds
 - Serialisation and deserialisation from JSON file
+- Correct Git workflow with branches and PRs
