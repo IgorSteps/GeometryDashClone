@@ -11,6 +11,26 @@ TriangleBounds::TriangleBounds(float base, float h)
     m_HalfHeight = h / 2.0f;
     m_HalfWidth = base / 2.0f;
     m_EnclosingRadius = std::max(m_HalfHeight, m_HalfWidth);
+
+    // load shader for lines
+    if (!shader.load("lineVert for triangles", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
+    {
+        std::cout << "failed to load shader" << std::endl;
+    }
+
+    line1 = Line();
+    line2 = Line();
+    line3 = Line();
+
+    float col[] = { 1.0f, 0.0f, 0.0f };
+    line1.setColour(col);
+    line2.setColour(col);
+    line3.setColour(col);
+
+    line1.setIsGrid(false);
+    line2.setIsGrid(false);
+    line3.setIsGrid(false);
+
 }
 
 TriangleBounds::~TriangleBounds()
@@ -28,10 +48,14 @@ float TriangleBounds::getWidth()
     return m_Base;
 }
 
-void TriangleBounds::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
+void TriangleBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
     // test
     //std::cout << m_X1 << "   &    " << m_Y1 << '\n';
+    ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    line1.draw(shader, ModelViewMatrix, ProjectionMatrix);
+    line2.draw(shader, ModelViewMatrix, ProjectionMatrix);
+    line3.draw(shader, ModelViewMatrix, ProjectionMatrix);
 }
 
 void TriangleBounds::start()
@@ -45,9 +69,9 @@ void TriangleBounds::calculateTransform()
     float rAngle = glm::radians(gameObj->transform->rotateion);
     // spike's origin is at the center
     // find corresponding edges:
-    glm::vec2 p1(gameObj->transform->position.x - m_HalfWidth, gameObj->transform->position.y + m_HalfHeight);  // bottom left
-    glm::vec2 p2(gameObj->transform->position.x, gameObj->transform->position.y - m_HalfHeight);                // top
-    glm::vec2 p3(gameObj->transform->position.x + m_HalfWidth, gameObj->transform->position.y + m_HalfHeight);  // bottom right
+    glm::vec2 p1(gameObj->transform->position.x - m_HalfWidth, gameObj->transform->position.y - m_HalfHeight);  // bottom left
+    glm::vec2 p2(gameObj->transform->position.x, gameObj->transform->position.y + m_HalfHeight);                // top
+    glm::vec2 p3(gameObj->transform->position.x + m_HalfWidth, gameObj->transform->position.y - m_HalfHeight);  // bottom right
 
     glm::vec2 origin(gameObj->transform->position.x, gameObj->transform->position.y);   // origin
 
@@ -64,6 +88,10 @@ void TriangleBounds::calculateTransform()
     m_X3 = p3.x;
     m_Y3 = p3.y;
 
+   
+    line1.initLine(shader, m_X1, m_Y1, m_X2, m_Y2);
+    line2.initLine(shader, m_X2, m_Y2, m_X3, m_Y3);
+    line3.initLine(shader, m_X3, m_Y3, m_X1, m_Y1);
 }
 
 bool TriangleBounds::checkCollision(BoxBounds& b1, TriangleBounds& t2)

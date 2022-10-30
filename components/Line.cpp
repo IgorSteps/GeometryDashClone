@@ -40,6 +40,12 @@ void Line::SetHeight(float size)
 	m_Height = size;
 }
 
+void Line::setIsGrid(bool var)
+{
+	isGrid = var;
+}
+
+// set up a quad not an actual line
 void Line::init(Shader& shader) 
 {
 	//Create the geometry
@@ -97,7 +103,41 @@ void Line::init(Shader& shader)
 	glBindVertexArray(0);
 }
 
+void Line::initLine(Shader& shader, float startX, float startY, float endX, float endY)
+{
+	float vert[] = {
+			 startX, startY,0.0f,
+			 endX,	endY,	0.0f,
+	};
+	// colour array
+	float col[]{
+		colour[0], colour[1], colour[2],
+		colour[0], colour[1], colour[2],
+	};
 
+	glGenVertexArrays(1, &m_vaoID);
+	glBindVertexArray(m_vaoID);
+	glGenBuffers(2, m_vboID);
+	
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);
+	GLint vertexLocation = glGetAttribLocation(shader.handle(), "in_Position");
+	glEnableVertexAttribArray(vertexLocation);
+	glVertexAttribPointer(vertexLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(col), col, GL_STATIC_DRAW);
+	// set the colour - linked to the colour shader input 
+	GLint colorLocation = glGetAttribLocation(shader.handle(), "in_Color");
+	glEnableVertexAttribArray(colorLocation);
+	glVertexAttribPointer(colorLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
+// draw a quad or an actual line
 void Line::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
 	glUseProgram(shader.handle());  // use the shader
@@ -113,7 +153,14 @@ void Line::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Projectio
 
 	//Draw the object
 	glBindVertexArray(m_vaoID);		// select first VAO
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	if (isGrid)
+	{
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	}
+	else
+	{
+		glDrawArrays(GL_LINES, 0, 2);
+	}
 
 	glBindVertexArray(0); //unbind the vertex array object
 	glUseProgram(0); //turn off the current shader
