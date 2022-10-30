@@ -38,6 +38,9 @@ private:
     const int LEFT = 1;   // 0001
     const int RIGHT = 2;  // 0010
     const int BOTTOM = 4; // 0100
-    const int TOP = 8;    // 1000
+    const int TOP = 8;
+    // Inherited via Bounds
+    virtual bool raycast(glm::vec2 position) override;
+    // 1000
 };
 

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <Game.h>
 #include <LevelEditorScene.h>
-#include <SnapToGrid.h>
+#include <LevelEditorControls.h>
 
 TabItem::TabItem(int x, int y, int width, int height, Sprite* sp, Shader& sh, MainContainer* maincont)
 {

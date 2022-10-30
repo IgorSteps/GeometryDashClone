@@ -10,7 +10,27 @@ BoxBounds::BoxBounds(float width, float height) {
 	m_HalfWidth = m_Width / 2;
 	m_HalfHeight = m_Height / 2;
 	type = Box;
-	m_EnclosingRadius = std::sqrtf(pow(m_HalfHeight, 2) + pow(m_HalfWidth,2));
+	m_EnclosingRadius = std::sqrtf(powf(m_HalfHeight, 2) + powf(m_HalfWidth,2));
+	// load shader for lines
+	if (!shader.load("lineVert for triangles", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
+	{
+		std::cout << "failed to load shader" << std::endl;
+	}
+	line1 = Line();
+	line2 = Line();
+	line3 = Line();
+	line4 = Line();
+	float col[] = { 1.0f, 0.0f, 0.0f };
+	line1.setColour(col);
+	line2.setColour(col);
+	line3.setColour(col);
+	line4.setColour(col);
+
+	line1.setIsGrid(false);
+	line2.setIsGrid(false);
+	line3.setIsGrid(false);
+	line4.setIsGrid(false);
+
 }
 
 BoxBounds::~BoxBounds()
@@ -19,8 +39,26 @@ BoxBounds::~BoxBounds()
 }
 
 
+void BoxBounds::start()
+{
+	calculateTransform();
+}
+
+
 void BoxBounds::update(float dt) {
 	//std::cout << "We are insside box bounds" << '\n';
+}
+
+void BoxBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
+{
+	if (isSelected)
+	{
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		line1.draw(shader, ModelViewMatrix, ProjectionMatrix);
+		line2.draw(shader, ModelViewMatrix, ProjectionMatrix);
+		line3.draw(shader, ModelViewMatrix, ProjectionMatrix);
+		line4.draw(shader, ModelViewMatrix, ProjectionMatrix);
+	}
 }
 
 Component* BoxBounds::copy() 
@@ -70,6 +108,19 @@ void BoxBounds::resolveCollision(GameObject& player)
 	}
 }
 
+void BoxBounds::calculateTransform()
+{
+	glm::vec2 p1(gameObj->transform->position.x, gameObj->transform->position.y);						// top left
+	glm::vec2 p2(gameObj->transform->position.x, gameObj->transform->position.y - m_Height);            // bottom left
+	glm::vec2 p3(gameObj->transform->position.x + m_Width, gameObj->transform->position.y - m_Height);  // bottom right
+	glm::vec2 p4(gameObj->transform->position.x + m_Width, gameObj->transform->position.y);				// top right
+
+	line1.initLine(shader, p1.x, p1.y, p2.x, p2.y);
+	line2.initLine(shader, p2.x, p2.y, p3.x, p3.y);
+	line3.initLine(shader, p3.x, p3.y, p4.x, p4.y);
+	line4.initLine(shader, p4.x, p4.y, p1.x, p1.y);
+}
+
 bool BoxBounds::checkCollision(BoxBounds& b1, BoxBounds& b2)
 {
 	float dx = b1.gameObj->transform->position.x - b2.gameObj->transform->position.x;
@@ -94,6 +145,14 @@ float BoxBounds::getWidth()
 float BoxBounds::getHeight()
 {
 	return m_Height;
+}
+
+bool BoxBounds::raycast(glm::vec2 position)
+{
+	return position.x > gameObj->transform->position.x &&
+		position.x < gameObj->transform->position.x + m_Width &&
+		position.y > gameObj->transform->position.y &&
+		position.y < gameObj->transform->position.y + m_Height;
 }
 
 std::string BoxBounds::serialise(int tabSize)

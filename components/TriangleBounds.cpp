@@ -52,10 +52,10 @@ void TriangleBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 {
     // test
     //std::cout << m_X1 << "   &    " << m_Y1 << '\n';
-    ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+   /* ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     line1.draw(shader, ModelViewMatrix, ProjectionMatrix);
     line2.draw(shader, ModelViewMatrix, ProjectionMatrix);
-    line3.draw(shader, ModelViewMatrix, ProjectionMatrix);
+    line3.draw(shader, ModelViewMatrix, ProjectionMatrix);*/
 }
 
 void TriangleBounds::start()
@@ -228,6 +228,11 @@ int TriangleBounds::computeRegionCode(glm::vec2 point, BoxBounds& b)
     }
 
     return code;
+}
+
+bool TriangleBounds::raycast(glm::vec2 position)
+{
+    return false;
 }
 
 glm::vec2 TriangleBounds::rotatePoint(float angle, glm::vec2 p, glm::vec2 o)

@@ -21,3 +21,8 @@ void Scene::addGameObject(GameObject* g) {
 		c->start();
 	}
 }
+
+std::vector<GameObject*> Scene::getAllGameObjects()
+{
+	return gameObjects;
+}

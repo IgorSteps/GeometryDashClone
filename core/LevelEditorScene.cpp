@@ -2,7 +2,7 @@
 
 
 #include <glm/ext/matrix_float4x4.hpp>
-#include "SnapToGrid.h"
+#include "LevelEditorControls.h"
 
 #include <KL.h>
 #include <fstream>
@@ -76,7 +76,7 @@ void LevelEditorScene::init()
 
 	/// PLACING BLOCKS
 	mouseCursor = new GameObject("Mouse cursor", new Transform(glm::vec2(0.0f)));
-	mouseCursor->addComponent(new SnapToGrid(Constants::TILE_WIDTH, Constants::TILE_HEIGHT, myShader));
+	mouseCursor->addComponent(new LevelEditorControls(Constants::TILE_WIDTH, Constants::TILE_HEIGHT, myShader));
 
 	/// PLAYER
 	player = new GameObject("Player game obj", new Transform(glm::vec2(500.0f,350.0f)));
@@ -258,7 +258,7 @@ void LevelEditorScene::savetoFile(std::string name)
 void LevelEditorScene::draw()
 {
 	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
-	grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
+	//grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
 	editingButtons->draw(myShader, ModelViewMatrix, ProjectionMatrix);
 	mouseCursor->draw(myShader, ModelViewMatrix, ProjectionMatrix);
 }

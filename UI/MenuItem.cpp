@@ -3,7 +3,7 @@
 #include <iostream>
 #include <Game.h>
 #include <LevelEditorScene.h>
-#include <SnapToGrid.h>
+#include <LevelEditorControls.h>
 
 MenuItem::MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sprite* hoveredSprite, Shader &sh, MainContainer* maincont)
 {
@@ -49,7 +49,7 @@ void MenuItem::update(float dt)
 			obj->removeComponent<MenuItem>(); 
 
 			LevelEditorScene* scene = static_cast<LevelEditorScene*>(Game::game->getCurrentScene());
-			SnapToGrid* snapToGrid = scene->mouseCursor->getComponent<SnapToGrid>();
+			LevelEditorControls* snapToGrid = scene->mouseCursor->getComponent<LevelEditorControls>();
 
 			obj->addComponent(snapToGrid);
 			scene->mouseCursor = obj;
