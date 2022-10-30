@@ -21,13 +21,14 @@ Grid::Grid()
 	lineVert.setColour(col);
 	lineVert.SetWidth(2.5f);
 	lineVert.SetHeight(Constants::GROUND_Y);
+	lineVert.setIsGrid(true);
 
 	//initilise horizontal lines
 	lineHoriz = Line();
 	lineHoriz.setColour(col);
 	lineHoriz.SetWidth(Constants::SCREEN_WIDTH);
 	lineHoriz.SetHeight(2.5f);
-	
+	lineHoriz.setIsGrid(true);
 	// load shader for lines
 	if (!shader.load("lineVert", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
 	{

@@ -15,6 +15,7 @@ public:
 	void setColour(float colour[3]);
 
 	void init(Shader& shader);
+	void initLine(Shader& shader, float startX, float startY, float endX, float endY);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	Component* copy();
 	std::string serialise(int tabSize);
@@ -22,6 +23,7 @@ public:
 
 	void SetWidth(float size);
 	void SetHeight(float size);
+	void setIsGrid(bool var);
 	float const& getWidth();
 	float const& getHeight();
 	float colour[3];
@@ -29,7 +31,7 @@ private:
 	unsigned int m_vaoID;		// id for Vertex Array Object
 	unsigned int m_vboID[2];	// ids for Vertex Buffer Objects
 	unsigned int m_eboID[2];	// ids for Element Buffer Objects
-	
+	bool isGrid = true;
 	//Dimensions of the sprite.
 	float m_Width;
 	float m_Height;
