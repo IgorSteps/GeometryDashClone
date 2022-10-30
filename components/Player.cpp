@@ -87,8 +87,10 @@ void Player::addJumpForce()
 
 void Player::die()
 {
-	gameObj->transform->position.x = 0;
-	gameObj->transform->position.x = 30;
+	gameObj->transform->position.x = 500;
+	gameObj->transform->position.y = 350;
+	gameObj->getComponent<Rigidbody>()->Velocity.y = 0;
+	gameObj->transform->rotateion = 0.0f;
 	Game::game->getCurrentScene()->camera->position.x = 0;
 }
 

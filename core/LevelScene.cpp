@@ -67,8 +67,7 @@ void LevelScene::init()
 
 	player->addComponent(playerComp);
 	player->addComponent(new Rigidbody(glm::vec2(Constants::PLAYER_SPEED, 0.0f)));
-	player->addComponent(new BoxBounds(Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT));
-	playerBounds = new BoxBounds(Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT);
+	playerBounds = new BoxBounds(Constants::PLAYER_WIDTH - 2.0f, Constants::PLAYER_HEIGHT - 2.0f);
 	player->addComponent(playerBounds);
 	// init player sprites
 	layerOne->sprites[spNum]->initSubSprite(myShader);
