@@ -3,6 +3,7 @@
 #include <GameObject.h>
 #include <Rigidbody.h>
 #include <LevelScene.h>
+#include <Game.h>
 
 BoxBounds::BoxBounds(float width, float height) {
 	m_Width = width;
@@ -12,10 +13,11 @@ BoxBounds::BoxBounds(float width, float height) {
 	type = Box;
 	m_EnclosingRadius = std::sqrtf(powf(m_HalfHeight, 2) + powf(m_HalfWidth,2));
 	// load shader for lines
-	if (!shader.load("lineVert for triangles", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
+	if (!shader.load("Line shader", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
+
 	line1 = Line();
 	line2 = Line();
 	line3 = Line();
@@ -51,9 +53,14 @@ void BoxBounds::update(float dt) {
 
 void BoxBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
+	
+
+
 	if (isSelected)
 	{
-		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		std::cout << gameObj->transform->position.x << " and " << gameObj->transform->position.y << '\n';
+		// bottom left is at the center of game object
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, 1.0f));
 		line1.draw(shader, ModelViewMatrix, ProjectionMatrix);
 		line2.draw(shader, ModelViewMatrix, ProjectionMatrix);
 		line3.draw(shader, ModelViewMatrix, ProjectionMatrix);
@@ -110,10 +117,10 @@ void BoxBounds::resolveCollision(GameObject& player)
 
 void BoxBounds::calculateTransform()
 {
-	glm::vec2 p1(gameObj->transform->position.x, gameObj->transform->position.y);						// top left
-	glm::vec2 p2(gameObj->transform->position.x, gameObj->transform->position.y - m_Height);            // bottom left
-	glm::vec2 p3(gameObj->transform->position.x + m_Width, gameObj->transform->position.y - m_Height);  // bottom right
-	glm::vec2 p4(gameObj->transform->position.x + m_Width, gameObj->transform->position.y);				// top right
+	glm::vec2 p1(gameObj->transform->position.x - m_HalfWidth, gameObj->transform->position.y - m_HalfHeight);	// top left
+	glm::vec2 p2(gameObj->transform->position.x - m_HalfWidth, gameObj->transform->position.y + m_HalfHeight);  // bottom left
+	glm::vec2 p3(gameObj->transform->position.x + m_HalfWidth, gameObj->transform->position.y + m_HalfHeight);  // bottom right
+	glm::vec2 p4(gameObj->transform->position.x + m_HalfWidth, gameObj->transform->position.y - m_HalfHeight);	// top right
 
 	line1.initLine(shader, p1.x, p1.y, p2.x, p2.y);
 	line2.initLine(shader, p2.x, p2.y, p3.x, p3.y);
