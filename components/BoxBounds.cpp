@@ -53,14 +53,13 @@ void BoxBounds::update(float dt) {
 
 void BoxBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
-	
-
-
 	if (isSelected)
 	{
 		std::cout << gameObj->transform->position.x << " and " << gameObj->transform->position.y << '\n';
+		//std::cout << ModelViewMatrix.po << " and " << gameObj->transform->position.x << '\n';
 		// bottom left is at the center of game object
-		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, 1.0f));
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x, gameObj->transform->position.y, 1.0f));
+		
 		line1.draw(shader, ModelViewMatrix, ProjectionMatrix);
 		line2.draw(shader, ModelViewMatrix, ProjectionMatrix);
 		line3.draw(shader, ModelViewMatrix, ProjectionMatrix);
@@ -126,6 +125,8 @@ void BoxBounds::calculateTransform()
 	line2.initLine(shader, p2.x, p2.y, p3.x, p3.y);
 	line3.initLine(shader, p3.x, p3.y, p4.x, p4.y);
 	line4.initLine(shader, p4.x, p4.y, p1.x, p1.y);
+
+	//gameObj->addComponent(&line1);
 }
 
 bool BoxBounds::checkCollision(BoxBounds& b1, BoxBounds& b2)
