@@ -1,6 +1,8 @@
 # Geometry Dash Clone 
+<p align="center">
 <img width="645" alt="Screenshot 2022-10-27 at 20 06 30" src="https://user-images.githubusercontent.com/84919282/198377124-1cdf45a4-e9eb-437d-b4f3-5e67c2022019.png">
 <img width="632" alt="Screenshot 2022-10-27 at 20 07 28" src="https://user-images.githubusercontent.com/84919282/198377306-52116b4b-0b95-4f87-bcac-e9acde19a046.png">
+</p>
 
 ## Supported Platforms
 Windows
@@ -9,13 +11,23 @@ Windows
 A geometry dash clone built with OpenGL, glad, glfw and C++. Supports basic functionality of the real game. This is my first big attempt at making a game following modern game-dev standrads.
 
 ## Controls
-Game starts in level editor so most of the controls in there. 
-- `left mouse button` click and hold - move around level editor
-- `left mouse button` click - select objects
-- `right mouse button` click - place objects into a scene
-- `1` - save level
-- `2` - load level
-- `3` - swith to playing the level
+| Key               | Action                     |
+|-------------------|----------------------------|
+| Left mouse        | Select object              |
+| Right mouse       | Place object               |
+| Left mouse + hold | Move around editor         |
+| 1                 | Save level                 |
+| 2                 | Load level                 |
+| 3                 | Switch to level            |
+| CTRL+D            | Duplicate selected object  |
+| UP                | Move selected object up    |
+| DOWN              | Move selected object down  |
+| LEFT              | Move selected object left  |
+| RIGHT             | Move selected object right |
+| SHIFT + direction | Move by small increment    |
+| ESC               | Unselect                   |
+
+
 
 ## Most interseting features
 - Multifunctional Level Editor
