@@ -32,10 +32,8 @@ public:
 	// Inherited via Bounds
 	virtual bool raycast(glm::vec2 position) override;
 private:
-	Line line1;
-	Line line2;
-	Line line3;
-	Line line4;
+	Line quad;
+	
 	Shader shader;
 };
 
