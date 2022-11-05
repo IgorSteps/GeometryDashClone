@@ -19,6 +19,11 @@ Scene* Game::getCurrentScene() {
 	return this->currentScene;
 }
 
+Scene* Game::getScene()
+{
+	return Game::game->getCurrentScene();
+}
+
 void Game::changeScene(int scene)
 {
 	switch (scene) {

@@ -3,7 +3,8 @@
 #include <iostream>
 #include <Game.h>
 #include <LevelEditorScene.h>
-#include <SnapToGrid.h>
+#include <LevelEditorControls.h>
+#include <KL.h>
 
 MenuItem::MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sprite* hoveredSprite, Shader &sh, MainContainer* maincont)
 {
@@ -49,7 +50,7 @@ void MenuItem::update(float dt)
 			obj->removeComponent<MenuItem>(); 
 
 			LevelEditorScene* scene = static_cast<LevelEditorScene*>(Game::game->getCurrentScene());
-			SnapToGrid* snapToGrid = scene->mouseCursor->getComponent<SnapToGrid>();
+			LevelEditorControls* snapToGrid = scene->mouseCursor->getComponent<LevelEditorControls>();
 
 			obj->addComponent(snapToGrid);
 			scene->mouseCursor = obj;
@@ -57,6 +58,10 @@ void MenuItem::update(float dt)
 			isSelected = true;
 			m_MainContainer->setHotButton(this->gameObj);
 		}
+	}
+	if (KL::isKeyPressed(GLFW_KEY_ESCAPE))
+	{
+		isSelected = false;
 	}
 }
 

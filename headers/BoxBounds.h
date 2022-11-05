@@ -1,6 +1,7 @@
 #pragma once
 #include "Bounds.h"
 #include <string>
+#include <Line.h>
 class BoxBounds : public Bounds
 {
 public:
@@ -8,12 +9,14 @@ public:
 	~BoxBounds();
 	
 	void update(float dt);
+	void draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	std::string serialise(int tabSize);
 	static BoxBounds* deserialise();
+	void start();
 	Component* copy();
 	void resolveCollision(GameObject& player);
 
-
+	void calculateTransform();
 	
 
 	// Inherited via Bounds
@@ -25,5 +28,12 @@ public:
 	static BoxBounds* deserialsiedBB;
 	float m_Width, m_Height;
 	float m_HalfWidth, m_HalfHeight;
+
+	// Inherited via Bounds
+	virtual bool raycast(glm::vec2 position) override;
+private:
+	Line quad;
+	
+	Shader shader;
 };
 

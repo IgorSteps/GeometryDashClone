@@ -29,6 +29,7 @@ public:
     Scene* currentScene;
     void changeScene(int scene);
     Scene* getCurrentScene();
+    Scene* getScene();
     // initialize game state (load all shaders/textures/levels)
     void Init();
     // game loop

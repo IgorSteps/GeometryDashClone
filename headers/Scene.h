@@ -13,7 +13,7 @@ public:
 
 	void SceneInit(std::string name);
 	void addGameObject(GameObject* g);
-
+	std::vector<GameObject*> getAllGameObjects();
 	virtual void init()=0;
 	virtual void update(float dt)=0;
 	virtual void draw()=0;

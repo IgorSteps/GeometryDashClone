@@ -81,8 +81,8 @@ int main(int argc, char* argv[])
         //std::cout << glGetError() << std::endl;
         GeometryDashClone.Render();
 
-        if (KL::isKeyPressed(GLFW_KEY_ESCAPE))
-                glfwSetWindowShouldClose(window, true);
+        /*if (KL::isKeyPressed(GLFW_KEY_ESCAPE))
+                glfwSetWindowShouldClose(window, true);*/
 
         ML::endFrame();
         glfwSwapBuffers(window);

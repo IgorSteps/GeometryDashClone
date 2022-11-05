@@ -167,7 +167,7 @@
     <ClInclude Include="headers\Rigidbody.h" />
     <ClInclude Include="headers\Scene.h" />
     <ClInclude Include="headers\Shader.h" />
-    <ClInclude Include="headers\SnapToGrid.h" />
+    <ClInclude Include="headers\LevelEditorControls.h" />
     <ClInclude Include="headers\Sprite.h" />
     <ClInclude Include="headers\Spritesheet.h" />
     <ClInclude Include="headers\Transform.h" />
@@ -202,7 +202,7 @@
     <ClCompile Include="components\Rigidbody.cpp" />
     <ClCompile Include="core\Scene.cpp" />
     <ClCompile Include="core\Shader.cpp" />
-    <ClCompile Include="components\SnapToGrid.cpp" />
+    <ClCompile Include="components\LevelEditorControls.cpp" />
     <ClCompile Include="components\Sprite.cpp" />
     <ClCompile Include="components\Spritesheet.cpp" />
     <ClCompile Include="datastructure\Transform.cpp" />

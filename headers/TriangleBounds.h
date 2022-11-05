@@ -20,9 +20,8 @@ public:
     static TriangleBounds* deseriaise();
 private:
     Shader shader;
-    Line line1;
-    Line line2;
-    Line line3;
+    Line triangle;
+    
     bool broadPhase(BoxBounds& b1);
     bool narrowPhase(BoxBounds& b1);
     glm::vec2 rotatePoint(float angle, glm::vec2 p, glm::vec2 o);
@@ -38,6 +37,9 @@ private:
     const int LEFT = 1;   // 0001
     const int RIGHT = 2;  // 0010
     const int BOTTOM = 4; // 0100
-    const int TOP = 8;    // 1000
+    const int TOP = 8;
+    // Inherited via Bounds
+    virtual bool raycast(glm::vec2 position) override;
+    // 1000
 };
 

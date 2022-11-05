@@ -3,6 +3,7 @@
 #include <GameObject.h>
 #include <Rigidbody.h>
 #include <LevelScene.h>
+#include <Game.h>
 
 BoxBounds::BoxBounds(float width, float height) {
 	m_Width = width;
@@ -10,7 +11,21 @@ BoxBounds::BoxBounds(float width, float height) {
 	m_HalfWidth = m_Width / 2;
 	m_HalfHeight = m_Height / 2;
 	type = Box;
-	m_EnclosingRadius = std::sqrtf(pow(m_HalfHeight, 2) + pow(m_HalfWidth,2));
+	m_EnclosingRadius = std::sqrtf(powf(m_HalfHeight, 2) + powf(m_HalfWidth,2));
+	// load shader for lines
+	if (!shader.load("Line shader", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
+	{
+		std::cout << "failed to load shader" << std::endl;
+	}
+
+	quad = Line();
+	
+	float col[] = { 0.0f, 1.0f, 0.0f };
+	quad.setColour(col);
+	// @TODO different sprites have different w and h
+	quad.SetWidth(38.0f);
+	quad.SetHeight(38.0f);
+	quad.setIsGrid(false);
 }
 
 BoxBounds::~BoxBounds()
@@ -19,8 +34,25 @@ BoxBounds::~BoxBounds()
 }
 
 
+void BoxBounds::start()
+{
+	calculateTransform();
+}
+
+
 void BoxBounds::update(float dt) {
 	//std::cout << "We are insside box bounds" << '\n';
+}
+
+void BoxBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
+{
+	if (isSelected)
+	{
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x - 19.0f, gameObj->transform->position.y - 19.0f, 1.0f));
+		
+		quad.draw(shader, ModelViewMatrix, ProjectionMatrix);
+		
+	}
 }
 
 Component* BoxBounds::copy() 
@@ -70,6 +102,18 @@ void BoxBounds::resolveCollision(GameObject& player)
 	}
 }
 
+void BoxBounds::calculateTransform()
+{
+	glm::vec2 p1(gameObj->transform->position.x - m_HalfWidth, gameObj->transform->position.y - m_HalfHeight);	// top left
+	glm::vec2 p2(gameObj->transform->position.x - m_HalfWidth, gameObj->transform->position.y + m_HalfHeight);  // bottom left
+	glm::vec2 p3(gameObj->transform->position.x + m_HalfWidth, gameObj->transform->position.y + m_HalfHeight);  // bottom right
+	glm::vec2 p4(gameObj->transform->position.x + m_HalfWidth, gameObj->transform->position.y - m_HalfHeight);	// top right
+
+	quad.init(shader);
+	
+
+}
+
 bool BoxBounds::checkCollision(BoxBounds& b1, BoxBounds& b2)
 {
 	float dx = b1.gameObj->transform->position.x - b2.gameObj->transform->position.x;
@@ -94,6 +138,14 @@ float BoxBounds::getWidth()
 float BoxBounds::getHeight()
 {
 	return m_Height;
+}
+
+bool BoxBounds::raycast(glm::vec2 position)
+{
+	return position.x > gameObj->transform->position.x &&
+		position.x < gameObj->transform->position.x + m_Width &&
+		position.y > gameObj->transform->position.y &&
+		position.y < gameObj->transform->position.y + m_Height;
 }
 
 std::string BoxBounds::serialise(int tabSize)
