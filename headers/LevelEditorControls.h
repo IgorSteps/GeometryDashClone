@@ -13,6 +13,8 @@ public:
 	void clearSelectedObjectsAndAdd(glm::vec2 mousePos);
 	void update(float dt);
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
+	void escapeKeyPressed();
+	void clearSelected();
 	// copy() method to copy components
 	Component* copy();
 	std::string serialise(int tabSize);

@@ -1,6 +1,8 @@
 #include "TriangleBounds.h"
 #include "Parser.h"
 #include "GameObject.h"
+#include <Game.h>
+#include <Constants.h>
 
 
 TriangleBounds::TriangleBounds(float base, float h)
@@ -18,18 +20,13 @@ TriangleBounds::TriangleBounds(float base, float h)
         std::cout << "failed to load shader" << std::endl;
     }
 
-    line1 = Line();
-    line2 = Line();
-    line3 = Line();
-
+    triangle = Line();
     float col[] = { 1.0f, 0.0f, 0.0f };
-    line1.setColour(col);
-    line2.setColour(col);
-    line3.setColour(col);
-
-    line1.setIsGrid(false);
-    line2.setIsGrid(false);
-    line3.setIsGrid(false);
+    triangle.SetHeight(20.0f);
+    triangle.SetWidth(20.0f);
+    triangle.setColour(col);
+    triangle.setIsGrid(false);
+    triangle.setIsTriangle(true);
 
 }
 
@@ -50,17 +47,16 @@ float TriangleBounds::getWidth()
 
 void TriangleBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
-    // test
-    //std::cout << m_X1 << "   &    " << m_Y1 << '\n';
-   /* ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    line1.draw(shader, ModelViewMatrix, ProjectionMatrix);
-    line2.draw(shader, ModelViewMatrix, ProjectionMatrix);
-    line3.draw(shader, ModelViewMatrix, ProjectionMatrix);*/
+    if (isSelected)
+    {
+        // center on the spike
+        ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x - m_X1 - m_Base / 2, gameObj->transform->position.y - m_Y2 - m_Base / 2, 1.0f));
+        triangle.draw(shader, ModelViewMatrix, ProjectionMatrix);
+    }
 }
 
 void TriangleBounds::start()
 {
-   
     calculateTransform();
 }
 
@@ -88,10 +84,7 @@ void TriangleBounds::calculateTransform()
     m_X3 = p3.x;
     m_Y3 = p3.y;
 
-   
-    line1.initLine(shader, m_X1, m_Y1, m_X2, m_Y2);
-    line2.initLine(shader, m_X2, m_Y2, m_X3, m_Y3);
-    line3.initLine(shader, m_X3, m_Y3, m_X1, m_Y1);
+    triangle.initTriangle(shader, p1, p2, p3);
 }
 
 bool TriangleBounds::checkCollision(BoxBounds& b1, TriangleBounds& t2)
@@ -232,8 +225,27 @@ int TriangleBounds::computeRegionCode(glm::vec2 point, BoxBounds& b)
 
 bool TriangleBounds::raycast(glm::vec2 position)
 {
-    return false;
+    // Compute vectors
+    glm::vec2 v0(m_X3 - m_X1, m_Y3 - m_Y1);
+    glm::vec2 v1(m_X2 - m_X1, m_Y2 - m_Y1);
+    glm::vec2 v2(position.x - m_X1, position.y - m_Y1);
+
+    // Compute dot products
+    float dot00 = dot(v0, v0);
+    float dot01 = dot(v0, v1);
+    float dot02 = dot(v0, v2);
+    float dot11 = dot(v1, v1);
+    float dot12 = dot(v1, v2);
+
+    // Compute barycentric coordinates
+    float invDenom = 1 / (dot00 * dot11 - dot01 * dot01);
+    float u = (dot11 * dot02 - dot01 * dot12) * invDenom;
+    float v = (dot00 * dot12 - dot01 * dot02) * invDenom;
+
+    // Check if point is in triangle
+    return (u >= 0.0f) && (v >= 0.0f) && (u + v < 1.0f);
 }
+
 
 glm::vec2 TriangleBounds::rotatePoint(float angle, glm::vec2 p, glm::vec2 o)
 {

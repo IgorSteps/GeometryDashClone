@@ -5,6 +5,8 @@
 #include "Constants.h"
 #include <iostream>
 #include <Bounds.h>
+#include <LevelEditorScene.h>
+#include <Game.h>
 
 LevelEditorControls::LevelEditorControls(int gridWidth, int gridHeight, Shader& sh)
 {
@@ -63,11 +65,7 @@ void LevelEditorControls::addGameObjectToSelected(glm::vec2 mousePos)
 
 void LevelEditorControls::clearSelectedObjectsAndAdd(glm::vec2 mousePos)
 {
-	for (GameObject* go : selectedGameObjects)
-	{
-		go->getComponent<Bounds>()->isSelected = false;
-	}
-	selectedGameObjects.clear();
+	clearSelected();
 	addGameObjectToSelected(mousePos);
 }
 
@@ -80,6 +78,10 @@ void LevelEditorControls::update(float dt)
 	}
 	if (isEditing)
 	{
+		if (selectedGameObjects.size() != 0)
+		{
+			clearSelected();
+		}
 		updateSpritePosition();
 	}
 
@@ -101,6 +103,11 @@ void LevelEditorControls::update(float dt)
 			clearSelectedObjectsAndAdd(glm::vec2(ML::getX(), ML::getY()));
 		}
 	}
+
+	if (KL::isKeyPressed(GLFW_KEY_ESCAPE))
+	{
+		escapeKeyPressed();
+	}
 	
 }
 
@@ -113,6 +120,24 @@ void LevelEditorControls::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::
 	{
 		sprite->draw(shader, ModelViewMatrix, ProjectionMatrix);
 	}
+}
+
+void LevelEditorControls::escapeKeyPressed()
+{
+	GameObject* newGameObject = new GameObject("Mouse Cursor", gameObj->transform->copy());
+	newGameObject->addComponent(this);
+	LevelEditorScene* scene = (LevelEditorScene*)Game::game->getCurrentScene();
+	scene->mouseCursor = newGameObject;
+	isEditing = false;
+}
+
+void LevelEditorControls::clearSelected()
+{
+	for (GameObject* go : selectedGameObjects)
+	{
+		go->getComponent<Bounds>()->isSelected = false;
+	}
+	selectedGameObjects.clear();
 }
 
 Component* LevelEditorControls::copy() 

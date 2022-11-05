@@ -20,9 +20,8 @@ public:
     static TriangleBounds* deseriaise();
 private:
     Shader shader;
-    Line line1;
-    Line line2;
-    Line line3;
+    Line triangle;
+    
     bool broadPhase(BoxBounds& b1);
     bool narrowPhase(BoxBounds& b1);
     glm::vec2 rotatePoint(float angle, glm::vec2 p, glm::vec2 o);

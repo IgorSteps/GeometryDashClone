@@ -4,6 +4,7 @@
 #include <Game.h>
 #include <LevelEditorScene.h>
 #include <LevelEditorControls.h>
+#include <KL.h>
 
 MenuItem::MenuItem(int x, int y, int width, int height, Sprite* buttonSprite, Sprite* hoveredSprite, Shader &sh, MainContainer* maincont)
 {
@@ -57,6 +58,10 @@ void MenuItem::update(float dt)
 			isSelected = true;
 			m_MainContainer->setHotButton(this->gameObj);
 		}
+	}
+	if (KL::isKeyPressed(GLFW_KEY_ESCAPE))
+	{
+		isSelected = false;
 	}
 }
 

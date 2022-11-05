@@ -45,6 +45,11 @@ void Line::setIsGrid(bool var)
 	isGrid = var;
 }
 
+void Line::setIsTriangle(bool var)
+{
+	isTriangle = var;
+}
+
 // set up a quad not an actual line
 void Line::init(Shader& shader) 
 {
@@ -137,6 +142,50 @@ void Line::initLine(Shader& shader, float startX, float startY, float endX, floa
 	glBindVertexArray(0);
 }
 
+void Line::initTriangle(Shader& shader, glm::vec2 p1, glm::vec2 p2, glm::vec2 p3)
+{
+	//Create the geometry
+	float vert[] = {
+		p1.x,		p1.y,	0.0f,	// left
+		p2.x,		p2.y,	0.0f,	// top 
+		p3.x,		p3.y,	0.0f,	// right
+	};
+
+	// colour array
+	float col[]{
+		colour[0], colour[1], colour[2],
+		colour[0], colour[1], colour[2],
+		colour[0], colour[1], colour[2],
+	};
+
+	//Generate buffers
+	glGenVertexArrays(1, &m_vaoID);
+	glBindVertexArray(m_vaoID);
+	glGenBuffers(2, m_vboID);		// we need 2 VBOs - vertices, colours
+
+	/// --------VERTICIES--------
+	// VBO[0]
+	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);//initialises data storage of VBO
+	//set the position - linked to the position shader input
+	GLint vertexLocation = glGetAttribLocation(shader.handle(), "in_Position");
+	glEnableVertexAttribArray(vertexLocation);
+	glVertexAttribPointer(vertexLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	/// --------COLOURS--------
+	// Bind and initilise storage of VBO[1] & m_eboID[1]
+	glBindBuffer(GL_ARRAY_BUFFER, m_vboID[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(col), col, GL_STATIC_DRAW);
+	// set the colour - linked to the colour shader input 
+	GLint colorLocation = glGetAttribLocation(shader.handle(), "in_Color");
+	glEnableVertexAttribArray(colorLocation);
+	glVertexAttribPointer(colorLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	//good practice to bind to 0.
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
+}
+
 // draw a quad or an actual line
 void Line::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
@@ -157,11 +206,16 @@ void Line::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Projectio
 	{
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}
+	else if (isTriangle)
+	{
+		glDrawArrays(GL_LINE_LOOP, 0, 3);
+	}
 	else
 	{
 		glDrawElements(GL_LINE_LOOP, 6, GL_UNSIGNED_INT, 0);
 	}
 
+	
 	glBindVertexArray(0); //unbind the vertex array object
 	glUseProgram(0); //turn off the current shader
 }
