@@ -8,9 +8,6 @@ Windows
 ## Overview
 A geometry dash clone built with OpenGL, glad, glfw and C++. Supports basic functionality of the real game. This is my first big attempt at making a game following modern game-dev standrads.
 
-## Development
-I used Agile methodolgy with 2 week long sprints. Trello Progress board - https://trello.com/b/hYyOTNNf/gd-progress
-
 ## Controls
 Game starts in level editor so most of the controls in there. 
 - `left mouse button` click and hold - move around level editor
@@ -26,4 +23,3 @@ Game starts in level editor so most of the controls in there.
 - Traingale collisions are implemented through broad/narrow phase collision detections. Narrowphase is using Cohen Sutherland pollygon clipping algorithm.
 - Infinite backgrounds
 - Serialisation and deserialisation from JSON file
-- Correct Git workflow with branches and PRs
