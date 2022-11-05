@@ -155,11 +155,11 @@ void Line::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Projectio
 	glBindVertexArray(m_vaoID);		// select first VAO
 	if (isGrid)
 	{
-		glDrawElements(GL_LINE_LOOP, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}
 	else
 	{
-		glDrawArrays(GL_LINES, 0, 2);
+		glDrawElements(GL_LINE_LOOP, 6, GL_UNSIGNED_INT, 0);
 	}
 
 	glBindVertexArray(0); //unbind the vertex array object

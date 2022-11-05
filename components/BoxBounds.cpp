@@ -22,11 +22,10 @@ BoxBounds::BoxBounds(float width, float height) {
 	
 	float col[] = { 0.0f, 1.0f, 0.0f };
 	quad.setColour(col);
-	quad.SetWidth(42.0f);
-	quad.SetHeight(42.0f);
-	quad.setIsGrid(true);
-	
-
+	// @TODO different sprites have different w and h
+	quad.SetWidth(38.0f);
+	quad.SetHeight(38.0f);
+	quad.setIsGrid(false);
 }
 
 BoxBounds::~BoxBounds()
@@ -49,10 +48,7 @@ void BoxBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& Projecti
 {
 	if (isSelected)
 	{
-		//	std::cout << gameObj->transform->position.x << " and " << gameObj->transform->position.y << '\n';
-		//std::cout << ModelViewMatrix.po << " and " << gameObj->transform->position.x << '\n';
-		//ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f - 21.0f, 0.0f - 21.0f, 1.0f));
-		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x - 21.0f, gameObj->transform->position.y - 21.0f, 1.0f));
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x - 19.0f, gameObj->transform->position.y - 19.0f, 1.0f));
 		
 		quad.draw(shader, ModelViewMatrix, ProjectionMatrix);
 		

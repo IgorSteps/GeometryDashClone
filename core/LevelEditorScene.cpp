@@ -258,7 +258,7 @@ void LevelEditorScene::savetoFile(std::string name)
 void LevelEditorScene::draw()
 {
 	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
-	//grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
+	grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
 	editingButtons->draw(myShader, ModelViewMatrix, ProjectionMatrix);
 	mouseCursor->draw(myShader, ModelViewMatrix, ProjectionMatrix);
 }
