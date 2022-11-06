@@ -22,8 +22,8 @@ TriangleBounds::TriangleBounds(float base, float h)
 
     triangle = Line();
     float col[] = { 1.0f, 0.0f, 0.0f };
-    triangle.SetHeight(20.0f);
-    triangle.SetWidth(20.0f);
+    triangle.SetHeight(42.0f);
+    triangle.SetWidth(42.0f);
     triangle.setColour(col);
     triangle.setIsGrid(false);
     triangle.setIsTriangle(true);
@@ -50,7 +50,11 @@ void TriangleBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& Pro
     if (isSelected)
     {
         // center on the spike
-        ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x - m_X1 - m_Base / 2, gameObj->transform->position.y - m_Y2 - m_Base / 2, 1.0f));
+        ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x,
+            gameObj->transform->position.y, 1.0f));
+        // rotate with the spike
+        ModelViewMatrix = glm::rotate(ModelViewMatrix, glm::radians(gameObj->transform->rotateion),
+            glm::vec3(0.0f, 0.0f, 1.0f));
         triangle.draw(shader, ModelViewMatrix, ProjectionMatrix);
     }
 }
@@ -84,7 +88,9 @@ void TriangleBounds::calculateTransform()
     m_X3 = p3.x;
     m_Y3 = p3.y;
 
-    triangle.initTriangle(shader, p1, p2, p3);
+    // @TODO this only works for trinagles of 42x42
+    // make possible to work with all others aswell
+    triangle.initTriangle(shader, glm::vec2(-21.0f,21.0f), glm::vec2(0.0f, -21.0f), glm::vec2(21.0f, 21.0f));
 }
 
 bool TriangleBounds::checkCollision(BoxBounds& b1, TriangleBounds& t2)

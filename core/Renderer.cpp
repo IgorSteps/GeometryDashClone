@@ -30,6 +30,8 @@ void Renderer::render(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 		{
 			ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(g->transform->position.x,
 				g->transform->position.y, 1.0f));
+			ModelViewMatrix = glm::rotate(ModelViewMatrix, glm::radians(g->transform->rotateion),
+				glm::vec3(0.0f, 0.0f, 1.0f));
 			if (g->isColor)
 			{
 				g->draw(shader, ModelViewMatrix, ProjectionMatrix);
@@ -50,7 +52,8 @@ void Renderer::render(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& Pro
 
 			// pass game object position to the model view matrix
 			ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(g->transform->position.x, g->transform->position.y, 1.0f));
-
+			ModelViewMatrix = glm::rotate(ModelViewMatrix, glm::radians(g->transform->rotateion),
+				glm::vec3(0.0f, 0.0f, 1.0f));
 			g->draw(shader, ModelViewMatrix, ProjectionMatrix);
 			g->transform = oldTransform;
 		}

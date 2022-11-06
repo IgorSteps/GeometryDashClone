@@ -20,6 +20,7 @@ public:
 	void clearSelected();
 	void moveObjects(Direction direction, float scale);
 	void duplicate();
+	void rotate(float d);
 	// copy() method to copy components
 	Component* copy();
 	std::string serialise(int tabSize);

@@ -7,6 +7,7 @@
 #include <Bounds.h>
 #include <LevelEditorScene.h>
 #include <Game.h>
+#include <TriangleBounds.h>
 
 LevelEditorControls::LevelEditorControls(int gridWidth, int gridHeight, Shader& sh)
 {
@@ -149,6 +150,19 @@ void LevelEditorControls::update(float dt)
 			m_debounceKeyLeft = m_debounceKey;
 		}
 	}
+
+
+	if (m_debounceKeyLeft <= 0 && KL::isKeyPressed(GLFW_KEY_Q))
+	{
+		rotate(90.0f);
+		m_debounceKeyLeft = m_debounceKey;
+	}
+	else if (m_debounceKeyLeft <= 0 && KL::isKeyPressed(GLFW_KEY_E))
+	{
+		rotate(-90.0f);
+		m_debounceKeyLeft = m_debounceKey;
+		std::cout << "Rotating\n";
+	}
 }
 
 void LevelEditorControls::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
@@ -217,6 +231,14 @@ void LevelEditorControls::duplicate()
 	{
 		Game::game->getCurrentScene()->addGameObject(go->copy(shader));
 	}
+}
+
+void LevelEditorControls::rotate(float d)
+{
+	for (GameObject* go : selectedGameObjects)
+	{
+		go->transform->rotateion += d;
+	} 
 }
 
 Component* LevelEditorControls::copy() 
