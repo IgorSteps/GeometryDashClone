@@ -14,18 +14,22 @@ A geometry dash clone built with OpenGL, glad, glfw and C++. Supports basic func
 | Key               | Action                     |
 |-------------------|----------------------------|
 | Left mouse        | Select object              |
+| SHIFT + left mouse| Multiselect                |
 | Right mouse       | Place object               |
 | Left mouse + hold | Move around editor         |
-| 1                 | Save level                 |
-| 2                 | Load level                 |
-| 3                 | Switch to level            |
-| CTRL+D            | Duplicate selected object  |
+| CTRL+D            | Duplicate selected object(s)|
 | UP                | Move selected object up    |
 | DOWN              | Move selected object down  |
 | LEFT              | Move selected object left  |
 | RIGHT             | Move selected object right |
 | SHIFT + direction | Move by small increment    |
+| Q                 | Rotate left                |
+| E                 | Rotate right               |
 | ESC               | Unselect                   |
+| 1                 | Save level                 |
+| 2                 | Load level                 |
+| 3                 | Switch to level            |
+| SPACE             | Jump                       |
 
 
 
