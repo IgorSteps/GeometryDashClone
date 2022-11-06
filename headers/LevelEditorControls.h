@@ -1,6 +1,9 @@
 #pragma once
 #include "Sprite.h"
 #include <vector>
+enum Direction {
+	UP, DOWN, LEFT, RIGHT
+};
 class LevelEditorControls : public Component
 {
 public:
@@ -15,6 +18,8 @@ public:
 	void draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix);
 	void escapeKeyPressed();
 	void clearSelected();
+	void moveObjects(Direction direction, float scale);
+	void duplicate();
 	// copy() method to copy components
 	Component* copy();
 	std::string serialise(int tabSize);
@@ -28,8 +33,10 @@ public:
 private:
 	// when user presses it only registers one click
 	float m_debounceTime, m_debounceLeft;
+	float m_debounceKey, m_debounceKeyLeft;
 	int m_gridWidth, m_gridHeight;
 	bool isEditing = false;
+	bool shiftPressed = false;
 	std::vector<GameObject*> selectedGameObjects;
 };
 

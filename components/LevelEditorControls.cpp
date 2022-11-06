@@ -14,7 +14,8 @@ LevelEditorControls::LevelEditorControls(int gridWidth, int gridHeight, Shader& 
 	m_gridHeight = gridHeight;
 	m_debounceTime = 0.2f;
 	m_debounceLeft = 0.0f;
-	
+	m_debounceKey = 0.2f;
+	m_debounceKeyLeft=0.0f;
 	shader = sh;
 	
 }
@@ -72,6 +73,7 @@ void LevelEditorControls::clearSelectedObjectsAndAdd(glm::vec2 mousePos)
 void LevelEditorControls::update(float dt)
 {
 	m_debounceLeft -= dt;
+	m_debounceKeyLeft -= dt;
 	if (!isEditing && gameObj->getComponent<Sprite>())
 	{
 		isEditing = true;
@@ -108,7 +110,45 @@ void LevelEditorControls::update(float dt)
 	{
 		escapeKeyPressed();
 	}
+
+	if (KL::isKeyPressed(GLFW_KEY_LEFT_SHIFT))
+	{
+		shiftPressed = true;
+	} 
+	else
+	{
+		shiftPressed = false;
+	}
 	
+	if (m_debounceKeyLeft <= 0 && KL::isKeyPressed(GLFW_KEY_LEFT))
+	{
+		moveObjects(LEFT, shiftPressed ? 0.1f : 1.0f); 
+		m_debounceKeyLeft = m_debounceKey;
+	}
+	else if (m_debounceKeyLeft <= 0 && KL::isKeyPressed(GLFW_KEY_RIGHT))
+	{
+		moveObjects(RIGHT, shiftPressed ? 0.1f : 1.0f);
+		m_debounceKeyLeft = m_debounceKey;
+	} 
+	else if (m_debounceKeyLeft <= 0 &&  KL::isKeyPressed(GLFW_KEY_UP))
+	{
+		moveObjects(UP, shiftPressed ? 0.1f : 1.0f);
+		m_debounceKeyLeft = m_debounceKey;
+	}
+	else if (m_debounceKeyLeft <= 0 &&  KL::isKeyPressed(GLFW_KEY_DOWN))
+	{
+		moveObjects(DOWN, shiftPressed ? 0.1f : 1.0f);
+		m_debounceKeyLeft = m_debounceKey;
+	}
+
+	if (m_debounceKeyLeft <= 0 && KL::isKeyPressed(GLFW_KEY_D))
+	{
+		if (KL::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
+		{
+			duplicate();
+			m_debounceKeyLeft = m_debounceKey;
+		}
+	}
 }
 
 void LevelEditorControls::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
@@ -138,6 +178,45 @@ void LevelEditorControls::clearSelected()
 		go->getComponent<Bounds>()->isSelected = false;
 	}
 	selectedGameObjects.clear();
+}
+
+void LevelEditorControls::moveObjects(Direction direction, float scale)
+{
+	glm::vec2 distance{};
+
+	switch (direction)
+	{
+		case UP:
+			distance.y -= Constants::TILE_HEIGHT * scale;
+			break;
+		case DOWN:
+			distance.y = Constants::TILE_HEIGHT * scale;
+			break;
+		case LEFT:
+			distance.x -= Constants::TILE_WIDTH * scale;
+			break;
+		case RIGHT:
+			distance.x = Constants::TILE_WIDTH * scale;
+			break;
+		default:
+			std::cout << "Unknown direction enum: '" << direction << "'" << std::endl;
+			exit(-1);
+			break; 
+	}
+
+	for (GameObject* go : selectedGameObjects)
+	{
+		go->transform->position.x += distance.x;
+		go->transform->position.y += distance.y;
+	}
+}
+
+void LevelEditorControls::duplicate()
+{
+	for (GameObject* go : selectedGameObjects)
+	{
+		Game::game->getCurrentScene()->addGameObject(go->copy(shader));
+	}
 }
 
 Component* LevelEditorControls::copy() 
