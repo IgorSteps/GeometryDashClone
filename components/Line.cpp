@@ -23,11 +23,12 @@ Line::~Line() {
 	glDeleteVertexArrays(1, &m_vaoID);
 }
 
-void Line::setColour(float col[3]) 
+void Line::setColour(float col[4]) 
 {
 	colour[0] = col[0];
 	colour[1] = col[1];
 	colour[2] = col[2];
+	colour[3] = col[3];
 }
 
 void Line::SetWidth(float size)
@@ -63,10 +64,10 @@ void Line::init(Shader& shader)
 
 	// colour array
 	float col[]{
-		colour[0], colour[1], colour[2],
-		colour[0], colour[1], colour[2],
-		colour[0], colour[1], colour[2],
-		colour[0], colour[1], colour[2],
+		colour[0], colour[1], colour[2], colour[3],
+		colour[0], colour[1], colour[2], colour[3],
+		colour[0], colour[1], colour[2], colour[3],
+		colour[0], colour[1], colour[2], colour[3],
 	};
 
 	unsigned int indices[] = {  // note that we start from 0!
@@ -101,7 +102,7 @@ void Line::init(Shader& shader)
 	// set the colour - linked to the colour shader input 
 	GLint colorLocation = glGetAttribLocation(shader.handle(), "in_Color");
 	glEnableVertexAttribArray(colorLocation);
-	glVertexAttribPointer(colorLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(colorLocation, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
 	//good practice to bind to 0.
 	glEnableVertexAttribArray(0);
@@ -153,9 +154,9 @@ void Line::initTriangle(Shader& shader, glm::vec2 p1, glm::vec2 p2, glm::vec2 p3
 
 	// colour array
 	float col[]{
-		colour[0], colour[1], colour[2],
-		colour[0], colour[1], colour[2],
-		colour[0], colour[1], colour[2],
+		colour[0], colour[1], colour[2], colour[3],
+		colour[0], colour[1], colour[2], colour[3],
+		colour[0], colour[1], colour[2], colour[3],
 	};
 
 	//Generate buffers
@@ -179,7 +180,7 @@ void Line::initTriangle(Shader& shader, glm::vec2 p1, glm::vec2 p2, glm::vec2 p3
 	// set the colour - linked to the colour shader input 
 	GLint colorLocation = glGetAttribLocation(shader.handle(), "in_Color");
 	glEnableVertexAttribArray(colorLocation);
-	glVertexAttribPointer(colorLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(colorLocation, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
 	//good practice to bind to 0.
 	glEnableVertexAttribArray(0);

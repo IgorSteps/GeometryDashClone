@@ -161,7 +161,6 @@ void LevelEditorControls::update(float dt)
 	{
 		rotate(-90.0f);
 		m_debounceKeyLeft = m_debounceKey;
-		std::cout << "Rotating\n";
 	}
 }
 

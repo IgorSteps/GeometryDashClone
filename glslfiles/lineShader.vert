@@ -4,8 +4,8 @@ uniform mat4 ProjectionMatrix;
 uniform mat4 ModelViewMatrix;
 
 in vec3 in_Position; // Position coming in
-in vec3 in_Color; // colour coming in
-out vec3 ex_Color; // colour leaving the vertex,
+in vec4 in_Color; // colour coming in
+out vec4 ex_Color; // colour leaving the vertex,
 
 //this will be sent to the fragment shader
 void main(void)

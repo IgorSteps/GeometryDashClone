@@ -21,7 +21,7 @@ TriangleBounds::TriangleBounds(float base, float h)
     }
 
     triangle = Line();
-    float col[] = { 1.0f, 0.0f, 0.0f };
+    float col[] = { 1.0f, 0.0f, 0.0f, 1.0f };
     triangle.SetHeight(42.0f);
     triangle.SetWidth(42.0f);
     triangle.setColour(col);
