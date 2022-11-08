@@ -13,10 +13,12 @@ A geometry dash clone built with OpenGL, glad, glfw and C++. Supports basic func
 ## Controls
 | Key               | Action                     |
 |-------------------|----------------------------|
-| Left mouse        | Select object              |
-| SHIFT + left mouse| Multiselect                |
-| Right mouse       | Place object               |
-| Left mouse + hold | Move around editor         |
+| MOUSE_LEFT        | Select object              |
+| MOUSE_LEFT + DRAG | Select multiple objects    |
+| MOUSE_LEFT + SHIFT| Select multiple objects    |
+| MOUSE_RIGHT       | Place object               |
+| MOUSE_MIDDLE      | Move around editor         |
+| BACKSPACE         | Delete object(s)           |
 | CTRL+D            | Duplicate selected object(s)|
 | UP                | Move selected object up    |
 | DOWN              | Move selected object down  |
