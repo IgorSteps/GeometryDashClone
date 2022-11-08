@@ -19,6 +19,20 @@ LevelEditorControls::LevelEditorControls(int gridWidth, int gridHeight, Shader& 
 	m_debounceKeyLeft=0.0f;
 	shader = sh;
 	
+
+
+	// initilise a box select sprite
+	if (!shaderLine.load("Line Shader for LevelEditorControls", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
+	{
+		std::cout << "failed to load shader" << std::endl;
+	}
+	box = Line();
+	box.SetHeight(10.0f);
+	box.SetWidth(10.0f);
+	float col[] = { 1.0f, 1.0f, 1.0f, .3f };
+	box.setColour(col);
+	box.setIsGrid(true);
+	box.init(shaderLine);
 }
 
 LevelEditorControls::~LevelEditorControls()
@@ -90,8 +104,9 @@ void LevelEditorControls::update(float dt)
 
 	if (ML::getY() < Constants::TAB_OFFSET_Y &&
 		ML::mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) &&
-		m_debounceLeft < 0.0f)
-	{
+		m_debounceLeft < 0.0f &&
+		!wasDragged)
+	{	
 		m_debounceLeft = m_debounceTime;
 		if (isEditing)
 		{
@@ -105,6 +120,26 @@ void LevelEditorControls::update(float dt)
 		{
 			clearSelectedObjectsAndAdd(glm::vec2(ML::getX(), ML::getY()));
 		}
+	}
+	else if (!ML::mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) && wasDragged)
+	{
+		wasDragged = false;
+		clearSelected();
+		std::vector<GameObject*> objs = boxSelect(mousePos.at(0).x, mousePos.at(0).y, m_DragWidth, m_DragHeight);
+		for (GameObject* go : objs)
+		{
+			selectedGameObjects.push_back(go);
+			Bounds* b = go->getComponent<Bounds>();
+			if (b != nullptr)
+			{
+				b->isSelected = true;
+			}
+		}
+	}
+	else
+	{
+		// clear mouse pos when no drag is happening
+		mousePos.clear();
 	}
 
 	if (KL::isKeyPressed(GLFW_KEY_ESCAPE))
@@ -166,12 +201,55 @@ void LevelEditorControls::update(float dt)
 
 void LevelEditorControls::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::mat4& ProjectionMatrix)
 {
-	Sprite* sprite = this->gameObj->getComponent<Sprite>();
-	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(this->gameObj->transform->position.x,
-		this->gameObj->transform->position.y, 0.0f));
-	if (sprite != nullptr)
+	if (isEditing)
 	{
-		sprite->draw(shader, ModelViewMatrix, ProjectionMatrix);
+		Sprite* sprite = this->gameObj->getComponent<Sprite>();
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(this->gameObj->transform->position.x,
+			this->gameObj->transform->position.y, 0.0f));
+		if (sprite != nullptr)
+		{
+			sprite->draw(shader, ModelViewMatrix, ProjectionMatrix);
+		}
+		
+	}
+	else if (ML::isDragging() && ML::mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT))
+	{
+		/*if (!wasDragged)
+		{
+			mousePos.clear();
+		}*/
+		wasDragged = true;
+
+		m_DragX = ML::getX();
+		m_DragY = ML::getY();
+		// to center
+		mousePos.push_back(glm::vec2(m_DragX, m_DragY));
+
+		m_DragWidth = ML::getX() - mousePos.at(0).x  ;
+		m_DragHeight =  ML::getY() - mousePos.at(0).y ;
+
+		// scale factors
+		float scaleX = m_DragWidth;
+		float scaleY = m_DragHeight;
+
+		// we need width and height +ve
+		if (m_DragWidth < 0)
+		{
+			m_DragWidth *= -1;
+		}
+		if (m_DragHeight < 0)
+		{
+			m_DragHeight *= -1;
+		}
+
+		// scale factor
+		glm::vec2 scale(scaleX /10.0f, scaleY /10.0f);
+		// origin at first mouse X and Y
+		ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(mousePos.at(0).x, mousePos.at(0).y, 1.0f));
+		// scale in drag w and h
+		ModelViewMatrix = glm::scale(ModelViewMatrix, glm::vec3(scale, 1.0f));
+		
+		box.draw(shaderLine, ModelViewMatrix, ProjectionMatrix);
 	}
 }
 
@@ -238,6 +316,31 @@ void LevelEditorControls::rotate(float d)
 	{
 		go->transform->rotateion += d;
 	} 
+}
+
+std::vector<GameObject*> LevelEditorControls::boxSelect(float x, float y, float w, float h)
+{
+	float x0 = x + Game::game->getCurrentScene()->camera->position.x;
+	float y0 = y + Game::game->getCurrentScene()->camera->position.y;
+	std::vector<GameObject*> objs;
+	for (GameObject* go : Game::game->getCurrentScene()->getAllGameObjects())
+	{
+		Bounds* b = go->getComponent<Bounds>();
+		if (b != nullptr)
+		{
+			// as our origin is stationary we need to subtract w or h to check if
+			// object is within box select if user selects from the bottom right/left
+			// and top right
+			if(go->transform->position.x + b->getWidth() <= x0 + w &&
+				go->transform->position.y + b->getHeight() <= y0 + h &&
+				go->transform->position.x >= x0 - w &&
+				go->transform->position.y >= y0 - h)
+				{
+					objs.push_back(go);
+				}
+		}
+	}
+	return objs;
 }
 
 Component* LevelEditorControls::copy() 
