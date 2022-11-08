@@ -209,10 +209,16 @@ void LevelEditorScene::update(float dt)
 		for (GameObject* g : gameObjectsToRemove)
 		{
 			gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), g), gameObjects.end());
-			// remove from renderer as well!
-			// @Todo there is still a memory reference somewhere
 			renderer->gameObjects.erase(std::remove(renderer->gameObjects.begin(), renderer->gameObjects.end(), g), renderer->gameObjects.end());
-			delete g;
+			
+			// @TODO 
+			// game crashes if you 
+			//				delete object -> save level -> load level
+			// but these work: 
+			//				delete object -> save -> switch to level
+			//				fresh level -> drop object -> save -> delete -> load
+
+			
 		}
 		gameObjectsToRemove.clear();
 	}
