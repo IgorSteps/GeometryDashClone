@@ -36,6 +36,7 @@ public:
 
 private:
 	// when user presses it only registers one click
+	float x, y;
 	float m_debounceTime, m_debounceLeft;
 	float m_debounceKey, m_debounceKeyLeft;
 	std::vector<glm::vec2> mousePos;

@@ -203,6 +203,19 @@ void LevelEditorScene::update(float dt)
 	{
 		Game::game->changeScene(1);
 	}
+
+	if (gameObjectsToRemove.size() > 0)
+	{
+		for (GameObject* g : gameObjectsToRemove)
+		{
+			gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), g), gameObjects.end());
+			// remove from renderer as well!
+			// @Todo there is still a memory reference somewhere
+			renderer->gameObjects.erase(std::remove(renderer->gameObjects.begin(), renderer->gameObjects.end(), g), renderer->gameObjects.end());
+			delete g;
+		}
+		gameObjectsToRemove.clear();
+	}
  }
 
 void LevelEditorScene::importLevel(std::string filename)

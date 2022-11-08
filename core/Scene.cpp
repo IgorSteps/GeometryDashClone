@@ -22,6 +22,11 @@ void Scene::addGameObject(GameObject* g) {
 	}
 }
 
+void Scene::removeGameObject(GameObject* g)
+{
+	gameObjectsToRemove.push_back(g);
+}
+
 std::vector<GameObject*> Scene::getAllGameObjects()
 {
 	return gameObjects;

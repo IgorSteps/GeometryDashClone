@@ -125,7 +125,7 @@ void LevelEditorControls::update(float dt)
 	{
 		wasDragged = false;
 		clearSelected();
-		std::vector<GameObject*> objs = boxSelect(mousePos.at(0).x, mousePos.at(0).y, m_DragWidth, m_DragHeight);
+		std::vector<GameObject*> objs = boxSelect(x,y, m_DragWidth, m_DragHeight);
 		for (GameObject* go : objs)
 		{
 			selectedGameObjects.push_back(go);
@@ -176,7 +176,14 @@ void LevelEditorControls::update(float dt)
 		moveObjects(DOWN, shiftPressed ? 0.1f : 1.0f);
 		m_debounceKeyLeft = m_debounceKey;
 	}
-
+	else if (m_debounceKeyLeft <= 0 && KL::isKeyPressed(GLFW_KEY_BACKSPACE))
+	{
+		for (GameObject* go : selectedGameObjects)
+		{
+			Game::game->getCurrentScene()->removeGameObject(go);
+		}
+		selectedGameObjects.clear();
+	}
 	if (m_debounceKeyLeft <= 0 && KL::isKeyPressed(GLFW_KEY_D))
 	{
 		if (KL::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
@@ -231,15 +238,18 @@ void LevelEditorControls::draw(Shader& shader, glm::mat4& ModelViewMatrix, glm::
 		// scale factors
 		float scaleX = m_DragWidth;
 		float scaleY = m_DragHeight;
-
+		x = mousePos.at(0).x;
+		y = mousePos.at(0).y;
 		// we need width and height +ve
 		if (m_DragWidth < 0)
 		{
 			m_DragWidth *= -1;
+			x -= m_DragWidth;
 		}
 		if (m_DragHeight < 0)
 		{
 			m_DragHeight *= -1;
+			y -= m_DragHeight;
 		}
 
 		// scale factor
@@ -333,8 +343,8 @@ std::vector<GameObject*> LevelEditorControls::boxSelect(float x, float y, float 
 			// and top right
 			if(go->transform->position.x + b->getWidth() <= x0 + w &&
 				go->transform->position.y + b->getHeight() <= y0 + h &&
-				go->transform->position.x >= x0 - w &&
-				go->transform->position.y >= y0 - h)
+				go->transform->position.x >= x0 &&
+				go->transform->position.y >= y0)
 				{
 					objs.push_back(go);
 				}
