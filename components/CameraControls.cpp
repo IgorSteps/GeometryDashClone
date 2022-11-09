@@ -18,7 +18,7 @@ CameraControls::CameraControls(CameraControls& cc)
 
 void CameraControls::update(float dt) 
 {
-	if (ML::mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT))
+	if (ML::mouseButtonDown(GLFW_MOUSE_BUTTON_MIDDLE))
 	{
 		float dx = ML::getX() + ML::getDx() - m_prevMx;
 		float dy = ML::getY() + ML::getDy() - m_prevMy;

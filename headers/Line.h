@@ -28,7 +28,7 @@ public:
 	void setIsTriangle(bool var);
 	float const& getWidth();
 	float const& getHeight();
-	float colour[3];
+	float colour[4];
 private:
 	unsigned int m_vaoID;		// id for Vertex Array Object
 	unsigned int m_vboID[2];	// ids for Vertex Buffer Objects

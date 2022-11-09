@@ -13,6 +13,7 @@ public:
 
 	void SceneInit(std::string name);
 	void addGameObject(GameObject* g);
+	void removeGameObject(GameObject* g);
 	std::vector<GameObject*> getAllGameObjects();
 	virtual void init()=0;
 	virtual void update(float dt)=0;
@@ -21,5 +22,6 @@ public:
 	std::string name;
 	Camera* camera;
 	std::vector<GameObject*> gameObjects;
+	std::vector<GameObject*> gameObjectsToRemove;
 	Renderer* renderer;
 };

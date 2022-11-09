@@ -14,7 +14,7 @@ Grid::Grid()
 	numXLines = 18; // number of horizontal lines
 
 	// lines color
-	float col[] = { .75f, .75f, .75f };
+	float col[] = { .75f, .75f, .75f , .3f};
 
 	// initilise vertical lines
 	lineVert = Line();

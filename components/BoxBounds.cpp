@@ -20,7 +20,7 @@ BoxBounds::BoxBounds(float width, float height) {
 
 	quad = Line();
 	
-	float col[] = { 0.0f, 1.0f, 0.0f };
+	float col[] = { 0.0f, 1.0f, 0.0f, 1.0f };
 	quad.setColour(col);
 	// @TODO different sprites have different w and h
 	quad.SetWidth(38.0f);
