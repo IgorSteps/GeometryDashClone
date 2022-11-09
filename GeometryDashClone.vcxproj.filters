@@ -150,6 +150,9 @@
     <ClInclude Include="headers\TriangleBounds.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="headers\Portal.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -246,6 +249,9 @@
       <Filter>Source Files\ui</Filter>
     </ClCompile>
     <ClCompile Include="components\TriangleBounds.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="components\Portal.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>

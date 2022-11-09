@@ -7,6 +7,8 @@
 
 Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float colourOne[], float colourTwo[])
 {
+	m_State = NORMAL;
+
 	this->layerOne = layerOne;
 	this->layerTwo = layerTwo;
 	this->layerThree = layerThree;

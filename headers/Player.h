@@ -1,5 +1,10 @@
 #pragma once
 #include "Sprite.h"
+enum PlayerState
+{
+	NORMAL,
+	FLY
+};
 class Player : public Component
 {
 public:
@@ -10,7 +15,7 @@ public:
 	std::string serialise(int tabSize);
 	void die();
 	bool onGround = true;
-	
+	PlayerState m_State;
 private:
 	void addJumpForce();
 	Sprite* layerOne;

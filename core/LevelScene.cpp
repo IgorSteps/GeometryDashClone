@@ -162,6 +162,7 @@ void LevelScene::update(float dt)
 		Bounds* b = g->getComponent<Bounds>();
 		if (b != nullptr)
 		{
+
 			if (Bounds::checkCollison(*playerBounds, *b))
 			{
 				Bounds::resolveCollison(b, *player);

@@ -6,6 +6,7 @@ class BoxBounds : public Bounds
 {
 public:
 	BoxBounds(float width, float height);
+	BoxBounds(float width, float height, bool isTrig);
 	~BoxBounds();
 	
 	void update(float dt);
@@ -28,7 +29,8 @@ public:
 	static BoxBounds* deserialsiedBB;
 	float m_Width, m_Height;
 	float m_HalfWidth, m_HalfHeight;
-
+	// portals
+	bool m_IsTrigger;
 	// Inherited via Bounds
 	virtual bool raycast(glm::vec2 position) override;
 private:

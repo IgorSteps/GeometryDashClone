@@ -3,6 +3,7 @@
 #include <GameObject.h>
 #include <BoxBounds.h>
 #include <TriangleBounds.h>
+#include <Portal.h>
 
 
 Parser::~Parser()
@@ -178,6 +179,10 @@ Component* Parser::parseComponent()
     else if (componentTitle == "TriangleBounds")
     {
         return TriangleBounds::deseriaise();
+    }
+    else if (componentTitle == "Portal")
+    {
+        return Portal::deseriaise();
     }
     else 
     {

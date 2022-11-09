@@ -26,8 +26,34 @@ BoxBounds::BoxBounds(float width, float height) {
 	quad.SetWidth(38.0f);
 	quad.SetHeight(38.0f);
 	quad.setIsGrid(false);
+	m_IsTrigger = false;
 }
+BoxBounds::BoxBounds(float width, float height, bool isTrig)
+{
+	m_Width = width;
+	m_Height = height;
+	m_HalfWidth = m_Width / 2;
+	m_HalfHeight = m_Height / 2;
+	type = Box;
+	m_EnclosingRadius = std::sqrtf(powf(m_HalfHeight, 2) + powf(m_HalfWidth, 2));
+	// load shader for lines
+	if (!shader.load("Line shader", "./glslfiles/lineShader.vert", "./glslfiles/lineShader.frag"))
+	{
+		std::cout << "failed to load shader" << std::endl;
+	}
 
+	quad = Line();
+
+	float col[] = { 0.0f, 1.0f, 0.0f };
+	quad.setColour(col);
+	// @TODO different sprites have different w and h
+	quad.SetWidth(38.0f);
+	quad.SetHeight(38.0f);
+	quad.setIsGrid(false);
+
+
+	m_IsTrigger = isTrig;
+}
 BoxBounds::~BoxBounds()
 {
 	delete deserialsiedBB;
@@ -57,11 +83,15 @@ void BoxBounds::draw(Shader& sh, glm::mat4& ModelViewMatrix, glm::mat4& Projecti
 
 Component* BoxBounds::copy() 
 {
-	return new BoxBounds(m_Width, m_Height);
+	return new BoxBounds(m_Width, m_Height, m_IsTrigger);
 }
 
 void BoxBounds::resolveCollision(GameObject& player)
 {
+	if (m_IsTrigger)
+	{
+		return;
+	}
 	BoxBounds* playerBounds = player.getComponent<BoxBounds>();
 	float dx = this->gameObj->transform->position.x - playerBounds->gameObj->transform->position.x;
 	float dy = this->gameObj->transform->position.y - playerBounds->gameObj->transform->position.y;
@@ -153,7 +183,8 @@ std::string BoxBounds::serialise(int tabSize)
 	std::string builder;
 	builder.append(beginObjectProperty("BoxBounds", tabSize));
 	builder.append(addFloatProperty("Width", m_Width, tabSize + 1, true, true));
-	builder.append(addFloatProperty("Height", m_Height, tabSize + 1, true, false));
+	builder.append(addFloatProperty("Height", m_Height, tabSize + 1, true, true));
+	builder.append(addBooleanProperty("isTrigger", m_IsTrigger, tabSize + 1, true, false));
 	builder.append(closeObjectProperty(tabSize));
 
 	return builder;
@@ -164,8 +195,10 @@ BoxBounds* BoxBounds::deserialise()
 	float width = Parser::consumeFloatProperty("Width");
 	Parser::consume(',');
 	float height = Parser::consumeFloatProperty("Height");
+	Parser::consume(',');
+	bool isTrigger = Parser::consumeBoolProperty("isTrigger");
 	Parser::consumeEndObjectProperty();
-	deserialsiedBB = new BoxBounds(width, height);
+	deserialsiedBB = new BoxBounds(width, height, isTrigger);
 	return deserialsiedBB;
 }
 
