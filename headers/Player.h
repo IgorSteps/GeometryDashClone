@@ -20,6 +20,7 @@ public:
 	Shader noColor;
 private:
 	void addJumpForce();
+	void addFlyForce();
 	Sprite* layerOne;
 	Sprite* layerTwo;
 	Sprite* layerThree;
