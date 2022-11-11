@@ -6,6 +6,7 @@
 #include <iostream>
 #include <Game.h>
 #include <TabItem.h>
+#include <Portal.h>
 
 MainContainer::MainContainer() : m_MenuItems()
 {
@@ -174,10 +175,16 @@ void MainContainer::addTabObjects()
 			obj->addComponent(menuItem);
 			obj->addComponent(portalSprites->sprites.at(i));
 			portalSprites->sprites.at(i)->initSubSprite(shader);
-			obj->addComponent(new BoxBounds(44.0f, 85.0f));
-
-			// todo: add portal component
-
+			obj->addComponent(new BoxBounds(44.0f, 85.0f, true));
+			obj->setPortal(true);
+			if (i==0)
+			{
+				obj->addComponent(new Portal(FLY));
+			}
+			else
+			{
+				obj->addComponent(new Portal(NORMAL));
+			}
 			m_TabMaps.at(m_Tabs.at(5)).push_back(obj);
 		}
 		

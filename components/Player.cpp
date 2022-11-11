@@ -4,9 +4,19 @@
 #include <KL.h>
 #include <Rigidbody.h>
 #include <Game.h>
+#include <AssetPool.h>
 
-Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float colourOne[], float colourTwo[])
+Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree,
+	Sprite* spShip, float colourOne[], float colourTwo[], Shader& sh)
 {
+	noColor = sh;
+	spaceship = spShip;
+	m_State = NORMAL;
+	
+	spaceship->SetHeight(42.0f);
+	spaceship->SetWidth(42.0f);	
+
+
 	this->layerOne = layerOne;
 	this->layerTwo = layerTwo;
 	this->layerThree = layerThree;
@@ -52,12 +62,19 @@ void Player::update(float dt)
 {
 	if (onGround && KL::isKeyPressed(GLFW_KEY_SPACE))
 	{
-		addJumpForce(); 
+		if(m_State == NORMAL)
+		{
+			addJumpForce();
+		}
 		onGround = false;
 	}
 	// debugging info of player's y coord
 	//std::cout << "Player y: " << this->gameObj->transform->position.y << '\n';
-
+	if (m_State == FLY && KL::isKeyPressed(GLFW_KEY_SPACE))
+	{
+		addFlyForce();
+		onGround = false;
+	}
 	if (!onGround)
 	{
 		gameObj->transform->rotateion += 200.0f * dt;
@@ -82,7 +99,14 @@ void Player::update(float dt)
 
 void Player::addJumpForce()
 {
-	gameObj->getComponent<Rigidbody>()->Velocity.y = -650.0f;
+	gameObj->getComponent<Rigidbody>()->Velocity.y = Constants::JUMP_FORCE;
+}
+
+void Player::addFlyForce()
+{
+	gameObj->getComponent<Rigidbody>()->Velocity.y = -200.0f;
+	gameObj->getComponent<Rigidbody>()->Velocity.x = 650.0f;
+
 }
 
 void Player::die()
@@ -104,10 +128,28 @@ void Player::draw(Shader& shader, glm::mat4& Model, glm::mat4& Proj) {
 	// scale
 	Model = glm::scale(Model, glm::vec3(gameObj->transform->scale, 1.0f));
 
+	if(m_State == NORMAL)
+	{
+		layerOne->draw(shader, Model, Proj);
+		layerTwo->draw(shader, Model, Proj);
+		layerThree->draw(shader, Model, Proj);
+	}
+	else
+	{
+		// PLAYER INSIDE
+		Model = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x + 20,
+			gameObj->transform->position.y - 3, 1.0f));
+		Model = glm::scale(Model, glm::vec3(gameObj->transform->scale / 2.0f, 1.0f));
+		layerOne->draw(shader, Model, Proj);
+		layerTwo->draw(shader, Model, Proj);
+		layerThree->draw(shader, Model, Proj);
 
-	layerOne->draw(shader, Model, Proj);
-	layerTwo->draw(shader, Model, Proj);
-	layerThree->draw(shader, Model, Proj);
+		// SPACESHIP
+		Model = glm::translate(glm::mat4(1.0f), glm::vec3(gameObj->transform->position.x,
+			gameObj->transform->position.y - 21, 1.0f));
+		spaceship->draw(noColor, Model, Proj);
+
+	}
 }
 
 Component* Player::copy()

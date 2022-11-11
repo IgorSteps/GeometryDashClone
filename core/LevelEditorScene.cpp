@@ -56,7 +56,10 @@ void LevelEditorScene::init()
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
-
+	if (!noColorShader.load("Shader", "./glslfiles/noColorVert.vert", "./glslfiles/noColorFrag.frag"))
+	{
+		std::cout << "failed to load shader" << std::endl;
+	}
 	
 	ModelViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
@@ -90,17 +93,19 @@ void LevelEditorScene::init()
 	layerOne = AssetPool::getSpritesheet("assets/player/layerOne.png");
 	layerTwo = AssetPool::getSpritesheet("assets/player/layerTwo.png");
 	layerThree = AssetPool::getSpritesheet("assets/player/layerThree.png");
-
+	Sprite* spaceship = AssetPool::getSprite("assets/player/spaceship.png");
 	int spNum = 0;
 	playerComp = new Player(
 		layerOne->sprites[spNum],
 		layerTwo->sprites[spNum],
 		layerThree->sprites[spNum],
+		spaceship,
 		red,
-		blue);
+		blue,
+		myShader);
 
 	player->addComponent(playerComp);
-
+	spaceship->initSprite(myShader);
 	layerOne->sprites[spNum]->initSubSprite(myShader);
 	layerTwo->sprites[spNum]->initSubSprite(myShader);
 	layerThree->sprites[spNum]->initSubSprite(myShader);
@@ -279,6 +284,6 @@ void LevelEditorScene::draw()
 	renderer->render(myShader, ViewMatrix, ProjectionMatrix);
 	grid->draw(grid->shader, ModelViewMatrix, ProjectionMatrix);
 	editingButtons->draw(myShader, ModelViewMatrix, ProjectionMatrix);
-	mouseCursor->draw(myShader, ModelViewMatrix, ProjectionMatrix);
+	mouseCursor->draw(noColorShader, ModelViewMatrix, ProjectionMatrix);
 }
 

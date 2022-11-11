@@ -14,7 +14,8 @@ GameObject::GameObject(std::string name, Transform* transform) {
 GameObject* GameObject::copy(Shader& sh)
 {
 	newGameObj = new GameObject("Generated", transform->copy());
-
+	if (this->isPortal)
+		newGameObj->setPortal(true);
 	for (Component* c : components) 
 	{
 		Component* copy = c->copy();
@@ -36,10 +37,10 @@ std::string GameObject::serialise(int tabSize)
 
 	// Game Object
 	stringBuilder.append(beginObjectProperty("GameObject", tabSize));
-
 	// Transform
 	stringBuilder.append(transform->serialise(tabSize + 1));
 	stringBuilder.append(addEnding(true, true));
+	stringBuilder.append(addBooleanProperty("isPortal", isPortal, tabSize +1, true, true));
 
 	// Name
 	if (components.size() > 0)
@@ -89,11 +90,13 @@ GameObject* GameObject::deserialise()
 
 	deserialisedTransform = Transform::deserialise();
 	Parser::consume(',');
+	bool isPortl = Parser::consumeBoolProperty("isPortal");
+	Parser::consume(',');
 	std::string name = Parser::consumeStringProperty("Name");
 
 	// make game object
 	go = new GameObject(name, deserialisedTransform);
-
+	go->setPortal(isPortl);
 	if (Parser::peek() == ',')
 	{
 		Parser::consume(',');
@@ -155,6 +158,11 @@ void GameObject::setUi(bool var)
 void GameObject::setColor(bool var)
 {
 	isColor = var;
+}
+
+void GameObject::setPortal(bool var)
+{
+	isPortal = var;
 }
 
 GameObject* GameObject::go = nullptr;

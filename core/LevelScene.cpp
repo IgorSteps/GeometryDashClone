@@ -35,7 +35,11 @@ void LevelScene::init()
 
 
 	//Load the GLSL program 
-	if (!myShader.load("Shader", "./glslfiles/basicTexture.vert", "./glslfiles/basicTexture.frag"))
+	if (!myShader.load("Color Shader", "./glslfiles/basicTexture.vert", "./glslfiles/basicTexture.frag"))
+	{
+		std::cout << "failed to load shader" << std::endl;
+	}
+	if (!noColor.load("No Color Shader", "./glslfiles/noColorVert.vert", "./glslfiles/noColorFrag.frag"))
 	{
 		std::cout << "failed to load shader" << std::endl;
 	}
@@ -56,19 +60,27 @@ void LevelScene::init()
 	layerOne = AssetPool::getSpritesheet("assets/player/layerOne.png");
 	layerTwo = AssetPool::getSpritesheet("assets/player/layerTwo.png");
 	layerThree = AssetPool::getSpritesheet("assets/player/layerThree.png");
-
+	Sprite* spaceship = AssetPool::getSprite("assets/player/spaceship.png");
 	int spNum = 0;
-	Player* playerComp = new Player(
+	playerComp = new Player(
 		layerOne->sprites[spNum],
 		layerTwo->sprites[spNum],
 		layerThree->sprites[spNum],
+		spaceship,
 		red,
-		blue);
+		blue,
+		noColor);
 
 	player->addComponent(playerComp);
+	spaceship->initSprite(noColor);
+
+
 	player->addComponent(new Rigidbody(glm::vec2(Constants::PLAYER_SPEED, 0.0f)));
 	playerBounds = new BoxBounds(Constants::PLAYER_WIDTH - 2.0f, Constants::PLAYER_HEIGHT - 2.0f);
 	player->addComponent(playerBounds);
+
+
+
 	// init player sprites
 	layerOne->sprites[spNum]->initSubSprite(myShader);
 	layerTwo->sprites[spNum]->initSubSprite(myShader);
@@ -91,6 +103,7 @@ void LevelScene::initAssetPool()
 	AssetPool::addSpritesheet("assets/player/layerTwo.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	AssetPool::addSpritesheet("assets/player/layerThree.png", 42, 42, 2, 13, 13 * 5, 572.0f, 220.0f);
 	AssetPool::addSpritesheet("assets/groundSprites.png", 42.0f, 42.0f, 2.0f, 6, 12, 264.0f, 88.0f);
+	AssetPool::getSprite("assets/player/spaceship.png");
 }
 
 void LevelScene::initBackgrounds()
@@ -162,6 +175,7 @@ void LevelScene::update(float dt)
 		Bounds* b = g->getComponent<Bounds>();
 		if (b != nullptr)
 		{
+
 			if (Bounds::checkCollison(*playerBounds, *b))
 			{
 				Bounds::resolveCollison(b, *player);

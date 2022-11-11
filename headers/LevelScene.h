@@ -34,6 +34,8 @@ public:
 
 	// Game Data
 	Shader myShader;
+	Shader noColor;
+	Player* playerComp;
 	GameObject* ground;
 	Spritesheet* layerOne;
 	Spritesheet* layerTwo;

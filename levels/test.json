@@ -1,8 +1,8 @@
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 693.000000f,
-			"y": 357.000000f
+			"x": 1071.000000f,
+			"y": 693.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,
@@ -10,26 +10,31 @@
 		},
 		"rotation": 0.000000f
 	},
+	"isPortal": true,
 	"Name": "Generated",
 	"Components": {
 		"Sprite": {
 			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
+			"FilePath": "assets/portal.png",
 			"row": 0,
 			"column": 0,
 			"index": 0
 		},
 		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
+			"Width": 44.000000f,
+			"Height": 85.000000f,
+			"isTrigger": true
+		},
+		"Portal": {
+			"StateChanger": 1
 		}
 	}
 },
 "GameObject": {
 	"Transform": {
 		"Position": {
-			"x": 735.000000f,
-			"y": 357.000000f
+			"x": 1701.000000f,
+			"y": 693.000000f
 		},
 		"Scale": {
 			"x": 1.000000f,
@@ -37,369 +42,23 @@
 		},
 		"rotation": 0.000000f
 	},
+	"isPortal": true,
 	"Name": "Generated",
 	"Components": {
 		"Sprite": {
 			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
+			"FilePath": "assets/portal.png",
 			"row": 0,
-			"column": 0,
-			"index": 0
+			"column": 1,
+			"index": 1
 		},
 		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 819.000000f,
-			"y": 315.000000f
+			"Width": 44.000000f,
+			"Height": 85.000000f,
+			"isTrigger": true
 		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 903.000000f,
-			"y": 315.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 945.000000f,
-			"y": 273.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 987.000000f,
-			"y": 273.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 1029.000000f,
-			"y": 273.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 693.000000f,
-			"y": 357.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 735.000000f,
-			"y": 357.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 777.000000f,
-			"y": 357.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 819.000000f,
-			"y": 315.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 903.000000f,
-			"y": 315.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 945.000000f,
-			"y": 273.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 987.000000f,
-			"y": 273.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
-		}
-	}
-},
-"GameObject": {
-	"Transform": {
-		"Position": {
-			"x": 1029.000000f,
-			"y": 273.000000f
-		},
-		"Scale": {
-			"x": 1.000000f,
-			"y": 1.000000f
-		},
-		"rotation": 0.000000f
-	},
-	"Name": "Generated",
-	"Components": {
-		"Sprite": {
-			"isSubSprite": true,
-			"FilePath": "assets/groundSprites.png",
-			"row": 0,
-			"column": 0,
-			"index": 0
-		},
-		"BoxBounds": {
-			"Width": 42.000000f,
-			"Height": 42.000000f
+		"Portal": {
+			"StateChanger": 0
 		}
 	}
 }
