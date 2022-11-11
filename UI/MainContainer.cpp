@@ -176,7 +176,7 @@ void MainContainer::addTabObjects()
 			obj->addComponent(portalSprites->sprites.at(i));
 			portalSprites->sprites.at(i)->initSubSprite(shader);
 			obj->addComponent(new BoxBounds(44.0f, 85.0f, true));
-
+			obj->setPortal(true);
 			if (i==0)
 			{
 				obj->addComponent(new Portal(FLY));

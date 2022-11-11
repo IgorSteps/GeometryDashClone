@@ -4,10 +4,18 @@
 #include <KL.h>
 #include <Rigidbody.h>
 #include <Game.h>
+#include <AssetPool.h>
 
-Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree, float colourOne[], float colourTwo[])
+Player::Player(Sprite* layerOne, Sprite* layerTwo, Sprite* layerThree,
+	Sprite* spShip, float colourOne[], float colourTwo[], Shader& sh)
 {
+	noColor = sh;
+	spaceship = spShip;
 	m_State = NORMAL;
+	
+	spaceship->SetHeight(42.0f);
+	spaceship->SetWidth(42.0f);	
+
 
 	this->layerOne = layerOne;
 	this->layerTwo = layerTwo;
@@ -106,10 +114,16 @@ void Player::draw(Shader& shader, glm::mat4& Model, glm::mat4& Proj) {
 	// scale
 	Model = glm::scale(Model, glm::vec3(gameObj->transform->scale, 1.0f));
 
-
-	layerOne->draw(shader, Model, Proj);
-	layerTwo->draw(shader, Model, Proj);
-	layerThree->draw(shader, Model, Proj);
+	if(m_State == NORMAL)
+	{
+		layerOne->draw(shader, Model, Proj);
+		layerTwo->draw(shader, Model, Proj);
+		layerThree->draw(shader, Model, Proj);
+	}
+	else
+	{
+		spaceship->draw(noColor, Model, Proj);
+	}
 }
 
 Component* Player::copy()
