@@ -104,7 +104,7 @@ void Player::addJumpForce()
 
 void Player::addFlyForce()
 {
-	gameObj->getComponent<Rigidbody>()->Velocity.y = -200.0f;
+	gameObj->getComponent<Rigidbody>()->Velocity.y = -100.0f;
 	gameObj->getComponent<Rigidbody>()->Velocity.x = 650.0f;
 
 }
