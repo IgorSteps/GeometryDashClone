@@ -8,7 +8,14 @@
 Windows
 
 ## Overview
-A geometry dash clone built with OpenGL, glad, glfw and C++. Supports basic functionality of the real game. This is my first big attempt at making a game following modern game-dev standrads.
+A geometry dash clone built with OpenGL, glad, glfw and C++. Supports basic functionality of the real game.
+
+
+## Features
+- Multifunctional Level Editor
+- Traingale collisions are implemented through broad/narrow phase collision detections. Narrowphase is using Cohen Sutherland pollygon clipping algorithm.
+- Infinite backgrounds
+- Serialisation and deserialisation from JSON file
 
 ## Controls
 | Key               | Action                     |
@@ -32,12 +39,3 @@ A geometry dash clone built with OpenGL, glad, glfw and C++. Supports basic func
 | 2                 | Load level                 |
 | 3                 | Switch to level            |
 | SPACE             | Jump                       |
-
-
-
-## Most interseting features
-- Multifunctional Level Editor
-- Uses *a sort of* ECS
-- Traingale collisions are implemented through broad/narrow phase collision detections. Narrowphase is using Cohen Sutherland pollygon clipping algorithm.
-- Infinite backgrounds
-- Serialisation and deserialisation from JSON file
